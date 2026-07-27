@@ -258,6 +258,24 @@ var EX = {
     feel:"Slow and controlled. If your lower back lifts off the floor, don't reach as far.",
     easier:"Move only the arms, or only the legs.",
     harder:"Slow it right down and go closer to the floor."},
+  pikePress:{name:"Pike press-up",works:"Shoulders, upper chest, triceps",
+    how:["Start in a press-up position with your hands under your shoulders.",
+      "Walk your feet in towards your hands and push your hips up high, so your body makes an upside-down V. Head between your arms.",
+      "Legs as straight as is comfortable, heels reaching down towards the floor.",
+      "Bend your elbows and lower the top of your head towards the floor between your hands.",
+      "Stop just before you touch, then press back up until your arms are straight."],
+    feel:"Shoulders, hard. This is the closest you get to an overhead press without owning weights.",
+    easier:"Hands on the third stair with your feet on the floor \u2014 far less weight through the shoulders.",
+    harder:"Feet up on a low step so the angle is steeper."},
+  declinePress:{name:"Decline press-up",works:"Chest, shoulders, triceps, stomach",
+    how:["Hands on the floor slightly wider than your shoulders.",
+      "Feet up on a chair or the edge of the sofa, so your body slopes down towards the floor.",
+      "Straight line from heels to head. Bum squeezed, stomach braced \u2014 the slope makes it want to sag.",
+      "Lower until your chest is a fist\u2019s height off the floor, elbows back at 45 degrees.",
+      "Press back up and lock out."],
+    feel:"More of your weight over your arms than a flat press-up. Expect your reps to drop \u2014 that\u2019s the exercise working.",
+    easier:"Lower surface under your feet, or back to flat press-ups.",
+    harder:"Higher surface, or slow the lowering to four seconds."},
   sitUp:{name:"Sit-up",works:"Stomach",
     how:["Lie on your back, knees bent, feet flat. Tuck your feet under the sofa if they lift.",
       "Cross your hands over your chest. Don't pull on your neck.",
@@ -278,7 +296,7 @@ var COOLDOWN = ["Doorway chest stretch \u2014 forearm on the frame, step through
   "Child's pose on the floor \u2014 45 seconds, breathe out slowly."];
 
 var PHASES = [
- {wk:[1,2],rank:"E",name:"Awakening",cardio:"20 minutes of brisk walking, every day",
+ {wk:[1,2],rank:"E",name:"Awakening",harder:"Starting point. Everything later is measured against this fortnight.",cardio:"20 minutes of brisk walking, every day",
   week:[["Mon","Session 1"],["Tue","Walk only"],["Wed","Session 2"],["Thu","Walk only"],["Fri","Session 1"],["Sat","Walk only"],["Sun","Rest and stretch"]],
   sessions:[
    {title:"Session 1 \u2014 Push and squat",ex:[
@@ -290,7 +308,7 @@ var PHASES = [
      {k:"gluteBridge",sets:3,reps:"10 reps",rest:"60 seconds"},
      {k:"deadBug",sets:3,reps:"6 reps each side",rest:"60 seconds"}]}],
   note:"It should feel too easy. That's deliberate \u2014 weeks 1 and 2 build the habit, not the muscle. The people who go hard now are the ones who quit in week three."},
- {wk:[3,4],rank:"E",name:"Awakening II",cardio:"30 minutes of brisk walking, every day",
+ {wk:[3,4],rank:"E",name:"Awakening II",harder:"Hands come off the worktop and onto the stairs, squats lose the chair, and every set gains reps.",cardio:"30 minutes of brisk walking, every day",
   week:[["Mon","Session 1"],["Tue","Walk only"],["Wed","Session 2"],["Thu","Walk only"],["Fri","Session 1"],["Sat","Walk only"],["Sun","Rest and stretch"]],
   sessions:[
    {title:"Session 1 \u2014 Push and squat",ex:[
@@ -302,7 +320,7 @@ var PHASES = [
      {k:"gluteBridge",sets:3,reps:"15 reps",rest:"60 seconds"},
      {k:"deadBug",sets:3,reps:"8 reps each side",rest:"60 seconds"}]}],
   note:"Swap the worktop for the stairs or the arm of the sofa. Same movement, lower surface, more of your weight through your arms."},
- {wk:[5,6],rank:"D",name:"Gate clearance",
+ {wk:[5,6],rank:"D",name:"Gate clearance",harder:"A fourth set on the big movements, split squats added, and your first interval walk.",
   cardio:"30 minute walk daily, plus one interval day: walk fast for 1 minute, easy for 2 minutes, repeat 8 times",
   week:[["Mon","Session 1"],["Tue","Walk"],["Wed","Session 2"],["Thu","Interval walk"],["Fri","Session 1"],["Sat","Walk"],["Sun","Rest and stretch"]],
   sessions:[
@@ -317,7 +335,7 @@ var PHASES = [
      {k:"gluteBridge",sets:3,reps:"15 reps",rest:"60 seconds"},
      {k:"deadBug",sets:3,reps:"8 reps each side",rest:"60 seconds"}]}],
   note:"Week 5 is when knees and shoulders start grumbling. A dull ache a day or two after training is normal. Sharp pain, one-sided pain, or pain inside a joint is not \u2014 stop that exercise and use the easier version."},
- {wk:[7,8],rank:"D",name:"Gate clearance II",cardio:"30 to 40 minute walk daily, plus two interval days",
+ {wk:[7,8],rank:"D",name:"Gate clearance II",harder:"Press-ups move to the floor, the rucksack comes out, and rests get longer because the sets get harder.",cardio:"30 to 40 minute walk daily, plus two interval days",
   week:[["Mon","Session 1"],["Tue","Interval walk"],["Wed","Session 2"],["Thu","Walk"],["Fri","Session 1"],["Sat","Interval walk"],["Sun","Rest and stretch"]],
   sessions:[
    {title:"Session 1 \u2014 Push and squat",ex:[
@@ -331,7 +349,7 @@ var PHASES = [
      {k:"gluteBridge",sets:3,reps:"20 reps",rest:"60 seconds"},
      {k:"sitUp",sets:3,reps:"12 reps",rest:"60 seconds"}]}],
   note:"Somewhere in these two weeks you'll get your first proper press-up off the floor. Write it in the journal \u2014 that's a boss kill."},
- {wk:[9,10],rank:"C",name:"Ascension",
+ {wk:[9,10],rank:"C",name:"Ascension",harder:"Walking becomes jogging, press-ups nearly double, and lunges replace standing still.",
   cardio:"Three jogging days: jog 30 seconds, walk 90 seconds, repeat 10 times. Keep the daily walk on the other days.",
   week:[["Mon","Session 1"],["Tue","Jog intervals"],["Wed","Session 2"],["Thu","Jog intervals"],["Fri","Session 1"],["Sat","Jog intervals"],["Sun","Rest and stretch"]],
   sessions:[
@@ -346,7 +364,7 @@ var PHASES = [
      {k:"splitSquat",sets:3,reps:"10 reps each leg",rest:"90 seconds"},
      {k:"sitUp",sets:3,reps:"15 reps",rest:"60 seconds"}]}],
   note:"Jog far slower than feels right. If you can't say a full sentence out loud while jogging, slow down \u2014 don't stop."},
- {wk:[11,12],rank:"C",name:"Trial",cardio:"Three jogging days: jog 1 minute, walk 1 minute, repeat 12 times",
+ {wk:[11,12],rank:"C",name:"Trial",harder:"No rest between exercises \u2014 five straight rounds, then a test day to put numbers on it.",cardio:"Three jogging days: jog 1 minute, walk 1 minute, repeat 12 times",
   week:[["Mon","Circuit"],["Tue","Jog intervals"],["Wed","Circuit"],["Thu","Jog intervals"],["Fri","Circuit"],["Sat","Jog intervals"],["Sun","Rest and stretch"]],
   circuit:"Do one set of each exercise back to back with no rest, then rest 90 seconds. That's one round. Five rounds in total.",
   sessions:[
@@ -356,7 +374,71 @@ var PHASES = [
      {k:"walkingLunge",sets:1,reps:"10 reps each leg",rest:"straight on"},
      {k:"sitUp",sets:1,reps:"15 reps",rest:"straight on"},
      {k:"plank",sets:1,reps:"hold 45 seconds",rest:"90 seconds, then next round"}]}],
-  note:"On the last day of week 12, test yourself: most press-ups in one go, most squats in one go, and time yourself over 1 km. Write all three in the journal. Everything after this is measured against those numbers."}
+  note:"On the last day of week 12, test yourself: most press-ups in one go, most squats in one go, and time yourself over 1 km. Write all three in the journal. Everything after this is measured against those numbers."},
+ {wk:[13,14],rank:"B",name:"Shadow extraction",
+  harder:"Back to straight sets, but heavier: press-ups at twelve, plank past a minute, two more tins in the bag.",
+  cardio:"Three jogging days: jog 90 seconds, walk 60 seconds, repeat 10 times",
+  week:[["Mon","Session 1"],["Tue","Jog intervals"],["Wed","Session 2"],["Thu","Jog intervals"],["Fri","Session 1"],["Sat","Walk"],["Sun","Rest and stretch"]],
+  sessions:[
+   {title:"Session 1 \u2014 Push and squat",ex:[
+     {k:"floorPress",sets:4,reps:"12 reps",rest:"2 minutes"},
+     {k:"loadedSquat",sets:4,reps:"15 reps, two more tins in the bag",rest:"2 minutes"},
+     {k:"walkingLunge",sets:3,reps:"12 reps each leg",rest:"90 seconds"},
+     {k:"plank",sets:3,reps:"hold 75 seconds",rest:"60 seconds"}]},
+   {title:"Session 2 \u2014 Pull and hinge",ex:[
+     {k:"tableRow",sets:4,reps:"10 reps",rest:"2 minutes"},
+     {k:"hipHinge",sets:4,reps:"15 reps loaded",rest:"2 minutes"},
+     {k:"splitSquat",sets:3,reps:"12 reps each leg",rest:"90 seconds"},
+     {k:"sitUp",sets:4,reps:"15 reps",rest:"60 seconds"}]}],
+  note:"Twelve press-ups a set would have been impossible in week one. Go back and read your first journal entry."},
+ {wk:[15,16],rank:"B",name:"Shadow extraction II",
+  harder:"Pike press-ups added for shoulders, and the jog stretches to two minutes at a stretch.",
+  cardio:"Three jogging days: jog 2 minutes, walk 1 minute, repeat 8 times",
+  week:[["Mon","Session 1"],["Tue","Jog intervals"],["Wed","Session 2"],["Thu","Jog intervals"],["Fri","Session 1"],["Sat","Walk"],["Sun","Rest and stretch"]],
+  sessions:[
+   {title:"Session 1 \u2014 Push and squat",ex:[
+     {k:"pikePress",sets:3,reps:"8 reps",rest:"90 seconds"},
+     {k:"floorPress",sets:4,reps:"14 reps",rest:"2 minutes"},
+     {k:"loadedSquat",sets:4,reps:"18 reps",rest:"2 minutes"},
+     {k:"plank",sets:3,reps:"hold 90 seconds",rest:"60 seconds"}]},
+   {title:"Session 2 \u2014 Pull and hinge",ex:[
+     {k:"tableRow",sets:4,reps:"12 reps",rest:"2 minutes"},
+     {k:"hipHinge",sets:4,reps:"15 reps loaded",rest:"2 minutes"},
+     {k:"walkingLunge",sets:3,reps:"14 reps each leg",rest:"90 seconds"},
+     {k:"deadBug",sets:3,reps:"12 reps each side",rest:"60 seconds"}]}],
+  note:"Pike press-ups are humbling. Start on the stairs version and don\u2019t be proud about it."},
+ {wk:[17,18],rank:"A",name:"Monarch\u2019s road",
+  harder:"Feet go up on a chair for decline press-ups, five sets on the rows, and the jog becomes an unbroken run.",
+  cardio:"Three runs: 15 minutes continuous, no walk breaks. Slower is fine \u2014 unbroken is the point.",
+  week:[["Mon","Session 1"],["Tue","Run"],["Wed","Session 2"],["Thu","Run"],["Fri","Session 1"],["Sat","Run or long walk"],["Sun","Rest and stretch"]],
+  sessions:[
+   {title:"Session 1 \u2014 Push and squat",ex:[
+     {k:"declinePress",sets:4,reps:"10 reps",rest:"2 minutes"},
+     {k:"loadedSquat",sets:5,reps:"15 reps",rest:"2 minutes"},
+     {k:"splitSquat",sets:3,reps:"10 reps each leg, back foot on a step",rest:"90 seconds"},
+     {k:"plank",sets:3,reps:"hold 2 minutes",rest:"90 seconds"}]},
+   {title:"Session 2 \u2014 Pull and hinge",ex:[
+     {k:"tableRow",sets:5,reps:"12 reps",rest:"2 minutes"},
+     {k:"hipHinge",sets:4,reps:"20 reps loaded",rest:"2 minutes"},
+     {k:"walkingLunge",sets:4,reps:"15 reps each leg",rest:"90 seconds"},
+     {k:"sitUp",sets:4,reps:"20 reps",rest:"60 seconds"}]}],
+  note:"Your first unbroken fifteen minutes is a bigger milestone than any press-up number. Write that one down."},
+ {wk:[19,24],rank:"A",name:"Ascendant",
+  harder:"Six weeks where the plan hands you the wheel: every fortnight add two reps to every set, or one whole extra set.",
+  cardio:"Build the run: 20 minutes, then 25, then 30. By week 24 that\u2019s around 5 km.",
+  week:[["Mon","Session 1"],["Tue","Run"],["Wed","Session 2"],["Thu","Run"],["Fri","Session 1"],["Sat","Run or long walk"],["Sun","Rest and stretch"]],
+  sessions:[
+   {title:"Session 1 \u2014 Push and squat",ex:[
+     {k:"declinePress",sets:5,reps:"12 reps",rest:"2 minutes"},
+     {k:"loadedSquat",sets:5,reps:"20 reps",rest:"2 minutes"},
+     {k:"walkingLunge",sets:4,reps:"20 reps each leg",rest:"90 seconds"},
+     {k:"plank",sets:3,reps:"hold 2 minutes 30",rest:"90 seconds"}]},
+   {title:"Session 2 \u2014 Pull and hinge",ex:[
+     {k:"tableRow",sets:5,reps:"15 reps",rest:"2 minutes"},
+     {k:"hipHinge",sets:5,reps:"20 reps loaded",rest:"2 minutes"},
+     {k:"splitSquat",sets:4,reps:"12 reps each leg, elevated",rest:"90 seconds"},
+     {k:"sitUp",sets:5,reps:"25 reps",rest:"60 seconds"}]}],
+  note:"When adding reps and adding sets both stop being possible, that\u2019s the point where the endgame protocol stops being a joke and starts being a project."}
 ];
 
 var ENDGAME = ["100 press-ups","100 sit-ups","100 squats","10 km run"];
@@ -676,8 +758,16 @@ function viewTraining(){
   ph.week.forEach(function(r){
     pb += '<div class="dayrow"><em>'+r[0]+'</em><span'+(r[1].indexOf("Rest")>-1?' class="muted"':'')+'>'+esc(r[1])+'</span></div>';
   });
-  pb += '</div><div class="small amber">'+esc(ph.note)+'</div>';
+  pb += '</div>';
+  if(ph.harder) pb += '<div class="note good"><div class="lab" style="color:var(--greenLit)">What\u2019s harder than last phase</div>'+esc(ph.harder)+'</div>';
+  pb += '<div class="small amber">'+esc(ph.note)+'</div>';
   h += panel(ph.rank+"-rank \u00b7 "+ph.name, pb, {right:"Week "+w});
+
+  h += panel("How it gets harder",
+    '<div class="small"><p style="margin:0 0 10px">The plan steps up on its own every fortnight \u2014 it works out which phase you\u2019re in from the date you started, so you never have to decide when to push. Ten phases, twenty-four weeks, E-rank to A-rank.</p>'+
+    '<p style="margin:0 0 10px">Three things climb: <b class="cy">the movement</b> (worktop \u2192 stairs \u2192 floor \u2192 feet up on a chair), <b class="cy">the numbers</b> (5 reps becomes 12, a 15-second plank becomes two and a half minutes), and <b class="cy">the load</b> (nothing, then a rucksack, then more tins in it).</p>'+
+    '<p style="margin:0 0 10px" class="muted">Within a fortnight the numbers stay put on purpose. Same sets, done better \u2014 slower, cleaner, less wobble. If you finish every set with two reps still in you before the fortnight is out, use the harder version on the exercise rather than waiting.</p>'+
+    '<p style="margin:0" class="amber">Past week 24 it stops prescribing and starts trusting you: add two reps to every set, or one more set, every fortnight. That road ends at the endgame protocol.</p></div>');
 
   var wu='<ol class="steps">';
   WARMUP.forEach(function(s,i){ wu += '<li><em>'+(i+1)+'</em><span>'+esc(s)+'</span></li>'; });
