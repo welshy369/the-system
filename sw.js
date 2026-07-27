@@ -1,6 +1,10 @@
-/* Cache everything on install so the app works with no signal at all. */
-var CACHE = "kitchen-table-v2";
-var FILES = [
+/* The System — network-first service worker.
+   Bump CACHE (v1 -> v2 -> ...) whenever you edit index.html to guarantee
+   installed copies pull the new version instead of serving the old one. */
+
+const CACHE = "system-v1";
+
+const ASSETS = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
@@ -8,40 +12,39 @@ var FILES = [
   "./icon-512.png"
 ];
 
-self.addEventListener("install", function (e) {
-  e.waitUntil(
-    caches.open(CACHE).then(function (c) {
-      return c.addAll(FILES);
-    }).then(function () {
-      return self.skipWaiting();
-    })
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE)
+      .then((c) => c.addAll(ASSETS))
+      .then(() => self.skipWaiting())
+      .catch(() => self.skipWaiting())
   );
 });
 
-self.addEventListener("activate", function (e) {
-  e.waitUntil(
-    caches.keys().then(function (keys) {
-      return Promise.all(keys.map(function (k) {
-        return k === CACHE ? null : caches.delete(k);
-      }));
-    }).then(function () {
-      return self.clients.claim();
-    })
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys()
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim())
   );
 });
 
-/* Network first so updates land, cache as the fallback when offline. */
-self.addEventListener("fetch", function (e) {
-  if (e.request.method !== "GET") return;
-  e.respondWith(
-    fetch(e.request).then(function (res) {
-      var copy = res.clone();
-      caches.open(CACHE).then(function (c) { c.put(e.request, copy); });
-      return res;
-    }).catch(function () {
-      return caches.match(e.request).then(function (hit) {
-        return hit || caches.match("./index.html");
-      });
-    })
+self.addEventListener("fetch", (event) => {
+  const req = event.request;
+
+  // Only handle same-origin GETs. Everything else goes straight to the network.
+  if (req.method !== "GET" || new URL(req.url).origin !== self.location.origin) return;
+
+  event.respondWith(
+    fetch(req)
+      .then((res) => {
+        // Stash a fresh copy for the next time there's no signal.
+        const copy = res.clone();
+        caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
+        return res;
+      })
+      .catch(() =>
+        caches.match(req).then((hit) => hit || caches.match("./index.html"))
+      )
   );
 });
