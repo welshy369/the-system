@@ -3,924 +3,990 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#04060c">
+<meta name="theme-color" content="#35566B">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="The System">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kitchen Table">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="icon-192.png">
-<title>The System</title>
+<title>The Kitchen Table Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Karla:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap">
 <style>
-:root{
-  --void:#04060c; --panel:#080d18; --panel2:#0c1424; --line:#164e63;
-  --cyan:#22d3ee; --cyanDim:#0e7490; --text:#c9d8e6; --mute:#5f7488;
-  --green:#16a34a; --greenLit:#4ade80; --amber:#f59e0b; --red:#dc2626;
-  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
-  --sans: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;padding:0}
-body{
-  background:var(--void); color:var(--text); font-family:var(--sans);
-  font-size:16px; line-height:1.5; padding-bottom:calc(64px + env(safe-area-inset-bottom));
-  -webkit-font-smoothing:antialiased;
-}
-.wrap{max-width:640px;margin:0 auto;padding:16px 12px 0}
-.mono{font-family:var(--mono)}
-.head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--cyanDim)}
-.hunter{font-family:var(--mono);font-size:18px;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan)}
-.rank{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;text-align:right}
-.rank small{display:block;font-size:10px;letter-spacing:.2em;color:var(--mute);font-weight:400;margin-top:2px}
+  :root{
+    --ink:#22303A; --soft:#5B6B75; --card:#FBF7F0; --edge:#E8DFD1;
+    --rule:#CBDDE6; --tin:#35566B; --red:#C4483C; --ochre:#D9A441; --green:#4F7A57;
+    --display:"Zilla Slab", Georgia, "Iowan Old Style", serif;
+    --body:"Karla", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono:"Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--tin);font-family:var(--body);color:var(--ink);
+    -webkit-text-size-adjust:100%;padding-bottom:calc(48px + env(safe-area-inset-bottom))}
+  .wrap{max-width:560px;margin:0 auto;padding:0 14px}
+  header{padding:calc(30px + env(safe-area-inset-top)) 6px 18px}
+  .kicker{font-family:var(--mono);font-size:10px;letter-spacing:.25em;color:rgba(255,255,255,.6)}
+  h1{font-family:var(--display);font-size:34px;font-weight:700;color:#fff;margin:6px 0 4px;line-height:1.05}
+  .sub{font-size:14px;color:rgba(255,255,255,.72)}
 
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:2px;margin-bottom:12px;
-  box-shadow:inset 0 0 40px -34px var(--cyan)}
-.panel.glow{box-shadow:0 0 24px -6px rgba(34,211,238,.33), inset 0 0 40px -30px var(--cyan)}
-.ph{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;
-  border-bottom:1px solid var(--line);background:var(--panel2);
-  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan)}
-.ph span.r{color:var(--mute);letter-spacing:.1em}
-.pb{padding:12px}
-.pb > * + *{margin-top:12px}
+  nav{display:flex;gap:3px}
+  nav button{flex:1;border:0;cursor:pointer;padding:11px 4px 12px;border-radius:6px 6px 0 0;
+    background:rgba(255,255,255,.13);color:rgba(255,255,255,.85);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+  nav button[aria-current="true"]{background:var(--card);color:var(--ink)}
 
-.bar{width:100%;background:#0f1b2b;border-radius:2px;overflow:hidden;height:6px}
-.bar > i{display:block;height:100%;transition:width .5s}
-.row{display:flex;align-items:center;gap:12px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.tile{background:var(--panel2);border:1px solid var(--line);border-radius:2px;padding:8px 12px}
-.tile b{display:block;font-family:var(--mono);font-size:22px;font-weight:400}
-.tile em{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);font-style:normal}
-.muted{color:var(--mute)}
-.amber{color:var(--amber)}
-.green{color:var(--greenLit)}
-.cy{color:var(--cyan)}
-.small{font-size:13px;line-height:1.6}
-.tiny{font-family:var(--mono);font-size:11px;line-height:1.6;color:var(--mute)}
+  .stack{display:grid;gap:12px;padding-top:12px}
+  .card{background:var(--card);border:1px solid var(--edge);border-radius:3px;position:relative;overflow:hidden;
+    box-shadow:0 1px 0 rgba(34,48,58,.06),0 2px 8px rgba(34,48,58,.05);padding:16px 18px 18px 36px}
+  .card::before{content:"";position:absolute;left:22px;top:0;bottom:0;width:1px;background:var(--red);opacity:.35}
+  .alert{background:#FFF3F1;border:1px solid var(--red);border-radius:3px;padding:14px 16px}
+  .alert::before{display:none}
+  .alert h2{color:var(--red)}
+  .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft)}
+  h2{font-family:var(--display);font-size:22px;font-weight:600;margin:4px 0 10px;line-height:1.2}
+  h3{font-family:var(--display);font-size:20px;font-weight:600;margin:4px 0 10px;line-height:1.2}
+  p{font-size:15px;line-height:1.65;margin:0 0 10px}
+  .muted{color:var(--soft)}
+  .divide{border-top:1px solid var(--rule);margin:12px 0}
+  ul,ol{margin:6px 0 12px;padding-left:19px}
+  li{font-size:15px;line-height:1.6;margin-bottom:6px}
 
-button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer;text-align:left}
-.btn{display:block;width:100%;text-align:center;padding:11px;border-radius:2px;
-  background:var(--cyanDim);color:#04121a;border:1px solid var(--cyan);
-  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
-.btn.ghost{background:transparent;color:var(--cyan)}
+  .acc{border-top:1px solid var(--rule);padding-top:11px;margin-top:11px}
+  .acc>button{background:none;border:0;padding:0;cursor:pointer;width:100%;text-align:left;display:block}
+  .acc-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .acc-title{font-family:var(--display);font-size:18px;font-weight:600;color:var(--ink)}
+  .plus{font-family:var(--mono);font-size:17px;color:var(--red)}
+  .meta{font-family:var(--mono);font-size:11px;color:var(--soft);letter-spacing:.05em;margin-top:3px}
 
-.quest{display:flex;gap:12px;align-items:center;width:100%;padding:12px;border-radius:2px;
-  background:var(--panel2);border:1px solid var(--line);margin-bottom:8px}
-.quest.done{background:#07210f;border-color:var(--green)}
-.tick{width:22px;height:22px;flex:0 0 22px;border:1px solid var(--cyanDim);color:transparent;
-  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px}
-.quest.done .tick{border-color:var(--greenLit);color:var(--greenLit)}
-.quest .lbl{flex:1}
-.quest .lbl b{display:block;font-weight:400;font-size:15px}
-.quest.done .lbl b{color:var(--greenLit);text-decoration:line-through}
-.quest .lbl em{display:block;font-family:var(--mono);font-size:10px;color:var(--mute);font-style:normal;margin-top:2px}
-.quest .xp{font-family:var(--mono);font-size:12px;color:var(--cyanDim)}
+  .habit{display:flex;align-items:center;gap:12px;background:none;border:0;border-bottom:1px solid var(--rule);
+    padding:12px 2px;cursor:pointer;text-align:left;width:100%;font-family:var(--body)}
+  .box{width:22px;height:22px;flex:0 0 auto;border:1.5px solid var(--soft);border-radius:2px;display:grid;
+    place-items:center;color:#fff;font-size:13px;font-weight:700}
+  .habit[aria-pressed="true"] .box{background:var(--green);border-color:var(--green)}
+  .habit span.lbl{font-size:15.5px}
+  .habit[aria-pressed="true"] span.lbl{color:var(--soft);text-decoration:line-through}
 
-.acc{background:var(--panel2);border:1px solid var(--line);border-radius:2px;margin-bottom:8px}
-.acc.open{border-color:var(--cyan)}
-.acc > button{display:block;width:100%;padding:12px}
-.acc .t{display:flex;justify-content:space-between;gap:8px;font-size:15px}
-.acc .plus{font-family:var(--mono);font-size:14px;color:var(--cyanDim)}
-.acc .sub{font-family:var(--mono);font-size:12px;margin-top:4px;color:var(--greenLit)}
-.acc .sub i{color:var(--mute);font-style:normal}
-.acc .meta{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--mute);margin-top:4px}
-.acc .body{padding:0 12px 12px}
-.acc .body > * + *{margin-top:12px}
-.lab{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
-ol.steps{margin:0;padding:0;list-style:none}
-ol.steps li{display:flex;gap:8px;font-size:15px;line-height:1.6;margin-bottom:8px}
-ol.steps li em{font-family:var(--mono);font-size:12px;color:var(--cyanDim);font-style:normal;flex:0 0 14px}
-ul.dash{margin:0;padding:0;list-style:none}
-ul.dash li{font-size:15px;line-height:1.6;margin-bottom:4px}
-.note{background:var(--panel);border:1px solid var(--line);border-radius:2px;padding:9px 12px;font-size:13px;line-height:1.6}
-.note.good{background:#07210f;border-color:var(--green)}
-.dayrow{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--panel2);font-size:15px}
-.dayrow em{font-family:var(--mono);font-size:12px;color:var(--cyanDim);font-style:normal;flex:0 0 42px}
-.hist{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--panel2);font-family:var(--mono);font-size:14px}
+  .stats{display:flex;gap:20px;flex-wrap:wrap;margin-top:10px}
+  .stat b{display:block;font-family:var(--mono);font-size:24px;font-weight:700}
+  .stat small{font-size:12.5px;color:var(--soft)}
 
-input,textarea{background:var(--panel2);border:1px solid var(--line);color:var(--text);
-  border-radius:2px;padding:10px;font-family:var(--mono);font-size:15px;width:100%;outline:none}
-textarea{font-family:var(--sans);resize:none}
-input:focus,textarea:focus,button:focus-visible{border-color:var(--cyan);outline:2px solid rgba(34,211,238,.3);outline-offset:1px}
-.weighrow{display:flex;gap:8px}
-.weighrow input{width:70px}
-.weighrow .btn{flex:1;width:auto}
+  .move{margin-bottom:16px}
+  .move-head{display:flex;gap:8px;align-items:baseline}
+  .num{font-family:var(--mono);font-size:11px;color:var(--red);font-weight:700}
+  .move-name{font-family:var(--display);font-size:17px;font-weight:600}
+  .reps{font-family:var(--mono);font-size:12.5px;color:var(--tin);margin:3px 0 5px;padding-left:24px}
+  .how{font-size:14.5px;line-height:1.6;padding-left:24px}
+  .cue{font-size:13.5px;font-style:italic;color:var(--soft);padding-left:24px;margin-top:4px}
+  .warm{font-size:14px;color:var(--soft);margin-bottom:14px;padding-left:10px;border-left:2px solid var(--ochre)}
+  .extra{background:rgba(79,122,87,.10);border-left:2px solid var(--green);padding:12px 14px;margin-top:6px}
+  .extra .tag{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--green);font-weight:700}
+  .note{background:rgba(217,164,65,.14);border-left:2px solid var(--ochre);padding:9px 12px;font-size:14px}
 
-nav{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line);
-  padding-bottom:env(safe-area-inset-bottom)}
-nav .in{max-width:640px;margin:0 auto;display:flex}
-nav button{flex:1;padding:13px 2px;text-align:center;font-family:var(--mono);font-size:10px;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--mute);border-top:2px solid transparent}
-nav button.on{color:var(--cyan);border-top-color:var(--cyan);background:var(--panel2)}
+  .sched{border-top:1px solid var(--rule);margin-top:12px;padding-top:10px}
+  .sched-row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;font-size:14.5px;border-bottom:1px dotted var(--rule)}
+  .sched-row:last-child{border-bottom:0}
+  .sched-day{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);padding-top:3px}
 
-.overlay{position:fixed;inset:0;background:rgba(4,6,12,.88);display:flex;align-items:center;justify-content:center;padding:24px}
-.overlay .panel{max-width:340px;width:100%;margin:0}
-.lvl{font-family:var(--mono);font-size:60px;font-weight:700;color:var(--cyan);text-shadow:0 0 24px rgba(34,211,238,.55);line-height:1}
-.center{text-align:center}
-@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+  label.f{flex:1 1 90px}
+  label.f div{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--soft);margin-bottom:4px}
+  input{width:100%;padding:10px;border:1px solid var(--edge);background:#fff;font-family:var(--mono);
+    font-size:17px;color:var(--ink);border-radius:2px}
+  .btn{padding:12px;background:var(--tin);color:#fff;border:0;border-radius:2px;font-family:var(--mono);
+    font-size:12px;letter-spacing:.14em;font-weight:700;cursor:pointer;width:100%}
+  .btn.small{width:auto;padding:9px 16px;font-size:11px}
+  .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--edge)}
+  .btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+
+  .mile{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--rule);padding:9px 0;font-size:15px}
+  .dot{width:18px;height:18px;border-radius:9px;border:1.5px solid var(--edge);flex:0 0 auto}
+  .mile.hit .dot{background:var(--green);border-color:var(--green)}
+  .mile.hit span{color:var(--soft);text-decoration:line-through}
+  .mile .lb{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--soft)}
+
+  .weighrow{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;padding:4px 0}
+  .flash{background:var(--green);color:#fff;font-size:14px;padding:9px 14px;border-radius:2px;margin-bottom:12px}
+  footer{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.6;padding:14px 6px 0}
+
+  .daybar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .daylbl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+  .step{background:#fff;border:1px solid var(--edge);border-radius:2px;width:34px;height:30px;
+    font-size:17px;color:var(--ink);cursor:pointer;line-height:1}
+  .step[disabled]{opacity:.3;cursor:default}
+  .big{font-family:var(--mono);font-size:38px;font-weight:700;line-height:1}
+  .big .of{font-size:14px;font-weight:400;color:var(--soft);letter-spacing:0}
+  .bar{height:8px;background:#EFE7DA;border-radius:4px;overflow:hidden;margin:12px 0 8px}
+  .bar i{display:block;height:100%;background:var(--tin)}
+  .leftline{font-size:14.5px;color:var(--soft)}
+
+  .fitem{border-top:1px solid var(--rule)}
+  .fitem>button{display:flex;justify-content:space-between;align-items:baseline;gap:10px;width:100%;
+    background:none;border:0;padding:11px 2px;cursor:pointer;text-align:left;font-family:var(--body)}
+  .fname{font-size:15px;color:var(--ink)}
+  .own{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--green);border:1px solid var(--green);border-radius:2px;padding:1px 4px;margin-left:4px}
+  .fkcal{font-family:var(--mono);font-size:12px;color:var(--soft);white-space:nowrap}
+
+  .amt{background:rgba(53,86,107,.07);padding:12px;margin:0 0 10px;border-left:2px solid var(--tin)}
+  .amt-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+  .amt-row{display:flex;gap:8px;align-items:stretch}
+  .amt-row input{flex:1}
+  .amt-row .btn{width:auto;padding:0 18px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .chip{background:#fff;border:1px solid var(--edge);border-radius:2px;padding:7px 11px;
+    font-family:var(--body);font-size:13px;color:var(--ink);cursor:pointer}
+  .chip.sel{background:var(--tin);color:#fff;border-color:var(--tin)}
+  .chip b{font-family:var(--mono);font-size:11px;color:var(--soft);font-weight:400}
+  .chip.sel b{color:rgba(255,255,255,.7)}
+  .quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+
+  .logrow{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--rule);padding:11px 0}
+  .lname{font-size:15px;flex:1}
+  .lk{font-family:var(--mono);font-size:13px;color:var(--soft)}
+  .del{background:none;border:0;font-size:20px;color:var(--soft);cursor:pointer;padding:0 2px;line-height:1}
+
+  button:focus-visible,input:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
-<div class="wrap" id="app"></div>
-<nav><div class="in" id="nav"></div></nav>
-<script>
-/* ============================== DATA ============================== */
-var KEY = "hunter_system_v1";
+<div class="wrap">
+  <header>
+    <div class="kicker" id="weeklabel">WEEK 01 OF 12</div>
+    <h1>The Kitchen<br>Table Plan</h1>
+    <div class="sub" id="phaselabel"></div>
+  </header>
+  <nav id="tabs"></nav>
+  <div class="stack" id="view"></div>
+  <footer>
+    General guidance, not medical advice. Worth a quick word with your GP before starting — especially if there's
+    anything going on with blood pressure, joints, or medication. Your data is saved on this phone only.
+  </footer>
+</div>
 
-var RANKS = [
-  {min:1,r:"E",c:"#94a3b8"},{min:4,r:"D",c:"#4ade80"},{min:7,r:"C",c:"#22d3ee"},
-  {min:11,r:"B",c:"#a78bfa"},{min:16,r:"A",c:"#f59e0b"},{min:23,r:"S",c:"#f43f5e"}
-];
+<script>
+"use strict";
+
+/* ============================ DATA ============================ */
 
 var EX = {
-  worktopPress:{name:"Worktop press-up",works:"Chest, shoulders, back of the arms",
-    how:["Stand about an arm's length from the kitchen worktop.",
-      "Put both hands on the edge, a bit wider apart than your shoulders.",
-      "Walk your feet backwards until your body is one straight line from your head to your heels. Squeeze your bum and tighten your stomach so your hips don't sag.",
-      "Bend your elbows and lower your chest towards the worktop. Your elbows should point backwards at roughly 45 degrees, not straight out sideways.",
-      "When your chest is close to the edge, push the worktop away and straighten your arms. That is one rep."],
-    feel:"Working across your chest and the back of your upper arms. Not in your lower back \u2014 if you feel it there, your hips are sagging.",
-    easier:"Stand more upright, or use a higher surface like a windowsill.",
-    harder:"Walk your feet further back, or move down to a lower surface."},
-  inclinePress:{name:"Incline press-up",works:"Chest, shoulders, back of the arms",
-    how:["Same movement as the worktop press-up, but with your hands on something lower \u2014 the arm of the sofa, the third or fourth stair, a sturdy chair pushed against a wall.",
-      "Hands slightly wider than your shoulders, body in one straight line, bum squeezed.",
-      "Lower your chest to the surface under control \u2014 about two seconds down.",
-      "Push back up until your arms are straight."],
-    feel:"Harder than the worktop version because more of your bodyweight goes through your arms.",
-    easier:"Go back up a step. Literally \u2014 use a higher stair.",
-    harder:"Go down a step. The floor is the final version."},
-  floorPress:{name:"Full press-up",works:"Chest, shoulders, back of the arms, stomach",
-    how:["Hands on the floor slightly wider than your shoulders, fingers spread, arms straight.",
-      "Legs out behind you, feet together or hip-width apart. Body in one straight line \u2014 head, hips and heels.",
-      "Squeeze your bum and brace your stomach as if you're about to be prodded in the belly. This stops the sag.",
-      "Lower until your chest is about a fist's height off the floor. Elbows back at 45 degrees.",
-      "Push the floor away and straighten your arms."],
-    feel:"Everything. This is the benchmark \u2014 the first full one is worth writing in the journal.",
-    easier:"Knees on the floor, keeping the straight line from knees to head. Or go back to the incline version.",
-    harder:"Slow the lowering to four seconds, or put your feet on a chair."},
-  chairSquat:{name:"Chair squat",works:"Thighs, bum",
-    how:["Stand in front of a dining chair, feet about shoulder-width apart, toes turned out very slightly.",
-      "Hold your arms straight out in front of you for balance.",
-      "Push your hips backwards first, as if reaching for the seat with your bum. Let your knees bend as you go.",
-      "Keep your chest up and your heels flat on the floor.",
-      "Touch the seat lightly \u2014 don't flop onto it \u2014 then stand up by pushing the floor away through your heels."],
-    feel:"Front of the thighs and the bum. Knees should feel fine \u2014 if they ache, sit back further onto your heels.",
-    easier:"Cushion on the chair so you're not going as low, and use the chair arms to help.",
-    harder:"Lower seat, or pause for two seconds when you touch it."},
-  bodyweightSquat:{name:"Bodyweight squat",works:"Thighs, bum",
-    how:["Feet shoulder-width apart, toes turned out slightly, arms out in front.",
-      "Hips back and down, chest up, weight through the middle of your feet.",
-      "Go down until your thighs are somewhere near parallel with the floor \u2014 or as far as you can go without your heels lifting or your back rounding.",
-      "Drive back up through your heels and stand tall, squeezing your bum at the top."],
-    feel:"Thighs burning by the last few reps. That burn is the point.",
-    easier:"Keep the chair behind you as a depth guide.",
-    harder:"Hold a rucksack loaded with tins against your chest."},
-  loadedSquat:{name:"Loaded squat",works:"Thighs, bum, stomach, upper back",
-    how:["Load a rucksack with tins, bags of rice or bottles of water. Start around 5kg \u2014 that's five tins.",
-      "Wear it on your front, hugged to your chest, or on your back with the straps pulled tight.",
-      "Squat exactly as you would without it: hips back, chest up, heels down.",
-      "The weight pulls you forwards. Fight it by keeping your chest tall."],
-    feel:"Same as a bodyweight squat, but you'll be out of breath sooner.",
-    easier:"Take a tin out. Small jumps are the right way to add weight.",
-    harder:"Add a tin. One every couple of weeks, not every session."},
-  gluteBridge:{name:"Glute bridge",works:"Bum, back of thighs, lower back",
-    how:["Lie on your back on the floor, knees bent, both feet flat and hip-width apart.",
-      "Bring your heels back so they're about a hand's length from your bum.",
-      "Arms flat on the floor by your sides, palms down.",
-      "Push through your heels and lift your hips until your body is a straight line from knees to shoulders.",
-      "Squeeze your bum hard for one second at the top, then lower slowly \u2014 don't drop."],
-    feel:"In your bum. If you mainly feel it in your lower back you're arching too far \u2014 lift a bit less and squeeze harder.",
-    easier:"Smaller range. Even an inch counts on day one.",
-    harder:"One leg at a time, with the other knee hugged to your chest."},
-  hipHinge:{name:"Hip hinge (good morning)",works:"Back of the thighs, bum, lower back",
-    how:["Feet hip-width apart, knees soft \u2014 not locked, not bent.",
-      "Hold a loaded bag against your chest, or just cross your hands over your chest with no weight to start.",
-      "Push your hips backwards as if closing a car door with your bum. Your chest travels down as your hips go back.",
-      "Keep your back flat like a table top the whole way. This is the important bit.",
-      "Stop when you feel a stretch down the back of your thighs \u2014 usually about halfway down.",
-      "Drive your hips forwards to stand up and squeeze your bum at the top."],
-    feel:"A stretch down the back of the thighs, then those muscles working to stand you back up.",
-    easier:"No weight, smaller range, and do it side-on to a mirror so you can see your back stays flat.",
-    harder:"Add weight to the bag. Never round your back to get lower."},
-  splitSquat:{name:"Split squat",works:"One leg at a time \u2014 thighs, bum, balance",
-    how:["Stand tall, then take a long step backwards with one foot. Your back heel stays off the floor.",
-      "Rest one hand on a wall or chair back. There's no prize for wobbling.",
-      "Most of your weight stays on the front foot.",
-      "Lower straight down \u2014 not forwards \u2014 until your back knee is an inch or two off the floor. Front shin stays close to upright.",
-      "Push through the front heel to stand. All the reps on one leg, then swap."],
-    feel:"Front leg working hard, back leg mostly just balancing.",
-    easier:"Shorter step, smaller range, both hands on a chair.",
-    harder:"Back foot up on a low step or the edge of the sofa."},
-  walkingLunge:{name:"Walking lunge",works:"Thighs, bum, balance",
-    how:["Stand tall with a bit of clear floor \u2014 a hallway works.",
-      "Step forward with one leg, long enough that your front shin stays upright as you lower.",
-      "Lower until your back knee nearly touches the floor.",
-      "Push through the front heel and bring your back foot through into the next step.",
-      "Keep alternating until you've done the reps on each leg."],
-    feel:"Legs burning and heart rate up. Half strength work, half cardio.",
-    easier:"Stay on the spot \u2014 step forward, then step back to where you started.",
-    harder:"Hold the loaded rucksack."},
-  doorwayRow:{name:"Doorway row",works:"Upper back, biceps",
-    how:["Stand facing an open doorway with one foot either side of the frame.",
-      "Grip both sides of the frame at about chest height. Check it's solid first.",
-      "Keeping your body dead straight and your heels planted, lean backwards until your arms are fully straight.",
-      "Pull your chest towards the frame by driving your elbows back and squeezing your shoulder blades together, as if pinching a pencil between them.",
-      "Lower yourself back out slowly \u2014 three seconds. The slow part is where the work is."],
-    feel:"Between and across your shoulder blades. This is what stops all the pressing rounding your shoulders forwards.",
-    easier:"Stand more upright so you're leaning back less.",
-    harder:"Walk your feet further forwards so you're leaning back further."},
-  tableRow:{name:"Under-table row",works:"Upper back, biceps",
-    how:["Find a solid table and test it takes your weight before you trust it. A dining table, not a folding one.",
-      "Lie on your back underneath with your chest roughly under the edge.",
-      "Reach up and grip the edge, hands a bit wider than your shoulders.",
-      "Body in a straight line, heels on the floor, pull your chest up towards the edge.",
-      "Lower back down slowly until your arms are straight."],
-    feel:"Much harder than the doorway row. Your upper back will let you know.",
-    easier:"Bend your knees and put your feet flat \u2014 that takes weight off.",
-    harder:"Straighten your legs and put your heels on a chair."},
-  plank:{name:"Plank",works:"Stomach, lower back, shoulders",
-    how:["Forearms flat on the floor, elbows directly under your shoulders, hands facing forwards.",
-      "Knees on the floor to start, or toes if you can hold the line.",
-      "Straight line from your ears through your hips to your knees or heels.",
-      "Squeeze your bum and brace your stomach. Tuck your ribs down slightly so your lower back doesn't dip.",
-      "Breathe normally. Hold for the time, then drop your knees and rest."],
-    feel:"A deep shaking tiredness across the stomach. Stop when your hips sag, even if the time isn't up \u2014 a good 20 seconds beats a sloppy 45.",
-    easier:"Knees down, or forearms up on the sofa seat.",
-    harder:"Toes down, or lift one foot an inch off the floor for a few seconds at a time."},
-  deadBug:{name:"Dead bug",works:"Deep stomach muscles, coordination",
-    how:["Lie on your back. Arms straight up at the ceiling, knees bent and lifted so your shins are parallel with the floor.",
-      "Press your lower back flat into the floor \u2014 no gap. Keep it there throughout.",
-      "Slowly lower your right arm back over your head and straighten your left leg out towards the floor at the same time.",
-      "Stop just before either touches, then bring them back to the start.",
-      "Repeat with the other arm and leg. That's one rep each side."],
-    feel:"Slow and controlled. If your lower back lifts off the floor, don't reach as far.",
-    easier:"Move only the arms, or only the legs.",
-    harder:"Slow it right down and go closer to the floor."},
-  sitUp:{name:"Sit-up",works:"Stomach",
-    how:["Lie on your back, knees bent, feet flat. Tuck your feet under the sofa if they lift.",
-      "Cross your hands over your chest. Don't pull on your neck.",
-      "Curl up one bit at a time \u2014 head, shoulders, then upper back \u2014 until your chest is near your knees.",
-      "Lower back down under control. Don't flop."],
-    feel:"Front of the stomach. Neck stays relaxed throughout.",
-    easier:"Crunches \u2014 just lift your head and shoulders a few inches.",
-    harder:"Arms crossed behind your head, or slow it down."}
+  sitStand:{n:"Sit-to-stand",h:"Sit on the front edge of a dining chair, feet flat and slightly apart. Lean your chest forward over your knees, push through your heels and stand up tall. Sit back down slowly, counting to three. Hands on your thighs to help if you need them.",c:"Slow on the way down is where the work happens."},
+  wallPress:{n:"Wall press-up",h:"Stand an arm's length from a wall. Hands flat on the wall at chest height, a bit wider than your shoulders. Bend your elbows and bring your chest towards the wall, then push back. Keep your body in one straight line from head to heels.",c:"Step further back from the wall to make it harder."},
+  counterPress:{n:"Kitchen counter press-up",h:"Same as the wall press-up, but hands on the edge of the worktop or the back of a sturdy sofa. Lower your chest to the edge, push back up.",c:"The lower the surface, the harder it gets. Stairs are the next step down."},
+  kneePress:{n:"Knee press-up",h:"On the floor, knees down, hands under your shoulders, ankles crossed. Lower your chest towards the floor as far as feels controlled, then push back up. Keep your hips in line with your shoulders — don't let your bum stick up.",c:"Half a rep done well beats a full rep flopped out."},
+  march:{n:"Standing march",h:"Stand tall, one hand on the back of a chair. Lift one knee to hip height, put it down, lift the other. Steady rhythm. Swing the arms if you're steady enough without the chair.",c:"Chest up, don't lean back."},
+  heelRaise:{n:"Heel raise",h:"Hold the worktop. Push up onto your tiptoes, hold for a second at the top, lower slowly.",c:"Take three seconds to come back down."},
+  bridge:{n:"Glute bridge",h:"Lie on your back, knees bent, feet flat and hip-width apart, arms by your sides. Squeeze your bum and lift your hips until your body makes a straight ramp from knees to shoulders. Hold for two, lower slowly.",c:"Squeeze your bum, not your lower back."},
+  kneeLift:{n:"Seated knee lift",h:"Sit tall on a chair, hands on the seat edge either side of you. Lift one knee a few inches, hold for two, lower. Alternate legs. Back straight, no slumping.",c:"Breathe out as you lift."},
+  stepUp:{n:"Step-up",h:"Stand at the bottom stair, hold the bannister. Step up with your right foot, bring the left up to meet it. Step down right, then left. Do all your reps leading with the right, then swap.",c:"Push through the heel of the foot that's on the stair."},
+  boxSquat:{n:"Box squat",h:"Stand in front of a chair, feet shoulder-width. Push your hips back like you're closing a car door with your bum. Lower until you just touch the seat, then stand straight back up without properly sitting down.",c:"Knees track out over your toes, never falling inwards."},
+  bagRow:{n:"Shopping bag row",h:"Put a few tins in two carrier bags, or grab two big water bottles. Feet hip-width, knees soft, hinge forward from the hips until your chest is at about 45 degrees. Let your arms hang, then pull both elbows back towards your hips, squeezing your shoulder blades together. Lower slowly.",c:"Pull with your back, not your hands."},
+  hipHinge:{n:"Hip hinge",h:"Feet hip-width, a bag of shopping held in front of your thighs, knees soft. Push your hips backwards and let the bag slide down your thighs, keeping your back flat. Stop when you feel a stretch down the back of your legs, then drive your hips forward to stand tall.",c:"Back stays flat like a table top."},
+  splitSquat:{n:"Supported split squat",h:"Hold a chair back with one hand. Take a long step back with your right foot, back heel up. Lower your back knee straight down towards the floor, then push back up through your front heel. All reps on one side, then swap.",c:"Go down, not forward."},
+  plankKnee:{n:"Knee plank",h:"Forearms and knees on the floor, elbows under your shoulders. Squeeze your bum and pull your belly button in so your body makes a straight line from knees to head. Hold and keep breathing.",c:"The second your lower back sags, stop the clock."},
+  sidePlank:{n:"Side plank on knees",h:"Lie on your side, forearm on the floor with your elbow under your shoulder, knees bent. Lift your hips so you make a straight line from knees to head. Hold, then swap sides.",c:"Stack your shoulders — don't roll forwards."},
+  fullSquat:{n:"Bodyweight squat",h:"Feet shoulder-width, toes turned slightly out, arms straight out in front for balance. Sit down and back as far as you comfortably can, heels stuck to the floor, chest up. Drive back up through your heels.",c:"Keep the chair behind you as a safety net if you want it."},
+  overhead:{n:"Overhead press",h:"A bottle or a tin in each hand at shoulder height, palms facing forward. Press both straight up overhead until your arms lock out, then lower under control.",c:"Don't lean back — squeeze your bum to stay upright."}
 };
 
-var WARMUP = ["March on the spot briskly for 2 minutes, swinging your arms.",
-  "10 arm circles forwards, 10 backwards.","10 hip circles each way, hands on hips.",
-  "10 slow chair squats, no weight.","5 slow press-ups against a wall."];
+var SESSIONS = {
+  S1:{name:"The Basics",
+    warm:"3 minutes marching on the spot, then roll your shoulders back 10 times and circle your ankles both ways.",
+    work:[[EX.sitStand,"2 sets of 8"],[EX.wallPress,"2 sets of 8"],[EX.march,"2 sets of 20 (10 each leg)"],[EX.heelRaise,"2 sets of 10"],[EX.kneeLift,"2 sets of 10"]],
+    extra:[EX.bridge,"2 sets of 8"]},
+  S2:{name:"The Basics, Plus Stairs",
+    warm:"4 minutes marching, shoulder rolls, then 10 slow hip circles each way.",
+    work:[[EX.boxSquat,"3 sets of 8"],[EX.counterPress,"3 sets of 8"],[EX.stepUp,"2 sets of 8 each leg"],[EX.bridge,"3 sets of 10"],[EX.kneeLift,"2 sets of 12"]],
+    extra:[EX.plankKnee,"2 holds of 10 seconds"]},
+  S3A:{name:"Squat and Push",
+    warm:"5 minutes brisk walking round the house, then 10 arm circles each way.",
+    work:[[EX.boxSquat,"3 sets of 10"],[EX.counterPress,"3 sets of 10"],[EX.bagRow,"3 sets of 10"],[EX.bridge,"3 sets of 12"],[EX.plankKnee,"3 holds of 15 seconds"]],
+    extra:[EX.heelRaise,"3 sets of 15"]},
+  S3B:{name:"Hinge and Pull",
+    warm:"5 minutes brisk walking, 10 arm circles, then 10 hip hinges holding nothing.",
+    work:[[EX.hipHinge,"3 sets of 10"],[EX.splitSquat,"2 sets of 8 each leg"],[EX.kneePress,"3 sets of 6"],[EX.overhead,"3 sets of 10"],[EX.sidePlank,"2 holds of 15 seconds each side"]],
+    extra:[EX.bagRow,"2 sets of 12"]},
+  S4A:{name:"Squat and Push",
+    warm:"5 minutes brisk walking, arm circles, then 10 bodyweight squats with no weight.",
+    work:[[EX.fullSquat,"3 sets of 12"],[EX.kneePress,"3 sets of 10"],[EX.bagRow,"3 sets of 12"],[EX.stepUp,"3 sets of 10 each leg"],[EX.plankKnee,"3 holds of 30 seconds"]],
+    extra:[EX.overhead,"2 sets of 12"]},
+  S4B:{name:"Hinge and Pull",
+    warm:"5 minutes brisk walking, arm circles, then 10 hip hinges holding nothing.",
+    work:[[EX.hipHinge,"3 sets of 12"],[EX.splitSquat,"3 sets of 10 each leg"],[EX.overhead,"3 sets of 12"],[EX.bagRow,"3 sets of 12"],[EX.sidePlank,"3 holds of 25 seconds each side"]],
+    extra:[EX.fullSquat,"2 sets of 15"]}
+};
 
-var COOLDOWN = ["Doorway chest stretch \u2014 forearm on the frame, step through, 30 seconds each side.",
-  "Quad stretch \u2014 hold a foot behind you, knees together, 30 seconds each leg.",
-  "Hamstring stretch \u2014 heel on a step, lean forwards with a flat back, 30 seconds each leg.",
-  "Child's pose on the floor \u2014 45 seconds, breathe out slowly."];
+var DAYNAMES=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
-var PHASES = [
- {wk:[1,2],rank:"E",name:"Awakening",cardio:"20 minutes of brisk walking, every day",
-  week:[["Mon","Session 1"],["Tue","Walk only"],["Wed","Session 2"],["Thu","Walk only"],["Fri","Session 1"],["Sat","Walk only"],["Sun","Rest and stretch"]],
-  sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"worktopPress",sets:3,reps:"5 reps",rest:"90 seconds"},
-     {k:"chairSquat",sets:3,reps:"8 reps",rest:"90 seconds"},
-     {k:"plank",sets:3,reps:"hold 15 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"doorwayRow",sets:3,reps:"8 reps",rest:"90 seconds"},
-     {k:"gluteBridge",sets:3,reps:"10 reps",rest:"60 seconds"},
-     {k:"deadBug",sets:3,reps:"6 reps each side",rest:"60 seconds"}]}],
-  note:"It should feel too easy. That's deliberate \u2014 weeks 1 and 2 build the habit, not the muscle. The people who go hard now are the ones who quit in week three."},
- {wk:[3,4],rank:"E",name:"Awakening II",cardio:"30 minutes of brisk walking, every day",
-  week:[["Mon","Session 1"],["Tue","Walk only"],["Wed","Session 2"],["Thu","Walk only"],["Fri","Session 1"],["Sat","Walk only"],["Sun","Rest and stretch"]],
-  sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"inclinePress",sets:3,reps:"8 reps",rest:"90 seconds"},
-     {k:"bodyweightSquat",sets:3,reps:"12 reps",rest:"90 seconds"},
-     {k:"plank",sets:3,reps:"hold 25 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"doorwayRow",sets:3,reps:"12 reps",rest:"90 seconds"},
-     {k:"gluteBridge",sets:3,reps:"15 reps",rest:"60 seconds"},
-     {k:"deadBug",sets:3,reps:"8 reps each side",rest:"60 seconds"}]}],
-  note:"Swap the worktop for the stairs or the arm of the sofa. Same movement, lower surface, more of your weight through your arms."},
- {wk:[5,6],rank:"D",name:"Gate clearance",
-  cardio:"30 minute walk daily, plus one interval day: walk fast for 1 minute, easy for 2 minutes, repeat 8 times",
-  week:[["Mon","Session 1"],["Tue","Walk"],["Wed","Session 2"],["Thu","Interval walk"],["Fri","Session 1"],["Sat","Walk"],["Sun","Rest and stretch"]],
-  sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"inclinePress",sets:4,reps:"8 reps",rest:"90 seconds"},
-     {k:"bodyweightSquat",sets:4,reps:"15 reps",rest:"90 seconds"},
-     {k:"splitSquat",sets:3,reps:"6 reps each leg",rest:"60 seconds"},
-     {k:"plank",sets:3,reps:"hold 35 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"doorwayRow",sets:4,reps:"12 reps",rest:"90 seconds"},
-     {k:"hipHinge",sets:3,reps:"10 reps, no weight",rest:"90 seconds"},
-     {k:"gluteBridge",sets:3,reps:"15 reps",rest:"60 seconds"},
-     {k:"deadBug",sets:3,reps:"8 reps each side",rest:"60 seconds"}]}],
-  note:"Week 5 is when knees and shoulders start grumbling. A dull ache a day or two after training is normal. Sharp pain, one-sided pain, or pain inside a joint is not \u2014 stop that exercise and use the easier version."},
- {wk:[7,8],rank:"D",name:"Gate clearance II",cardio:"30 to 40 minute walk daily, plus two interval days",
-  week:[["Mon","Session 1"],["Tue","Interval walk"],["Wed","Session 2"],["Thu","Walk"],["Fri","Session 1"],["Sat","Interval walk"],["Sun","Rest and stretch"]],
-  sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"floorPress",sets:4,reps:"6 reps (knees down if needed)",rest:"2 minutes"},
-     {k:"loadedSquat",sets:4,reps:"12 reps",rest:"2 minutes"},
-     {k:"splitSquat",sets:3,reps:"8 reps each leg",rest:"90 seconds"},
-     {k:"plank",sets:3,reps:"hold 45 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"doorwayRow",sets:4,reps:"15 reps",rest:"90 seconds"},
-     {k:"hipHinge",sets:3,reps:"12 reps with the loaded bag",rest:"2 minutes"},
-     {k:"gluteBridge",sets:3,reps:"20 reps",rest:"60 seconds"},
-     {k:"sitUp",sets:3,reps:"12 reps",rest:"60 seconds"}]}],
-  note:"Somewhere in these two weeks you'll get your first proper press-up off the floor. Write it in the journal \u2014 that's a boss kill."},
- {wk:[9,10],rank:"C",name:"Ascension",
-  cardio:"Three jogging days: jog 30 seconds, walk 90 seconds, repeat 10 times. Keep the daily walk on the other days.",
-  week:[["Mon","Session 1"],["Tue","Jog intervals"],["Wed","Session 2"],["Thu","Jog intervals"],["Fri","Session 1"],["Sat","Jog intervals"],["Sun","Rest and stretch"]],
-  sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"floorPress",sets:4,reps:"10 reps",rest:"2 minutes"},
-     {k:"loadedSquat",sets:4,reps:"15 reps",rest:"2 minutes"},
-     {k:"walkingLunge",sets:3,reps:"10 reps each leg",rest:"90 seconds"},
-     {k:"plank",sets:3,reps:"hold 60 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"tableRow",sets:4,reps:"8 reps",rest:"2 minutes"},
-     {k:"hipHinge",sets:4,reps:"12 reps loaded",rest:"2 minutes"},
-     {k:"splitSquat",sets:3,reps:"10 reps each leg",rest:"90 seconds"},
-     {k:"sitUp",sets:3,reps:"15 reps",rest:"60 seconds"}]}],
-  note:"Jog far slower than feels right. If you can't say a full sentence out loud while jogging, slow down \u2014 don't stop."},
- {wk:[11,12],rank:"C",name:"Trial",cardio:"Three jogging days: jog 1 minute, walk 1 minute, repeat 12 times",
-  week:[["Mon","Circuit"],["Tue","Jog intervals"],["Wed","Circuit"],["Thu","Jog intervals"],["Fri","Circuit"],["Sat","Jog intervals"],["Sun","Rest and stretch"]],
-  circuit:"Do one set of each exercise back to back with no rest, then rest 90 seconds. That's one round. Five rounds in total.",
-  sessions:[
-   {title:"The circuit \u2014 five rounds",ex:[
-     {k:"floorPress",sets:1,reps:"12 reps",rest:"straight on"},
-     {k:"bodyweightSquat",sets:1,reps:"20 reps",rest:"straight on"},
-     {k:"walkingLunge",sets:1,reps:"10 reps each leg",rest:"straight on"},
-     {k:"sitUp",sets:1,reps:"15 reps",rest:"straight on"},
-     {k:"plank",sets:1,reps:"hold 45 seconds",rest:"90 seconds, then next round"}]}],
-  note:"On the last day of week 12, test yourself: most press-ups in one go, most squats in one go, and time yourself over 1 km. Write all three in the journal. Everything after this is measured against those numbers."}
+var PHASES=[
+  {weeks:[1,2],name:"Getting moving",
+   walk:"10 to 20 minutes, every day. Start at 10 and add a minute or two whenever it stops feeling like effort.",
+   days:{1:"S1",3:"S1",5:"S1"},optional:{},
+   note:"Two weeks of just showing up. The same session three times so it becomes familiar. Nothing here should leave you gasping — if it does, slow down and do fewer reps."},
+  {weeks:[3,4],name:"Building the habit",
+   walk:"25 minutes, every day. Make one of them brisk enough that holding a conversation takes a bit of effort.",
+   days:{1:"S2",3:"S2",5:"S2"},optional:{},
+   note:"Still one session three times a week, but three sets instead of two, and the stairs come into it. You'll ache a bit the day after the first one. That fades and it doesn't come back."},
+  {weeks:[5,6,7,8],name:"Getting stronger",
+   walk:"30 to 40 minutes most days. Twice a week, walk up a hill or put the treadmill on an incline.",
+   days:{1:"S3A",3:"S3B",5:"S3A"},optional:{},
+   note:"Two different sessions now. Squat and Push comes round twice a week, Hinge and Pull once — that's deliberate, not a mistake. Add another tin to the bags whenever 12 reps starts feeling easy."},
+  {weeks:[9,10,11,12],name:"Intermediate",
+   walk:"40 minutes most days, plus one interval walk a week: 2 minutes fast, 2 minutes easy, repeated 6 times.",
+   days:{1:"S4A",3:"S4B",5:"S4A",6:"S4B"},optional:{6:true},
+   note:"Same two sessions, harder versions. Saturday is optional — take it if the week has gone well, drop it without guilt if it hasn't. Three done beats four skipped."}
 ];
 
-var ENDGAME = ["100 press-ups","100 sit-ups","100 squats","10 km run"];
-
-var RECIPES = [
- {id:"oats",name:"Banana porridge",tag:"Breakfast",serves:1,time:"5 min",
+var RECIPES=[
+ {id:"oats",name:"Banana porridge",serves:1,kcal:350,time:"5 min",tag:"Breakfast",
   ings:["50g porridge oats","250ml semi-skimmed milk (or half milk, half water)","1 banana","Pinch of salt","Cinnamon if you have it"],
-  steps:["Tip the oats into a saucepan with the milk and a pinch of salt.",
-    "Medium heat, and keep stirring \u2014 it catches on the bottom if you wander off.",
-    "After about 4 minutes it thickens and starts to bubble. Take it off the heat.",
-    "Slice the banana in and stir. The heat turns it sweet, so you don't need sugar.",
-    "Cinnamon on top if you've got it."],
-  yours:"Use 75g oats and stir in a heaped tablespoon of peanut butter. About 560 kcal, 22g protein.",
-  note:"Cold version: same oats, same milk, in a jar in the fridge overnight."},
- {id:"eggsbeans",name:"Eggs and beans on toast",tag:"Breakfast",serves:1,time:"8 min",
+  steps:["Tip the oats into a saucepan with the milk and a pinch of salt.","Medium heat, and stir. Keep stirring — it catches on the bottom the second you wander off.","After about 4 minutes it thickens and starts to bubble. Take it off the heat.","Slice the banana in and stir. The heat turns it sweet, so you don't need sugar.","Cinnamon on top if you've got it."],
+  note:"Cold version: same oats, same milk, in a jar in the fridge overnight. Grab it and go."},
+ {id:"eggsbeans",name:"Eggs and beans on toast",serves:1,kcal:400,time:"8 min",tag:"Breakfast",
   ings:["2 eggs","Half a tin of baked beans","2 slices wholemeal bread","Splash of milk","Salt and pepper"],
-  steps:["Beans into a small pan on a low heat. Toast on.",
-    "Crack the eggs into a bowl, add a splash of milk, salt and pepper. Beat with a fork until there are no streaks of white left.",
-    "Non-stick pan on medium-low, the smallest bit of oil or a spray.",
-    "Pour the eggs in. Leave them completely alone for 20 seconds, then push them slowly from the edges into the middle with a wooden spoon.",
-    "Take them off the heat while they still look slightly too wet \u2014 they carry on cooking in the pan.",
-    "Toast, beans, eggs. Done."],
-  yours:"Three eggs and the full tin of beans. About 600 kcal, 38g protein.",
+  steps:["Beans into a small pan on a low heat. Toast on.","Crack the eggs into a bowl, add a splash of milk, salt and pepper. Beat with a fork until there are no streaks of white left.","Non-stick pan on medium-low, the smallest bit of oil or a spray.","Pour the eggs in. Leave them completely alone for 20 seconds, then push them slowly from the edges into the middle with a wooden spoon.","Take them off the heat while they still look slightly too wet — they carry on cooking in the pan.","Toast, beans, eggs. Done."],
   note:"Low heat and patience is the entire trick with scrambled eggs."},
- {id:"yog",name:"Yoghurt and berry pot",tag:"Breakfast or snack",serves:1,time:"2 min",
-  ings:["150g natural or Greek yoghurt","Handful frozen berries","1 tbsp porridge oats","Drizzle of honey (optional)"],
-  steps:["Frozen berries into a bowl or jar.","Yoghurt on top.","Oats sprinkled over.",
-    "Leave it 10 minutes \u2014 the berries defrost and bleed into the yoghurt. Or make it the night before."],
-  yours:"200g of Greek yoghurt rather than 150g. About 200 kcal, 20g protein \u2014 your best protein-per-penny snack.",
-  note:"This is the answer to wanting pudding."},
- {id:"lentilsoup",name:"Red lentil and tomato soup",tag:"Batch cook",serves:6,time:"35 min",
+ {id:"lentilsoup",name:"Red lentil and tomato soup",serves:6,kcal:250,time:"35 min",tag:"Batch cook",
   ings:["250g red lentils","2 onions","3 carrots","2 cloves garlic","1 tin chopped tomatoes","2 stock cubes","1.5 litres water","1 tsp paprika","1 tbsp oil"],
-  steps:["Peel and roughly chop the onions and carrots. Squash and chop the garlic.",
-    "Oil in a big pan on medium. Onions and carrots in, 8 minutes until the onion has gone soft and see-through. Stir now and then.",
-    "Garlic and paprika in, stir for 1 minute \u2014 don't let the garlic brown or it turns bitter.",
-    "Rinse the lentils in a sieve under the tap, then tip them in with the tomatoes, stock cubes and water.",
-    "Bring to the boil, then turn it right down and simmer 25 minutes with the lid half on.",
-    "The lentils will have collapsed into it. Blend smooth if you like, or leave it chunky. Salt and pepper to taste.",
-    "Cool, then portion into 6 tubs. Fridge 4 days, freezer 3 months."],
-  yours:"A bigger ladle plus two slices of wholemeal bread, and stir a drained tin of tuna through your bowl. About 550 kcal, 45g protein.",
-  note:"Pennies a portion and the most filling thing on the list. Make it on a Sunday."},
- {id:"chilli",name:"Batch chilli",tag:"Batch cook",serves:6,time:"45 min",
-  ings:["500g 5% beef or turkey mince","2 onions","2 cloves garlic","2 tins chopped tomatoes","1 tin kidney beans","1 tin baked beans","2 tsp chilli powder","2 tsp paprika","1 tsp cumin","1 stock cube","Rice to serve"],
-  steps:["Chop the onions and garlic.",
-    "Big pan on medium-high, no oil needed for the mince. Break it up with a spoon and fry until there's no pink left, about 6 minutes.",
-    "Onions in, 5 minutes until soft. Then garlic and all the spices, stir for a minute.",
-    "Tomatoes, drained kidney beans, baked beans and the crumbled stock cube in. Swill half a tin of water out into the pan.",
-    "Bring to a bubble, turn it low, simmer 25 minutes with the lid off, stirring occasionally. It should thicken up properly.",
-    "Taste it. More chilli if it's flat, a pinch of salt if it needs lifting.",
-    "Rice: boil in plenty of salted water for 10 to 12 minutes, then drain.",
-    "Portion into 6 tubs. Three in the fridge, three in the freezer."],
-  yours:"A portion and a half of chilli with 75g of dry rice. About 620 kcal, 48g protein.",
-  note:"The baked beans sound wrong and taste right \u2014 they thicken it and add sweetness for about 40p."},
- {id:"traybake",name:"Chicken and veg traybake",tag:"Dinner",serves:4,time:"50 min",
-  ings:["8 chicken thighs (bone-in, skin on is cheapest)","6 potatoes","3 carrots","2 onions","1 tbsp oil","1 tsp mixed herbs","1 tsp paprika","Salt and pepper"],
-  steps:["Oven on at 200\u00b0C (180\u00b0C fan).",
-    "Cut the potatoes into chunks about the size of a matchbox. Carrots into thick sticks. Onions into wedges.",
-    "Everything into a big roasting tin. Oil, herbs, paprika, salt and pepper. Get your hands in and mix it all up.",
-    "Sit the chicken thighs on top, spaced out.",
-    "40 minutes. At the 20 minute mark, pull it out and turn the veg over.",
-    "It's done when the potatoes are golden at the edges and the chicken juices run clear when you poke the thickest part with a knife."],
-  yours:"Two thighs instead of one, and take the skin off yours \u2014 saves about 80 kcal each with no real loss. About 620 kcal, 48g protein.",
-  note:"One tin, one wash-up. Leftovers are good cold the next day."},
- {id:"curry",name:"Chickpea and potato curry",tag:"Dinner",serves:4,time:"30 min",
-  ings:["2 tins chickpeas","4 potatoes","1 onion","2 cloves garlic","1 tin chopped tomatoes","2 tbsp curry powder","1 stock cube","Rice to serve","1 tbsp oil","Handful frozen peas"],
-  steps:["Peel the potatoes and cut into 2cm cubes. Boil in salted water for 8 minutes, then drain.",
-    "Meanwhile chop the onion and garlic. Oil in a pan, onion in on medium for 6 minutes until soft.",
-    "Garlic and curry powder in. Stir for a minute \u2014 the smell should hit you.",
-    "Tomatoes, drained chickpeas, the crumbled stock cube and half a tin of water in. Then the drained potatoes.",
-    "Simmer 12 minutes. Add the frozen peas for the last 3.",
-    "Rice on while it simmers. Salt to taste at the end."],
-  yours:"Bigger portion, 75g dry rice, and two heaped spoons of Greek yoghurt on top \u2014 that's the protein this one is short on. About 620 kcal, 30g protein.",
-  note:"Under \u00a31 a portion and it freezes fine."},
- {id:"bolognese",name:"Hidden veg bolognese",tag:"Batch cook",serves:5,time:"40 min",
-  ings:["500g 5% beef mince","1 onion","2 carrots","1 courgette (or a handful of frozen mixed veg)","2 cloves garlic","2 tins chopped tomatoes","2 tbsp tomato pur\u00e9e","1 stock cube","1 tsp mixed herbs","Pasta to serve"],
-  steps:["Grate the carrots and courgette on the coarse side of a grater. Chop the onion and garlic finely.",
-    "Dry pan on medium-high, mince in, break it up and fry 6 minutes until browned.",
-    "Onion in for 5 minutes, then the grated veg and garlic for another 4. The veg disappears into the sauce as it cooks.",
-    "Pur\u00e9e in and stir for a minute \u2014 cooking it out takes the tinny edge off.",
-    "Tomatoes, herbs and crumbled stock cube in. Half a tin of water swilled out into the pan.",
-    "Simmer 20 minutes with the lid off until it's thick, not watery.",
-    "Pasta boiled in salted water, drained. Portion the sauce into 5 tubs."],
-  yours:"100g of dry pasta rather than 75g, plus a tablespoon of grated cheese. About 640 kcal, 45g protein.",
-  note:"Two veg per portion that nobody has to look at. Freezes for 3 months."},
- {id:"tunapasta",name:"Tuna pasta",tag:"Lunch",serves:2,time:"15 min",
+  steps:["Peel and roughly chop the onions and carrots. Squash and chop the garlic.","Oil in a big pan on medium. Onions and carrots in, 8 minutes until the onion has gone soft and see-through. Stir now and then.","Garlic and paprika in, stir for 1 minute — don't let the garlic brown or it turns bitter.","Rinse the lentils in a sieve under the tap, then tip them in with the tomatoes, stock cubes and water.","Bring to the boil, then turn it right down and simmer 25 minutes with the lid half on.","The lentils will have collapsed into it. Blend smooth if you like, or leave it chunky. Salt and pepper to taste.","Cool, then portion into 6 tubs. Fridge 4 days, freezer 3 months."],
+  note:"Pennies a portion and the most filling thing on this list. Make it on a Sunday."},
+ {id:"chilli",name:"Batch chilli",serves:6,kcal:500,time:"45 min",tag:"Batch cook",
+  ings:["500g 5% beef or turkey mince","2 onions","2 cloves garlic","2 tins chopped tomatoes","1 tin kidney beans","1 tin baked beans","2 tsp chilli powder","2 tsp paprika","1 tsp cumin","1 stock cube","300g rice (dry) to serve"],
+  steps:["Chop the onions and garlic.","Big pan on medium-high, no oil needed for the mince. Break it up with a spoon and fry until there's no pink left, about 6 minutes.","Onions in, 5 minutes until soft. Then garlic and all the spices, stir for a minute.","Tomatoes, drained kidney beans, baked beans and the crumbled stock cube in. Swill half a tin of water out into the pan.","Bring to a bubble, turn it low, simmer 25 minutes with the lid off, stirring occasionally. It should thicken up properly.","Taste it. More chilli if it's flat, a pinch of salt if it needs lifting.","Rice: 50g dry each, boiled in plenty of salted water 10 to 12 minutes, drained.","Portion into 6 tubs. Three in the fridge, three in the freezer."],
+  note:"The baked beans sound wrong and taste right — they thicken it and add sweetness for about 40p."},
+ {id:"traybake",name:"Chicken and veg traybake",serves:4,kcal:450,time:"45 min",tag:"Dinner",
+  ings:["8 chicken thighs, skin off (far cheaper than breast)","6 potatoes","3 carrots","2 onions","2 tbsp oil","2 tsp mixed herbs","1 tsp paprika","Salt and pepper"],
+  steps:["Oven on to 200C, 180C fan, gas 6.","Cut the potatoes into chunks about the size of a matchbox. Carrots into thick sticks. Onions into wedges.","Everything into a big roasting tin. Oil, herbs, paprika, salt and pepper. Get your hands in and mix it properly.","Sit the chicken thighs on top, spaced out so they roast rather than steam.","40 minutes. At the 20 minute mark, pull it out and turn the veg over.","Done when the potatoes are golden at the edges and the chicken juices run clear when you poke the thickest bit with a knife."],
+  note:"One tin, one wash-up. The leftovers are good cold the next day."},
+ {id:"curry",name:"Chickpea and potato curry",serves:4,kcal:420,time:"30 min",tag:"Dinner",
+  ings:["2 tins chickpeas","4 potatoes","1 onion","2 cloves garlic","1 tin chopped tomatoes","2 tbsp curry powder","1 stock cube","200g rice (dry)","1 tbsp oil","Handful frozen peas"],
+  steps:["Peel the potatoes and cut into 2cm cubes. Boil in salted water 8 minutes, then drain.","Meanwhile chop the onion and garlic. Oil in a pan, onion on medium for 6 minutes until soft.","Garlic and curry powder in. Stir for a minute — the smell should hit you.","Tomatoes, drained chickpeas, crumbled stock cube and half a tin of water in. Then the drained potatoes.","Simmer 12 minutes. Frozen peas in for the last 3.","Rice on while it simmers. Salt to taste right at the end."],
+  note:"Under a pound a portion and it freezes fine."},
+ {id:"tunapasta",name:"Tuna pasta",serves:2,kcal:450,time:"15 min",tag:"Lunch",
   ings:["150g pasta","1 tin tuna in spring water","1 tin chopped tomatoes","1 onion","1 clove garlic","Handful frozen peas or sweetcorn","1 tsp mixed herbs","30g cheese, grated"],
-  steps:["Pasta on in salted boiling water. Check the packet \u2014 usually 10 minutes.",
-    "Chop the onion and garlic. Fry the onion in a little oil for 5 minutes, add garlic and herbs for 1 minute.",
-    "Tomatoes in, simmer for 6 minutes to thicken.",
-    "Drain the tuna properly and flake it in. Frozen peas or sweetcorn in too.",
-    "Drain the pasta but keep a mugful of the water. Pasta into the sauce, a splash of the water to loosen it, stir.",
-    "Cheese on top."],
-  yours:"Add a second tin of tuna to the pan and take the bigger share. About 600 kcal, 50g protein.",
-  note:"Weigh the pasta dry. 75g each looks small and isn't."},
- {id:"jacket",name:"Jacket potato, beans and cheese",tag:"Lunch",serves:1,time:"1 hr 10 (or 12 min microwave)",
-  ings:["1 large baking potato","Half a tin baked beans","25g cheese, grated","Salt"],
-  steps:["Oven 200\u00b0C. Wash the potato, dry it, prick it 6 times with a fork.",
-    "Rub with a tiny bit of oil and salt \u2014 that's what makes the skin crisp.",
-    "Straight on the oven shelf for an hour. A knife should slide in with no resistance.",
-    "Microwave shortcut: 5 minutes, turn it over, 5 more, then 10 minutes in the oven if you want the skin crisp.",
-    "Split it open, beans in, cheese over the top."],
-  yours:"Full tin of beans and a drained tin of tuna alongside. About 620 kcal, 48g protein.",
-  note:"The cheapest hot lunch there is."}
+  steps:["Pasta on in salted boiling water. Check the packet, usually 10 minutes.","Chop the onion and garlic. Fry the onion in a little oil for 5 minutes, then garlic and herbs for 1 minute.","Tomatoes in, simmer 6 minutes to thicken.","Drain the tuna properly and flake it in. Frozen peas or sweetcorn in too.","Drain the pasta but keep a mugful of the water. Pasta into the sauce, splash of the water to loosen it, stir.","Cheese over the top."],
+  note:"Weigh the pasta dry. 75g each looks mean in the bowl and isn't."},
+ {id:"jacket",name:"Jacket potato, beans and cheese",serves:1,kcal:420,time:"1 hr 10 (or 12 min microwave)",tag:"Lunch",
+  ings:["1 large baking potato","Half a tin baked beans","25g cheese, grated","Salt","Tiny bit of oil"],
+  steps:["Oven 200C. Wash the potato, dry it properly, prick it 6 times with a fork.","Rub with a tiny bit of oil and plenty of salt — that's what makes the skin crisp instead of leathery.","Straight onto the oven shelf for an hour. A knife should slide in with no resistance.","Microwave shortcut: 5 minutes, turn it, 5 more. Then 10 minutes in a hot oven for the skin if you've got the time.","Split it, fluff the inside with a fork, beans on, cheese on."],
+  note:"Weigh the cheese. It's the thing that quietly doubles the calories in this one."},
+ {id:"bolognese",name:"Hidden veg bolognese",serves:5,kcal:480,time:"40 min",tag:"Batch cook",
+  ings:["500g 5% mince","2 onions","3 carrots","2 cloves garlic","2 tins chopped tomatoes","1 tbsp tomato puree","2 tsp mixed herbs","1 stock cube","375g pasta (dry)"],
+  steps:["Grate the carrots on the coarse side of a box grater. Chop the onions and garlic.","Brown the mince in a big pan on medium-high, breaking it up, about 6 minutes.","Onions and grated carrot in. Cook 8 minutes — the carrot melts into it and disappears.","Garlic, herbs and puree in for a minute.","Tomatoes and crumbled stock cube in. Simmer 20 minutes on low, lid off.","Pasta: 75g dry each, boiled and drained.","Portion the sauce into 5 tubs. Fridge 4 days, freezer 3 months."],
+  note:"Three carrots grated in is three portions of veg nobody notices eating."},
+ {id:"yog",name:"Yoghurt and berry pot",serves:1,kcal:200,time:"2 min",tag:"Snack",
+  ings:["150g natural or Greek yoghurt","Handful frozen berries","1 tbsp porridge oats","Small drizzle of honey (optional)"],
+  steps:["Frozen berries into a bowl or a jar.","Yoghurt on top.","Oats sprinkled over.","Leave it 10 minutes — the berries defrost and bleed through the yoghurt. Or make it the night before."],
+  note:"This is the answer to wanting pudding."}
 ];
 
-var DAYPLAN = [
- ["Monday","Banana porridge","Lentil soup + bread","Batch chilli with rice","Yoghurt pot"],
- ["Tuesday","Eggs and beans on toast","Tuna pasta","Chicken and veg traybake","Apple + peanut butter"],
- ["Wednesday","Banana porridge","Traybake leftovers","Batch chilli with rice","Yoghurt pot"],
- ["Thursday","Yoghurt, berries and oats","Jacket potato, beans, tuna","Chickpea and potato curry","Banana"],
- ["Friday","Eggs and beans on toast","Lentil soup + bread","Hidden veg bolognese","Yoghurt pot"],
- ["Saturday","Banana porridge","Tuna pasta","Curry leftovers","2 boiled eggs"],
- ["Sunday","Eggs and beans on toast","Bolognese leftovers","Chicken traybake","Yoghurt pot"]
+var DAYPLAN=[
+ ["Monday","Banana porridge","Lentil soup and a slice of bread","Batch chilli with rice","Yoghurt and berry pot"],
+ ["Tuesday","Eggs and beans on toast","Tuna pasta","Chicken and veg traybake","Apple and a small handful of nuts"],
+ ["Wednesday","Banana porridge","Traybake leftovers","Batch chilli with rice","Yoghurt and berry pot"],
+ ["Thursday","Yoghurt, berries and oats","Jacket potato, beans and cheese","Chickpea and potato curry","Banana"],
+ ["Friday","Eggs and beans on toast","Lentil soup and a slice of bread","Hidden veg bolognese","Yoghurt and berry pot"],
+ ["Saturday","Banana porridge","Tuna pasta","Curry leftovers","Two oatcakes and a bit of cheese"],
+ ["Sunday","Eggs and beans on toast","Bolognese leftovers","Chicken and veg traybake","Yoghurt and berry pot"]
 ];
 
-var SHOPPING = [
- ["Cupboard",["Porridge oats 1kg","Rice 1kg","Pasta 1kg","Red lentils 500g","Chopped tomatoes \u00d76 tins","Baked beans \u00d74 tins","Kidney beans \u00d72 tins","Chickpeas \u00d72 tins","Tuna in spring water \u00d74 tins","Stock cubes","Curry powder, chilli powder, paprika, cumin, mixed herbs","Vegetable oil","Tomato pur\u00e9e","Peanut butter"]],
- ["Fridge",["Eggs \u00d718","Semi-skimmed milk 4 pints","Big tub Greek or natural yoghurt","Block of cheese","Wholemeal loaf"]],
- ["Fresh",["Onions 2kg","Carrots 1kg","Potatoes 2.5kg","Garlic","Courgette","Bananas \u00d77","Apples \u00d77"]],
- ["Freezer",["Mixed veg 1kg","Peas 1kg","Sweetcorn","Frozen berries 500g","Chicken thighs","5% mince \u00d72 packs"]]
+var SHOPPING=[
+ ["Cupboard",["Porridge oats 1kg","Rice 1kg","Pasta 1kg","Red lentils 500g","Chopped tomatoes x6 tins","Baked beans x4 tins","Kidney beans x2 tins","Chickpeas x2 tins","Tuna in spring water x2 tins","Stock cubes","Curry powder, chilli powder, paprika, cumin, mixed herbs","Vegetable oil","Tomato puree"]],
+ ["Fridge",["Eggs x12","Semi-skimmed milk 4 pints","Big tub natural or Greek yoghurt","Block of cheese","Wholemeal loaf"]],
+ ["Fresh",["Onions 2kg","Carrots 1kg","Potatoes 2.5kg","Garlic","Bananas x7","Apples x7"]],
+ ["Freezer",["Mixed veg 1kg","Peas 1kg","Sweetcorn","Frozen berries 500g","Chicken thighs or drumsticks","5% mince x2 packs"]]
 ];
 
-var QUESTS = [
- {id:"walk",label:"Daily movement",detail:"The walk for your current phase",stat:"END",xp:30},
- {id:"train",label:"Training session",detail:"Or stretching on a walk-only day",stat:"STR",xp:30},
- {id:"cals",label:"Ate to plan",detail:"Your portions, no extras",stat:"WIL",xp:30},
- {id:"prot",label:"Protein at every meal",detail:"Eggs, tuna, mince, chicken, yoghurt, beans",stat:"INT",xp:30},
- {id:"water",label:"2 litres of water",detail:"Roughly 4 pint glasses",stat:"VIT",xp:30},
- {id:"sleep",label:"7+ hours sleep",detail:"The cheapest performance drug there is",stat:"VIT",xp:30},
- {id:"bonus",label:"Bonus objective \u2014 second walk",detail:"15 more minutes after tea. Optional. Big XP.",stat:"END",xp:69}
+/* Per 100g unless "each". UK supermarket own-brand averages, rounded. */
+var FOODDB=[
+ {n:"Porridge oats, dry",per100:370,c:"Basics"},
+ {n:"Rice, dry",per100:350,c:"Basics"},
+ {n:"Rice, cooked",per100:130,c:"Basics"},
+ {n:"Pasta, dry",per100:350,c:"Basics"},
+ {n:"Pasta, cooked",per100:158,c:"Basics"},
+ {n:"Potato, raw",per100:77,c:"Basics"},
+ {n:"Jacket potato, baked",per100:93,c:"Basics"},
+ {n:"Chips, oven",per100:170,c:"Basics"},
+ {n:"Wholemeal bread, slice",each:95,c:"Basics"},
+ {n:"White bread, slice",each:90,c:"Basics"},
+ {n:"Weetabix, each",each:67,c:"Basics"},
+ {n:"Cornflakes",per100:380,c:"Basics"},
+ {n:"Red lentils, dry",per100:350,c:"Basics"},
+ {n:"Tortilla wrap, each",each:200,c:"Basics"},
+
+ {n:"Chicken breast, raw",per100:106,c:"Protein"},
+ {n:"Chicken thigh, skinless, raw",per100:120,c:"Protein"},
+ {n:"Beef mince 5%, raw",per100:137,c:"Protein"},
+ {n:"Beef mince 20%, raw",per100:250,c:"Protein"},
+ {n:"Turkey mince 5%, raw",per100:125,c:"Protein"},
+ {n:"Pork sausage, each",each:220,c:"Protein"},
+ {n:"Bacon rasher, each",each:100,c:"Protein"},
+ {n:"Egg, medium, each",each:66,c:"Protein"},
+ {n:"Tuna in spring water, drained",per100:105,c:"Protein"},
+ {n:"Salmon fillet, raw",per100:200,c:"Protein"},
+ {n:"Baked beans",per100:90,c:"Protein"},
+ {n:"Kidney beans, drained",per100:100,c:"Protein"},
+ {n:"Chickpeas, drained",per100:115,c:"Protein"},
+ {n:"Ham, slice",each:20,c:"Protein"},
+
+ {n:"Semi-skimmed milk",per100:50,c:"Dairy"},
+ {n:"Whole milk",per100:65,c:"Dairy"},
+ {n:"Skimmed milk",per100:35,c:"Dairy"},
+ {n:"Natural yoghurt",per100:60,c:"Dairy"},
+ {n:"Greek yoghurt, 0%",per100:57,c:"Dairy"},
+ {n:"Greek yoghurt, full fat",per100:130,c:"Dairy"},
+ {n:"Cheddar",per100:410,c:"Dairy"},
+ {n:"Butter",per100:740,c:"Dairy"},
+ {n:"Spread, low fat",per100:360,c:"Dairy"},
+
+ {n:"Onion",per100:40,c:"Veg"},
+ {n:"Carrot",per100:35,c:"Veg"},
+ {n:"Broccoli",per100:34,c:"Veg"},
+ {n:"Cauliflower",per100:25,c:"Veg"},
+ {n:"Cabbage",per100:25,c:"Veg"},
+ {n:"Peas, frozen",per100:80,c:"Veg"},
+ {n:"Sweetcorn",per100:85,c:"Veg"},
+ {n:"Mixed veg, frozen",per100:45,c:"Veg"},
+ {n:"Tomato",per100:18,c:"Veg"},
+ {n:"Tinned chopped tomatoes",per100:22,c:"Veg"},
+ {n:"Cucumber",per100:15,c:"Veg"},
+ {n:"Lettuce",per100:15,c:"Veg"},
+ {n:"Pepper",per100:26,c:"Veg"},
+ {n:"Mushrooms",per100:22,c:"Veg"},
+ {n:"Spinach",per100:25,c:"Veg"},
+ {n:"Green beans",per100:31,c:"Veg"},
+
+ {n:"Banana, each",each:95,c:"Fruit"},
+ {n:"Apple, each",each:80,c:"Fruit"},
+ {n:"Orange, each",each:62,c:"Fruit"},
+ {n:"Satsuma, each",each:35,c:"Fruit"},
+ {n:"Grapes",per100:69,c:"Fruit"},
+ {n:"Strawberries",per100:32,c:"Fruit"},
+ {n:"Frozen berries",per100:45,c:"Fruit"},
+ {n:"Raisins",per100:300,c:"Fruit"},
+
+ {n:"Vegetable oil, tbsp",each:120,c:"Extras"},
+ {n:"Olive oil, tbsp",each:120,c:"Extras"},
+ {n:"Mayonnaise",per100:700,c:"Extras"},
+ {n:"Ketchup",per100:100,c:"Extras"},
+ {n:"Gravy, made up",per100:30,c:"Extras"},
+ {n:"Peanut butter",per100:600,c:"Extras"},
+ {n:"Sugar, tsp",each:20,c:"Extras"},
+ {n:"Stock cube",each:20,c:"Extras"},
+
+ {n:"Digestive biscuit, each",each:71,c:"Treats"},
+ {n:"Chocolate digestive, each",each:85,c:"Treats"},
+ {n:"Crisps, 25g bag",each:130,c:"Treats"},
+ {n:"Chocolate bar, standard",each:240,c:"Treats"},
+ {n:"Milk chocolate",per100:535,c:"Treats"},
+ {n:"Ice cream",per100:190,c:"Treats"},
+ {n:"Chip shop chips, regular",each:700,c:"Treats"},
+ {n:"Pizza, slice",each:250,c:"Treats"},
+
+ {n:"Tea with milk, mug",each:15,c:"Drinks"},
+ {n:"Coffee with milk, mug",each:25,c:"Drinks"},
+ {n:"Cola, 330ml can",each:139,c:"Drinks"},
+ {n:"Diet cola, 330ml can",each:1,c:"Drinks"},
+ {n:"Orange juice, glass",each:110,c:"Drinks"},
+ {n:"Squash, no added sugar, glass",each:5,c:"Drinks"},
+ {n:"Wine, 175ml glass",each:160,c:"Drinks"},
+ {n:"Lager, pint",each:180,c:"Drinks"}
 ];
 
-var STAT_KEYS=["STR","END","VIT","INT","WIL"];
-var STAT_NAMES={STR:"Strength",END:"Endurance",VIT:"Vitality",INT:"Intelligence",WIL:"Willpower"};
+var HABITS=[
+ {id:"walk",l:"Walk done"},{id:"session",l:"Strength session"},{id:"food",l:"Ate to plan"},
+ {id:"water",l:"6+ glasses of water"},{id:"veg",l:"Veg at two meals"}
+];
 
-/* ============================ STATE =============================== */
+/* ============================ STORAGE ============================ */
 
-function iso(d){ d=d||new Date(); var x=new Date(d.getTime()-d.getTimezoneOffset()*60000); return x.toISOString().slice(0,10); }
-function today(){ return iso(); }
-function defaults(){ return {startISO:today(),startLbs:198,targetLbs:175,level:1,xp:0,totalXp:0,
-  stats:{STR:0,END:0,VIT:0,INT:0,WIL:0},log:{},weights:[],journal:[]}; }
+var KEY="kitchenTablePlan.v1";
+var IS_FILE = (location.protocol === "file:");
+var STORAGE_OK = (function(){
+  try{
+    if(!window.localStorage) return false;
+    localStorage.setItem("__ktp_probe","1");
+    var back = localStorage.getItem("__ktp_probe");
+    localStorage.removeItem("__ktp_probe");
+    return back === "1";
+  }catch(e){ return false; }
+})();
 
-var S, memoryOnly=false;
-try{
-  var raw = localStorage.getItem(KEY);
-  S = raw ? Object.assign(defaults(), JSON.parse(raw)) : defaults();
-}catch(e){ S = defaults(); memoryOnly = true; }
-if(!S.startISO) S.startISO = today();
+var state, tab="today", openAcc=null, openRec=null, flash="";
+var logDate=null, searchTerm="", pending=null, showCustom=false, cfMode="per100";
 
-var storageOk = false;
-try{ localStorage.setItem(KEY+"_test","1"); localStorage.removeItem(KEY+"_test"); storageOk = true; }
-catch(e){ storageOk = false; memoryOnly = true; }
-
-var isFile = (location.protocol === "file:");
-
-var ui = {tab:"status", ex:{}, rec:{}, alert:null,
-  err: isFile ? "You\u2019ve opened this as a file. It can\u2019t save, can\u2019t go on your home screen, and won\u2019t work offline \u2014 see Your data at the bottom of this tab."
-      : (storageOk ? null : "This browser is blocking saved data. Nothing you tick will survive closing the tab \u2014 see Your data at the bottom of this tab.")};
-
-function save(){
-  try{ localStorage.setItem(KEY, JSON.stringify(S)); ui.err=null; }
-  catch(e){ ui.err = memoryOnly ? "This browser is blocking saved data \u2014 your ticks will vanish when you close the tab. Try opening the file in Chrome or Safari directly."
-                                : "Couldn't save just then. Your ticks are still on screen."; }
+function addEntry(name,kcal){
+  var d=logDay();
+  state.log[d]=state.log[d]||[];
+  state.log[d].push({n:name,k:kcal});
+  pending=null;searchTerm="";
+  flash=save()?(kcal+" kcal added"):"Not saved — see the red note.";
+  render();
 }
 
-/* =========================== HELPERS ============================== */
+function iso(d){d=d||new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function blank(){return{startDate:iso(),startLb:228,goalLb:154,weights:[],checks:{},
+  log:{},customFoods:[],kcalTarget:1550};}
 
-function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
-function daysBetween(a,b){ return Math.round((new Date(b)-new Date(a))/86400000); }
-function needFor(l){ return 369 + (l-1)*123; }
-function rankFor(l){ var r=RANKS[0]; for(var i=0;i<RANKS.length;i++){ if(l>=RANKS[i].min) r=RANKS[i]; } return r; }
-function rankColour(letter){ for(var i=0;i<RANKS.length;i++){ if(RANKS[i].r===letter) return RANKS[i].c; } return RANKS[0].c; }
-function lbsToSt(lbs){ var st=Math.floor(lbs/14), rem=Math.round(lbs-st*14);
-  return rem===14 ? (st+1)+" st 0 lb" : st+" st "+rem+" lb"; }
-function curWeek(){ return Math.max(1, Math.floor(daysBetween(S.startISO, today())/7)+1); }
-function curPhase(){ var w=curWeek(); for(var i=0;i<PHASES.length;i++){ if(w>=PHASES[i].wk[0] && w<=PHASES[i].wk[1]) return PHASES[i]; } return PHASES[PHASES.length-1]; }
-function doneToday(){ return S.log[today()] || []; }
+function load(){
+  state=blank();
+  if(!STORAGE_OK) return;
+  try{var raw=localStorage.getItem(KEY); if(raw) state=Object.assign(blank(),JSON.parse(raw));}
+  catch(e){ /* corrupt data, start clean rather than crash */ }
+}
+function save(){
+  if(!STORAGE_OK) return false;
+  try{ localStorage.setItem(KEY,JSON.stringify(state)); return true; }
+  catch(e){ return false; }
+}
+
+function stoneStr(lb){var st=Math.floor(lb/14),r=Math.round(lb%14);
+  if(r===14){st++;r=0;} return st+"st "+r+"lb";}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+function planFor(dateISO){
+  var d=new Date(dateISO+"T12:00:00"), s=new Date(state.startDate+"T12:00:00");
+  var wk=Math.max(1,Math.floor((d-s)/86400000/7)+1), ph=null, i;
+  for(i=0;i<PHASES.length;i++){if(PHASES[i].weeks.indexOf(Math.min(wk,12))>-1){ph=PHASES[i];break;}}
+  if(!ph)ph=PHASES[PHASES.length-1];
+  var dow=d.getDay(), key=ph.days[dow];
+  return {week:Math.min(wk,12),phase:ph,session:key?SESSIONS[key]:null,optional:!!ph.optional[dow]};
+}
+function current(){return state.weights.length?state.weights[state.weights.length-1].lb:state.startLb;}
 function streak(){
   var n=0;
   for(var i=0;i<400;i++){
-    var d=iso(new Date(Date.now()-i*86400000)); var c=S.log[d]||[];
-    if(c.length>=4){ n++; } else if(i===0){ continue; } else { break; }
+    var d=new Date(); d.setDate(d.getDate()-i);
+    var c=state.checks[iso(d)], done=false, k;
+    if(c){for(k in c){if(c[k]){done=true;break;}}}
+    if(done)n++; else if(i>0)break;
   }
   return n;
 }
-function currentLbs(){ return S.weights.length ? S.weights[S.weights.length-1].lbs : S.startLbs; }
 
-/* ============================ RENDER ============================== */
+/* ============================ RENDER ============================ */
 
-function bar(pct,colour,h){
-  pct = Math.max(0, Math.min(100, pct));
-  return '<div class="bar" style="height:'+(h||6)+'px"><i style="width:'+pct+'%;background:'+colour+';box-shadow:0 0 10px '+colour+'"></i></div>';
-}
-function panel(title,body,opt){
-  opt=opt||{};
-  return '<div class="panel'+(opt.glow?" glow":"")+'"><div class="ph"><span>'+esc(title)+'</span>'+
-    (opt.right?'<span class="r">'+esc(opt.right)+'</span>':'')+'</div><div class="pb">'+body+'</div></div>';
-}
-
-function spark(){
-  if(S.weights.length<2) return '<div class="tiny">Two weigh-ins will draw the line here.</div>';
-  var vals=S.weights.map(function(w){return w.lbs;});
-  var min=Math.min.apply(null,vals.concat([S.targetLbs]))-2, max=Math.max.apply(null,vals)+2;
-  var W=300,H=70, pts=[];
-  for(var i=0;i<S.weights.length;i++){
-    var x=(i/(S.weights.length-1))*W, y=H-((S.weights[i].lbs-min)/(max-min))*H;
-    pts.push(x.toFixed(1)+","+y.toFixed(1));
-  }
-  var ty=H-((S.targetLbs-min)/(max-min))*H;
-  var dots="";
-  pts.forEach(function(p){ var a=p.split(","); dots+='<circle cx="'+a[0]+'" cy="'+a[1]+'" r="2.5" fill="#22d3ee"/>'; });
-  return '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:70px">'+
-    '<line x1="0" y1="'+ty.toFixed(1)+'" x2="'+W+'" y2="'+ty.toFixed(1)+'" stroke="#16a34a" stroke-width="1" stroke-dasharray="4 4"/>'+
-    '<polyline points="'+pts.join(" ")+'" fill="none" stroke="#22d3ee" stroke-width="2"/>'+dots+'</svg>';
+function storageBanner(){
+  if(STORAGE_OK) return "";
+  return '<div class="card alert"><div class="eyebrow" style="color:var(--red)">Nothing is being saved</div>'+
+    '<h2>This copy can\'t remember anything</h2>'+
+    (IS_FILE
+      ? '<p>You have opened this as a <strong>file</strong> rather than a web page. Phone browsers block saving, and block adding to the home screen, for anything opened this way. It is not your phone and it is not you.</p>'+
+        '<p><strong>The fix:</strong> whoever sent you this needs to send a proper web link instead — one starting with https. Everything then saves and sticks, and the Add to Home Screen option appears.</p>'
+      : '<p>Your browser is refusing to save data for this page. The usual cause is a Private or Incognito tab. Close it and open the same link in a normal tab.</p>')+
+    '<p class="muted">You can still read the whole plan below. Only the ticks and weigh-ins are affected.</p></div>';
 }
 
-function viewStatus(){
-  var lvl=S.level, need=needFor(lvl), cur=currentLbs();
-  var lost=S.startLbs-cur, toGo=Math.max(0,cur-S.targetLbs);
-  var wPct=((S.startLbs-cur)/(S.startLbs-S.targetLbs))*100;
-  var h="";
-
-  var b = '<div style="display:flex;justify-content:space-between;align-items:flex-end" class="mono">'+
-      '<span class="muted" style="font-size:14px">LEVEL</span>'+
-      '<span style="font-size:38px;font-weight:700;color:var(--cyan);text-shadow:0 0 16px rgba(34,211,238,.4);line-height:1">'+lvl+'</span></div>'+
-    '<div>'+bar((S.xp/need)*100,"#22d3ee",8)+
-      '<div class="mono" style="display:flex;justify-content:space-between;font-size:11px;margin-top:4px;color:var(--mute)">'+
-      '<span>XP '+S.xp+' / '+need+'</span><span>TOTAL '+S.totalXp+'</span></div></div>'+
-    '<div class="grid2">'+
-      '<div class="tile"><em>Streak</em><b style="color:'+(streak()>0?"#4ade80":"#5f7488")+'">'+streak()+'<span style="font-size:13px"> days</span></b></div>'+
-      '<div class="tile"><em>Today</em><b style="color:#22d3ee">'+doneToday().length+'<span style="font-size:13px"> / '+QUESTS.length+'</span></b></div>'+
-    '</div><div>';
-  STAT_KEYS.forEach(function(k){
-    b += '<div class="row" style="margin-bottom:8px"><span class="mono cy" style="font-size:12px;width:34px">'+k+'</span>'+
-      '<span style="flex:1">'+bar((S.stats[k]%25)*4,"#16a34a")+'</span>'+
-      '<span class="mono" style="font-size:12px;width:30px;text-align:right">'+S.stats[k]+'</span></div>';
+function movesHTML(sess){
+  var h='<div class="warm"><strong>Warm up:</strong> '+esc(sess.warm)+'</div>';
+  sess.work.forEach(function(pair,i){
+    var e=pair[0];
+    h+='<div class="move"><div class="move-head"><span class="num">'+String(i+1).padStart(2,"0")+
+       '</span><span class="move-name">'+esc(e.n)+'</span></div><div class="reps">'+esc(pair[1])+
+       '</div><div class="how">'+esc(e.h)+'</div><div class="cue">'+esc(e.c)+'</div></div>';
   });
-  b += '<div class="tiny">'+STAT_KEYS.map(function(k){return k+" "+STAT_NAMES[k];}).join("  \u00b7  ")+'</div></div>';
-  h += panel("Status window", b, {glow:true, right:"Week "+curWeek()});
-
-  var body = '<div class="mono" style="display:flex;justify-content:space-between;font-size:14px">'+
-      '<span class="muted">'+lbsToSt(S.startLbs)+'</span><span class="green">'+lbsToSt(cur)+'</span>'+
-      '<span class="muted">'+lbsToSt(S.targetLbs)+'</span></div>'+
-    bar(wPct,"#4ade80",10)+
-    '<div class="grid2"><div class="tile"><em>Lost</em><b class="green">'+lost.toFixed(1)+' lb</b></div>'+
-    '<div class="tile"><em>Remaining</em><b class="cy">'+toGo.toFixed(1)+' lb</b></div></div>'+
-    spark()+
-    '<div class="weighrow"><input id="wst" inputmode="decimal" placeholder="st"><input id="wlb" inputmode="decimal" placeholder="lb">'+
-    '<button class="btn" data-act="weigh">Log weigh-in</button></div>'+
-    '<div class="tiny">Once a week, same day, morning, after the loo, before food. Daily weight swings 2\u20134 lb on water alone.</div>';
-  h += panel("Body", body);
-
-  var store;
-  if(isFile){
-    store = '<div class="note" style="border-color:var(--red);background:#2a0d0d"><span class="mono" style="font-size:11px;letter-spacing:.15em;color:#fca5a5">OPENED AS A FILE</span>'+
-      '<div class="small" style="margin-top:4px">Phone browsers treat local files as throwaway: no saving, no home screen, no offline. Put these files on a web address (GitHub Pages takes two minutes) and all three start working.</div></div>';
-  } else if(storageOk){
-    store = '<div class="note good"><span class="mono green" style="font-size:11px;letter-spacing:.15em">SAVING TO THIS DEVICE</span>'+
-      '<div class="small" style="margin-top:4px">Your ticks and weigh-ins are being kept on this phone. Nothing is sent anywhere and it works with no signal.</div></div>';
-  } else {
-    store = '<div class="note" style="border-color:var(--red);background:#2a0d0d"><span class="mono" style="font-size:11px;letter-spacing:.15em;color:#fca5a5">NOT SAVING</span>'+
-      '<div class="small" style="margin-top:4px">This browser is blocking storage \u2014 often private/incognito mode. Open it in a normal window.</div></div>';
+  if(sess.extra){
+    h+='<div class="extra"><div class="tag">Extra — only if you fancy it</div>'+
+       '<div class="move" style="margin:8px 0 0"><div class="move-head"><span class="num">+</span>'+
+       '<span class="move-name">'+esc(sess.extra[0].n)+'</span></div>'+
+       '<div class="reps">'+esc(sess.extra[1])+'</div>'+
+       '<div class="how">'+esc(sess.extra[0].h)+'</div>'+
+       '<div class="cue">'+esc(sess.extra[0].c)+'</div></div>'+
+       '<p class="muted" style="margin:10px 0 0;font-size:13.5px">Add this only if the five moves above felt manageable. Leaving it out is not failing — the main session is the plan, this is a bonus.</p></div>';
   }
-  h += panel("Your data", store +
-    '<button class="btn ghost" data-act="backup">Copy backup code</button>'+
-    '<div class="tiny">Copy this every few weeks and paste it into a note to yourself. It\u2019s the only way to move your progress to another phone or browser.</div>'+
-    '<textarea id="rcode" rows="2" placeholder="Paste a backup code here to restore"></textarea>'+
-    '<button class="btn ghost" data-act="restore">Restore from code</button>'+
-    '<div class="tiny">Restoring replaces everything currently in the app.</div>');
+  h+='<p class="muted" style="margin-top:12px;font-size:13.5px">Rest about a minute between sets. Finish with 3 minutes of easy walking and a stretch of whatever feels tight.</p>';
   return h;
 }
 
-function viewQuests(){
-  var done=doneToday(), ph=curPhase(), h="";
-  var b="";
-  QUESTS.forEach(function(q){
-    var on = done.indexOf(q.id)>-1;
-    b += '<button class="quest'+(on?" done":"")+'" data-act="quest" data-id="'+q.id+'">'+
-      '<span class="tick">\u2713</span><span class="lbl"><b>'+esc(q.label)+'</b><em>'+
-      esc(q.id==="walk"?ph.cardio:q.detail)+'</em></span><span class="xp">+'+q.xp+'</span></button>';
+function scheduleHTML(ph){
+  var rows="",d;
+  for(d=1;d<=6;d++){
+    var key=ph.days[d]; if(!key)continue;
+    rows+='<div class="sched-row"><span class="sched-day">'+DAYNAMES[d]+'</span><span>'+
+      esc(SESSIONS[key].name)+(ph.optional[d]?' <span class="muted">(optional)</span>':'')+'</span></div>';
+  }
+  rows+='<div class="sched-row"><span class="sched-day">Other days</span><span class="muted">Just the walk</span></div>';
+  return '<div class="sched"><div class="eyebrow">Your week</div>'+rows+'</div>';
+}
+
+function viewToday(){
+  var p=planFor(iso()), c=state.checks[iso()]||{}, cur=current(), lost=state.startLb-cur, h="";
+
+  h+='<div class="card"><div class="eyebrow">Today &middot; '+
+     new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"})+'</div>';
+  h+='<h2>Walk first</h2><p>'+esc(p.phase.walk)+'</p><div class="divide"></div>';
+  if(p.session){
+    h+='<div class="eyebrow">Then &middot; '+esc(p.session.name)+(p.optional?' (optional today)':'')+'</div><ol style="margin-top:10px">';
+    p.session.work.forEach(function(pair){
+      h+='<li><strong>'+esc(pair[0].n)+'</strong> — <span style="font-family:var(--mono);font-size:13px">'+esc(pair[1])+'</span></li>';
+    });
+    h+='</ol>';
+    if(p.session.extra){
+      h+='<p class="muted" style="font-size:13.5px">Feeling good? Add '+esc(p.session.extra[0].n).toLowerCase()+', '+esc(p.session.extra[1]).toLowerCase()+'.</p>';
+    }
+    h+='<p class="muted" style="font-size:13.5px">Full instructions for every move are on the Move card.</p>';
+  }else{
+    h+='<div class="eyebrow">No strength session</div><p>Walking day — that is the whole job. A gentle stretch in the evening if you feel stiff.</p>';
+  }
+  h+='</div>';
+
+  h+='<div class="card"><div class="eyebrow">Tick them off</div><h3>Five things</h3>';
+  HABITS.forEach(function(x){
+    h+='<button class="habit" data-habit="'+x.id+'" aria-pressed="'+(c[x.id]?"true":"false")+'">'+
+       '<span class="box">'+(c[x.id]?"&#10003;":"")+'</span><span class="lbl">'+esc(x.l)+'</span></button>';
   });
-  b += '<div class="mono amber" style="font-size:11px">All seven clears a +123 XP bonus. Four or more keeps the streak alive.</div>';
-  h += panel("Daily quest", b, {glow:true, right:done.length+"/"+QUESTS.length});
-  h += panel("Penalty zone", '<div class="tiny">No punishment here, and no failed weeks \u2014 only a streak that starts again at 1. One bad day costs you nothing. Ten in a row is a habit, and the counter exists so you notice on day two instead of day ten.</div>');
+  h+='</div>';
+
+  h+='<div class="card"><div class="eyebrow">Where you are</div><div class="stats">'+
+     '<div class="stat"><b>'+stoneStr(cur)+'</b><small>now</small></div>'+
+     '<div class="stat"><b style="color:'+(lost>0?"var(--green)":"var(--soft)")+'">'+
+       (lost>0?"&minus;"+lost.toFixed(1):"0")+'lb</b><small>lost so far</small></div>'+
+     '<div class="stat"><b>'+Math.max(0,cur-state.goalLb).toFixed(0)+'lb</b><small>to goal</small></div></div>';
+  var kt=dayTotal(iso());
+  h+='<div class="divide"></div><div style="font-size:14.5px">'+
+     (kt? '<strong>'+kt+'</strong> of '+state.kcalTarget+' kcal logged today. '+
+          (state.kcalTarget-kt>=0 ? '<span class="muted">'+(state.kcalTarget-kt)+' left.</span>'
+                                  : '<span class="muted">'+(kt-state.kcalTarget)+' over.</span>')
+        : '<span class="muted">Nothing logged today yet — the Log tab is where food goes.</span>')+'</div>';
+  h+='</div>';
   return h;
 }
 
-function exCard(item, idx){
-  var e=EX[item.k], open=!!ui.ex[item.k+idx];
-  var h='<div class="acc'+(open?" open":"")+'"><button data-act="ex" data-id="'+item.k+idx+'">'+
-    '<div class="t"><span>'+esc(e.name)+'</span><span class="plus">'+(open?"\u2212":"+")+'</span></div>'+
-    '<div class="sub">'+(item.sets===1?esc(item.reps):item.sets+" sets of "+esc(item.reps))+
-    ' <i>\u00b7 rest '+esc(item.rest)+'</i></div></button>';
-  if(open){
-    h += '<div class="body"><div class="mono" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)">Works \u2014 '+esc(e.works)+'</div><ol class="steps">';
-    e.how.forEach(function(s,i){ h += '<li><em>'+(i+1)+'</em><span>'+esc(s)+'</span></li>'; });
-    h += '</ol><div class="small amber">What it should feel like \u2014 '+esc(e.feel)+'</div>'+
-      '<div class="note"><div class="lab" style="color:var(--greenLit)">Too hard?</div>'+esc(e.easier)+'</div>'+
-      '<div class="note"><div class="lab">Too easy?</div>'+esc(e.harder)+'</div></div>';
-  }
-  return h+'</div>';
-}
+function viewMove(){
+  var h='<div class="card"><div class="eyebrow">How this works</div><h2>Twelve weeks, four phases</h2>'+
+    '<p>Walking is the engine — it is what actually burns through the week. The strength sessions stop you losing muscle along with the fat, and they are why the stairs get easier.</p>'+
+    '<p>Nothing needs a gym. A chair, a wall, the bottom stair, and two carrier bags with tins in them.</p>'+
+    '<p><strong>Reading a session.</strong> Every session has a name, five moves, and one optional extra. Sets and reps are written like <em>3 sets of 8</em> — that means 8 repetitions, a minute of rest, 8 more, rest, 8 more. Then move to the next exercise.</p>'+
+    '<p><strong>Two rules.</strong> If a set feels impossible, do fewer reps rather than skipping the exercise. If something hurts sharply, as opposed to burns, stop that exercise.</p></div>';
 
-function viewTraining(){
-  var ph=curPhase(), w=curWeek(), h="";
-
-  h += panel("How to read the plan",
-    '<div class="small"><p style="margin:0 0 10px"><b class="cy">A rep</b> is one single movement \u2014 going down and back up once. Short for repetition.</p>'+
-    '<p style="margin:0 0 10px"><b class="cy">A set</b> is a batch of reps done back to back without stopping. Then you rest, then you do the next set.</p>'+
-    '<p style="margin:0 0 10px" class="muted">So "3 sets of 5 reps, rest 90 seconds" means: 5 press-ups, sit down for a minute and a half, 5 more, rest again, 5 more, done. Fifteen press-ups in total, spread over about five minutes.</p>'+
-    '<p style="margin:0 0 10px"><b class="cy">Rest</b> means properly rest. You should be able to talk in full sentences before the next set.</p>'+
-    '<p style="margin:0 0 10px"><b class="cy">When to move up</b> \u2014 when you can finish every set with two reps still left in you, use the harder version listed on the exercise.</p>'+
-    '<p style="margin:0" class="amber">Tap any exercise below for how to do it, what it should feel like, and what to do if it\u2019s too hard or too easy.</p></div>', {glow:true});
-
-  var pb = '<div class="note" style="background:var(--panel2)"><span class="mono green" style="font-size:12px">WALKING \u2014 '+esc(ph.cardio)+'</span></div><div>'+
-    '<div class="lab" style="color:var(--mute)">Your week</div>';
-  ph.week.forEach(function(r){
-    pb += '<div class="dayrow"><em>'+r[0]+'</em><span'+(r[1].indexOf("Rest")>-1?' class="muted"':'')+'>'+esc(r[1])+'</span></div>';
+  PHASES.forEach(function(ph,pi){
+    var last=ph.weeks[ph.weeks.length-1];
+    h+='<div class="card"><div class="eyebrow">Weeks '+ph.weeks[0]+' to '+last+'</div><h2>'+esc(ph.name)+'</h2>'+
+       '<p><strong>Walking:</strong> '+esc(ph.walk)+'</p><p class="muted">'+esc(ph.note)+'</p>'+scheduleHTML(ph);
+    var seen=[],d;
+    for(d=1;d<=6;d++){var k=ph.days[d]; if(k&&seen.indexOf(k)<0)seen.push(k);}
+    seen.forEach(function(k){
+      var sess=SESSIONS[k], id=pi+"-"+k, open=(openAcc===id);
+      h+='<div class="acc"><button data-acc="'+id+'"><div class="acc-row">'+
+         '<span class="acc-title">'+esc(sess.name)+'</span><span class="plus">'+(open?"&minus;":"+")+'</span></div>'+
+         '<div class="meta">'+sess.work.length+' MOVES &middot; PLUS 1 OPTIONAL &middot; ABOUT 25 MIN</div></button>';
+      if(open)h+='<div style="margin-top:14px">'+movesHTML(sess)+'</div>';
+      h+='</div>';
+    });
+    h+='</div>';
   });
-  pb += '</div><div class="small amber">'+esc(ph.note)+'</div>';
-  h += panel(ph.rank+"-rank \u00b7 "+ph.name, pb, {right:"Week "+w});
-
-  var wu='<ol class="steps">';
-  WARMUP.forEach(function(s,i){ wu += '<li><em>'+(i+1)+'</em><span>'+esc(s)+'</span></li>'; });
-  wu += '</ol><div class="tiny">Five minutes. Non-negotiable \u2014 it\u2019s most of your injury insurance.</div>';
-  h += panel("Warm-up \u2014 every session", wu);
-
-  if(ph.circuit) h += panel("How this circuit works", '<div class="small">'+esc(ph.circuit)+'</div>');
-
-  ph.sessions.forEach(function(s,si){
-    var b="";
-    s.ex.forEach(function(item,i){ b += exCard(item, si+"-"+i); });
-    h += panel(s.title, b);
-  });
-
-  var cd='<ul class="dash">';
-  COOLDOWN.forEach(function(c){ cd += '<li>\u2014 '+esc(c)+'</li>'; });
-  h += panel("Cool-down", cd+'</ul>');
-
-  var camp="";
-  PHASES.forEach(function(p){
-    var active = w>=p.wk[0] && w<=p.wk[1], cleared = w>p.wk[1];
-    camp += '<div class="row" style="padding:8px 12px;border-radius:2px;margin-bottom:8px;background:'+(active?"#07210f":"var(--panel2)")+
-      ';border:1px solid '+(active?"var(--green)":"var(--line)")+'">'+
-      '<span class="mono muted" style="font-size:12px;width:62px">WK '+p.wk[0]+'\u2013'+p.wk[1]+'</span>'+
-      '<span class="mono" style="font-size:12px;width:18px;color:'+rankColour(p.rank)+'">'+p.rank+'</span>'+
-      '<span style="flex:1;font-size:15px'+(active?";color:var(--greenLit)":"")+'">'+esc(p.name)+'</span>'+
-      '<span class="mono" style="font-size:10px;color:'+(cleared?"var(--greenLit)":"var(--mute)")+'">'+(cleared?"CLEARED":active?"ACTIVE":"LOCKED")+'</span></div>';
-  });
-  h += panel("Full campaign", camp);
-
-  var eg='<ul class="dash mono">';
-  ENDGAME.forEach(function(e){ eg += '<li>\u2014 '+esc(e)+'</li>'; });
-  eg += '</ul><div class="small amber">Saitama\u2019s routine, and a joke in the manga for a reason. It\u2019s where the road points, not where it starts. Getting there inside a year would put you in the top few percent of people alive.</div>';
-  h += panel("Endgame protocol", eg);
-
-  h += panel("Aches, pains and stopping",
-    '<div class="small"><p style="margin:0 0 8px"><span class="green">Normal:</span> stiff, achy muscles for a day or two after a session, worst about 48 hours later. It fades as you get fitter.</p>'+
-    '<p style="margin:0 0 8px"><span class="amber">Back off:</span> an ache still there four days later, or the same joint grumbling every session. Drop to the easier version for a week.</p>'+
-    '<p style="margin:0"><span style="color:var(--red)">Stop and get it looked at:</span> sharp or stabbing pain, pain on one side only, chest pain, dizziness, or anything that makes you catch your breath.</p></div>');
   return h;
-}
-
-function recCard(r){
-  var open=!!ui.rec[r.id];
-  var h='<div class="acc'+(open?" open":"")+'"><button data-act="rec" data-id="'+r.id+'">'+
-    '<div class="t"><span>'+esc(r.name)+'</span><span class="plus">'+(open?"\u2212":"+")+'</span></div>'+
-    '<div class="meta">'+esc(r.tag)+' \u00b7 serves '+r.serves+' \u00b7 '+esc(r.time)+'</div></button>';
-  if(open){
-    h += '<div class="body"><div><div class="lab">You need</div><ul class="dash">';
-    r.ings.forEach(function(i){ h += '<li>\u2014 '+esc(i)+'</li>'; });
-    h += '</ul></div><div><div class="lab">Method</div><ol class="steps">';
-    r.steps.forEach(function(s,i){ h += '<li><em>'+(i+1)+'</em><span>'+esc(s)+'</span></li>'; });
-    h += '</ol></div><div class="note good"><div class="lab" style="color:var(--greenLit)">Your plate</div>'+esc(r.yours)+'</div>'+
-      '<div class="small muted">'+esc(r.note)+'</div></div>';
-  }
-  return h+'</div>';
 }
 
 function viewFood(){
-  var h="";
-  h += panel("Daily targets",
-    '<div class="grid3">'+
-    '<div class="tile" style="text-align:center"><b class="cy">1,850</b><em>kcal</em></div>'+
-    '<div class="tile" style="text-align:center"><b class="cy">150 g</b><em>protein</em></div>'+
-    '<div class="tile" style="text-align:center"><b class="cy">2 L</b><em>water</em></div></div>'+
-    '<div class="small muted">Same pot, bigger ladle. These are the ten recipes from her plan \u2014 you eat the same food, cooked once, with a larger portion on your plate. Every recipe has a green box telling you exactly what to add to yours. She\u2019s on around 1,500 a day; you\u2019re on roughly 1,850, which is about a pound a week off you.</div>', {glow:true});
+  var h='<div class="card"><div class="eyebrow">The whole approach</div><h2>Eat less than you burn, without going hungry</h2>'+
+    '<p>Somewhere around <strong>1,500 to 1,600 calories a day</strong> should take roughly a pound off a week at this starting point. That is the pace that stays off. Faster than 2lb a week and it is mostly water and muscle, and it comes straight back.</p>'+
+    '<p><strong>The plate rule, if you would rather not count.</strong> Half the plate vegetables. A quarter protein — meat, fish, eggs, beans, lentils. A quarter carbs — potato, rice, pasta, bread. Weigh the rice and pasta dry: 50 to 75g each. That one habit does most of the work.</p>'+
+    '<p><strong>Protein and fibre keep you full.</strong> Beans, lentils, eggs, yoghurt, mince, tuna. All cheap. That is why the recipes lean on them.</p>'+
+    '<p><strong>Drink water.</strong> Liquid calories are the quiet killer — a couple of full-sugar drinks a day is a whole meal. Swap to squash or water and you have done a day\'s work before eating anything.</p>'+
+    '<p class="muted">One meal off plan does not undo a week. Note it, move on, do not write the whole day off.</p></div>';
 
-  var rb="";
-  RECIPES.forEach(function(r){ rb += recCard(r); });
-  h += panel("The recipes \u2014 tap for the method", rb);
-
-  var wk="";
-  DAYPLAN.forEach(function(row,i){
-    wk += '<div style="padding:8px 0'+(i?';border-top:1px solid var(--panel2)':'')+'">'+
-      '<div class="lab" style="color:var(--cyanDim);margin-bottom:2px">'+esc(row[0])+'</div>'+
-      '<div class="small">'+esc(row[1])+' \u00b7 '+esc(row[2])+' \u00b7 '+esc(row[3])+'<span class="muted"> \u00b7 '+esc(row[4])+'</span></div></div>';
+  h+='<div class="card"><div class="eyebrow">The recipes</div><h2>Ten meals, all cheap</h2><p class="muted">Tap any one for the full method.</p>';
+  RECIPES.forEach(function(r){
+    var open=(openRec===r.id);
+    h+='<div class="acc"><button data-rec="'+r.id+'"><div class="acc-row">'+
+       '<span class="acc-title">'+esc(r.name)+'</span><span class="plus">'+(open?"&minus;":"+")+'</span></div>'+
+       '<div class="meta">'+r.tag.toUpperCase()+' &middot; SERVES '+r.serves+' &middot; ~'+r.kcal+' KCAL &middot; '+r.time.toUpperCase()+'</div></button>';
+    if(open){
+      h+='<div style="margin-top:14px"><div class="eyebrow">You need</div><ul>';
+      r.ings.forEach(function(i){h+='<li>'+esc(i)+'</li>';});
+      h+='</ul><div class="eyebrow">Method</div><ol>';
+      r.steps.forEach(function(s){h+='<li>'+esc(s)+'</li>';});
+      h+='</ol><div class="note">'+esc(r.note)+'</div></div>';
+    }
+    h+='</div>';
   });
-  wk += '<div class="small amber">Notice how often leftovers appear. Cook once on Sunday, eat three times.</div>';
-  h += panel("A week, sketched out", wk);
+  h+='</div>';
 
-  var sh="";
+  h+='<div class="card"><div class="eyebrow">A week, sketched out</div><h2>Sample week</h2>';
+  DAYPLAN.forEach(function(row){
+    h+='<div style="border-top:1px solid var(--rule);padding:10px 0"><div class="sched-day">'+row[0]+'</div>'+
+       '<div style="font-size:14.5px;line-height:1.6;margin-top:3px">'+esc(row[1])+' &middot; '+esc(row[2])+
+       ' &middot; '+esc(row[3])+'<span class="muted"> &middot; '+esc(row[4])+'</span></div></div>';
+  });
+  h+='<p class="muted" style="margin-top:12px;font-size:13.5px">Notice how often leftovers appear. Cook once on Sunday, eat three times.</p></div>';
+
+  h+='<div class="card"><div class="eyebrow">One shop</div><h2>Shopping list</h2><p class="muted">Covers the week above for two people. Own-brand everything.</p>';
   SHOPPING.forEach(function(sec){
-    sh += '<div><div class="lab">'+esc(sec[0])+'</div><ul class="dash">';
-    sec[1].forEach(function(it){ sh += '<li>\u2014 '+esc(it)+'</li>'; });
-    sh += '</ul></div>';
+    h+='<div style="border-top:1px solid var(--rule);padding-top:10px;margin-top:10px">'+
+       '<div class="sched-day" style="margin-bottom:6px">'+sec[0]+'</div><ul>';
+    sec[1].forEach(function(i){h+='<li>'+esc(i)+'</li>';});
+    h+='</ul></div>';
   });
-  sh += '<div class="small amber">Covers the week above for two people. Own-brand everything \u2014 the tin of tomatoes doesn\u2019t know it\u2019s cheap. Frozen veg is as good as fresh and never rots.</div>';
-  h += panel("One shop", sh);
+  h+='</div>';
+  return h;
+}
 
-  h += panel("Method",
-    '<div class="small"><p style="margin:0 0 8px">1. Sunday: cook the chilli and the lentil soup. That\u2019s most of two weeks of lunches in the freezer.</p>'+
-    '<p style="margin:0 0 8px">2. Boil six eggs while you\u2019re at it. Snack drawer sorted.</p>'+
-    '<p style="margin:0 0 8px">3. Weigh oats, rice and pasta dry for the first fortnight. After that you\u2019ll eyeball it right.</p>'+
-    '<p style="margin:0 0 8px">4. Pint of water before every meal.</p>'+
-    '<p style="margin:0 0 8px">5. Liquid calories are the quiet killer \u2014 pop, juice and pints. Swapping those alone may cover most of your deficit.</p>'+
-    '<p style="margin:0" class="muted">One meal off plan doesn\u2019t undo a week. Note it, move on, don\u2019t write the whole day off.</p></div>');
+function chartSVG(){
+  var pts=state.weights;
+  if(pts.length<2)return '<p class="muted" style="padding:16px 0">Two weigh-ins and a line appears here. Same day each week, first thing in the morning, after the loo, before breakfast.</p>';
+  var w=320,ht=150,pad=10;
+  var lbs=pts.map(function(p){return p.lb;});
+  var min=Math.min.apply(null,lbs.concat([state.goalLb]))-4, max=Math.max.apply(null,lbs)+4;
+  var X=function(i){return pad+(i/(pts.length-1))*(w-pad*2);};
+  var Y=function(v){return ht-pad-((v-min)/(max-min))*(ht-pad*2);};
+  var d=pts.map(function(p,i){return (i?"L":"M")+X(i).toFixed(1)+","+Y(p.lb).toFixed(1);}).join(" ");
+  var gy=Y(state.goalLb);
+  var s='<svg viewBox="0 0 '+w+' '+ht+'" style="width:100%;height:auto;display:block" role="img" aria-label="Weight over time">';
+  if(gy>pad&&gy<ht-pad){
+    s+='<line x1="'+pad+'" y1="'+gy+'" x2="'+(w-pad)+'" y2="'+gy+'" stroke="#4F7A57" stroke-width="1" stroke-dasharray="3 4"/>'+
+       '<text x="'+(w-pad)+'" y="'+(gy-5)+'" text-anchor="end" style="font-family:var(--mono);font-size:8px;fill:#4F7A57">goal</text>';
+  }
+  s+='<path d="'+d+'" fill="none" stroke="#35566B" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+  pts.forEach(function(p,i){s+='<circle cx="'+X(i)+'" cy="'+Y(p.lb)+'" r="3" fill="#FBF7F0" stroke="#35566B" stroke-width="1.6"/>';});
+  return s+'</svg>';
+}
+
+function viewProgress(){
+  var cur=current(), h="";
+  if(flash){h+='<div class="flash">'+esc(flash)+'</div>';flash="";}
+
+  h+='<div class="card"><div class="eyebrow">Weigh-in</div><h2>Once a week, same day</h2>'+
+    '<p class="muted">First thing in the morning, after the loo, before breakfast. Weighing daily will drive you mad — it swings three or four pounds on water alone.</p>'+
+    '<div style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;margin-top:12px">'+
+    '<label class="f"><div>STONE</div><input id="st" inputmode="numeric" placeholder="16"></label>'+
+    '<label class="f"><div>POUNDS</div><input id="lb" inputmode="decimal" placeholder="4"></label>'+
+    '<button class="btn" id="saveW">SAVE WEIGH-IN</button></div></div>';
+
+  h+='<div class="card"><div class="eyebrow">The line</div><h3>Weight over time</h3>'+chartSVG();
+  if(state.weights.length){
+    h+='<div style="margin-top:14px;border-top:1px solid var(--rule);padding-top:10px">';
+    state.weights.slice().reverse().slice(0,8).forEach(function(w){
+      h+='<div class="weighrow"><span class="muted">'+
+         new Date(w.date+"T12:00:00").toLocaleDateString("en-GB",{day:"2-digit",month:"short"})+
+         '</span><span>'+stoneStr(w.lb)+'</span></div>';
+    });
+    h+='</div>';
+  }
+  h+='</div>';
+
+  h+='<div class="card"><div class="eyebrow">Half a stone at a time</div><h3>Milestones</h3>';
+  var n=Math.max(1,Math.ceil((state.startLb-state.goalLb)/7)),i;
+  for(i=0;i<n;i++){
+    var t=state.startLb-(i+1)*7, hit=cur<=t;
+    h+='<div class="mile'+(hit?" hit":"")+'"><span class="dot"></span><span>'+stoneStr(t)+
+       '</span><span class="lb">&minus;'+((i+1)*7)+'lb</span></div>';
+  }
+  h+='<p class="muted" style="margin-top:12px;font-size:13.5px">Losing 5% of your starting weight already improves blood pressure, blood sugar and joint pain. That is the first milestone and a half, not the whole journey.</p></div>';
+
+  h+='<div class="card"><div class="eyebrow">Put it on your home screen</div><h3>So it opens like an app</h3>'+
+    '<p><strong>iPhone.</strong> In Safari, tap the share button at the bottom (a square with an arrow out of the top), scroll down, tap <em>Add to Home Screen</em>, then <em>Add</em>.</p>'+
+    '<p><strong>Android.</strong> In Chrome, tap the three dots top right, then <em>Add to Home screen</em> or <em>Install app</em>.</p>'+
+    '<p class="muted">Once it is on your home screen it opens instantly, works with no signal, and stops disappearing when the browser tidies up its tabs.</p></div>';
+
+  h+='<div class="card"><div class="eyebrow">Setup</div><h3>Goal weight</h3>'+
+    '<p class="muted">A healthy BMI at 5ft 5in runs from about 8st to 10st 10lb. That is a long way off and a poor first target. Aim at the next stone down and reset it when you get there.</p>'+
+    '<div style="display:flex;gap:8px;align-items:center;margin-top:8px">'+
+    '<button class="btn ghost small" id="goalUp">&minus;</button>'+
+    '<span style="font-family:var(--mono);font-size:18px;font-weight:700;min-width:90px;text-align:center">'+stoneStr(state.goalLb)+'</span>'+
+    '<button class="btn ghost small" id="goalDown">+</button>'+
+    '<span class="muted" style="font-size:13px">adjust in half stones</span></div>'+
+    '<div class="divide"></div><h3>Daily calorie target</h3>'+
+    '<p class="muted">1,500 to 1,600 suits most people starting here. Do not push it below 1,200.</p>'+
+    '<div style="display:flex;gap:8px;align-items:center;margin-top:8px">'+
+    '<button class="btn ghost small" id="kcalDown">&minus;</button>'+
+    '<span style="font-family:var(--mono);font-size:18px;font-weight:700;min-width:90px;text-align:center">'+state.kcalTarget+'</span>'+
+    '<button class="btn ghost small" id="kcalUp">+</button>'+
+    '<span class="muted" style="font-size:13px">50 at a time</span></div>'+
+    '<div class="divide"></div><h3>Start date</h3>'+
+    '<p class="muted">The plan counts your weeks from here. Change it if you want to restart.</p>'+
+    '<input type="date" id="startDate" value="'+state.startDate+'" style="font-family:var(--body);font-size:15px">'+
+    '<div class="divide"></div><h3>Back up and restore</h3>'+
+    '<p class="muted">Everything lives on this phone only. Clearing your browsing data wipes it. Copy a backup now and then and text it to yourself.</p>'+
+    '<div class="btnrow"><button class="btn ghost small" id="backup">COPY MY DATA</button>'+
+    '<button class="btn ghost small" id="restore">RESTORE FROM BACKUP</button></div></div>';
+  return h;
+}
+
+/* ---------- calorie log ---------- */
+
+function logDay(){ return logDate || iso(); }
+function entries(d){ return state.log[d||logDay()] || []; }
+function dayTotal(d){ return entries(d).reduce(function(a,e){return a+e.k;},0); }
+
+function avg7(){
+  var sum=0,n=0,i;
+  for(i=0;i<7;i++){
+    var dt=new Date(); dt.setDate(dt.getDate()-i);
+    var k=iso(dt);
+    if(state.log[k]&&state.log[k].length){sum+=dayTotal(k);n++;}
+  }
+  return n?Math.round(sum/n):0;
+}
+
+function allFoods(){
+  var out=[],i;
+  for(i=0;i<state.customFoods.length;i++) out.push({key:"own-"+i,f:state.customFoods[i],own:true});
+  for(i=0;i<FOODDB.length;i++) out.push({key:"db-"+i,f:FOODDB[i],own:false});
+  return out;
+}
+function foodByKey(k){
+  var p=k.split("-"), i=parseInt(p[1],10);
+  return p[0]==="own" ? state.customFoods[i] : FOODDB[i];
+}
+
+function amountRow(f){
+  var per = f.per100 !== undefined;
+  var chips = per ? [50,100,150,200] : [1,2,3];
+  var h='<div class="amt"><div class="amt-lbl">'+(per?"How many grams?":"How many?")+'</div>'+
+    '<div class="amt-row"><input id="amtIn" inputmode="decimal" value="'+(per?100:1)+'">'+
+    '<button class="btn small" id="amtAdd">ADD</button></div><div class="chips">';
+  chips.forEach(function(c){ h+='<button class="chip" data-chip="'+c+'">'+c+(per?"g":"")+'</button>'; });
+  h+='</div><div class="amt-lbl muted" style="margin-top:8px">'+
+     (per? f.per100+" kcal per 100g" : f.each+" kcal each")+'</div></div>';
+  return h;
+}
+
+function resultsHTML(){
+  var q=searchTerm.trim().toLowerCase(), list=allFoods(), h="";
+  if(q) list=list.filter(function(x){return x.f.n.toLowerCase().indexOf(q)>-1;});
+  else list=list.filter(function(x){return x.own;});
+
+  if(!q && !list.length)
+    return '<p class="muted" style="font-size:14px;margin:10px 0 0">Start typing to find a food — porridge, mince, banana, biscuit. Anything you save yourself appears here first next time.</p>';
+  if(q && !list.length)
+    return '<p class="muted" style="font-size:14px;margin:10px 0 0">Nothing matching. Use <strong>Add your own food</strong> below and it will be here from now on.</p>';
+
+  list.slice(0,14).forEach(function(x){
+    var open=(pending===x.key);
+    h+='<div class="fitem"><button data-food="'+x.key+'"><span class="fname">'+esc(x.f.n)+
+       (x.own?' <span class="own">yours</span>':'')+'</span><span class="fkcal">'+
+       (x.f.per100!==undefined ? x.f.per100+"/100g" : x.f.each+" ea")+'</span></button>';
+    if(open) h+=amountRow(x.f);
+    h+='</div>';
+  });
+  if(list.length>14) h+='<p class="muted" style="font-size:13px;margin:8px 0 0">Keep typing to narrow it down.</p>';
   return h;
 }
 
 function viewLog(){
-  var h="";
-  var jb = '<textarea id="note" rows="3" placeholder="First full press-up. Felt like a boss kill."></textarea>'+
-    '<button class="btn" data-act="note">Record entry</button>';
-  if(!S.journal.length) jb += '<div class="tiny">Nothing recorded yet. Start with the reps you can\u2019t do today \u2014 they read very differently in eight weeks.</div>';
-  S.journal.forEach(function(j){
-    jb += '<div class="tile"><div class="mono" style="font-size:10px;color:var(--cyanDim)">'+esc(j.d)+'</div><div class="small">'+esc(j.t)+'</div></div>';
-  });
-  h += panel("Hunter\u2019s journal", jb);
+  var d=logDay(), t=dayTotal(d), target=state.kcalTarget, left=target-t;
+  var pct=Math.max(0,Math.min(100,Math.round((t/target)*100)));
+  var isToday=(d===iso()), h="";
+  if(flash){h+='<div class="flash">'+esc(flash)+'</div>';flash="";}
 
-  var wb="";
-  if(!S.weights.length) wb = '<div class="tiny">No weigh-ins yet. Add the first from the Status tab.</div>';
-  else {
-    for(var i=S.weights.length-1;i>=0;i--){
-      wb += '<div class="hist"><span class="muted">'+esc(S.weights[i].d)+'</span><span>'+lbsToSt(S.weights[i].lbs)+'</span></div>';
-    }
+  h+='<div class="card"><div class="daybar">'+
+     '<button class="step" data-day="-1">&#8249;</button>'+
+     '<span class="daylbl">'+(isToday?"Today":new Date(d+"T12:00:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}))+'</span>'+
+     '<button class="step" data-day="1"'+(isToday?' disabled':'')+'>&#8250;</button></div>';
+  h+='<div class="big">'+t+'<span class="of"> of '+target+' kcal</span></div>';
+  h+='<div class="bar"><i style="width:'+pct+'%"></i></div>';
+  h+='<div class="leftline">'+(left>=0
+      ? left+' left today'
+      : Math.abs(left)+' over — that is information, not a verdict')+'</div>';
+  if(avg7()) h+='<div class="muted" style="font-size:13px;margin-top:6px">7-day average: '+avg7()+' kcal a day</div>';
+  h+='</div>';
+
+  h+='<div class="card"><div class="eyebrow">Add something</div><h3>Search</h3>'+
+     '<input id="foodSearch" placeholder="porridge, mince, banana..." value="'+esc(searchTerm)+'" autocomplete="off">'+
+     '<div id="results">'+resultsHTML()+'</div>';
+
+  h+='<div class="divide"></div><div class="eyebrow">Or your own recipe</div>'+
+     '<p class="muted" style="font-size:13.5px">One tap logs a full portion.</p><div class="quick">';
+  RECIPES.forEach(function(r){
+    h+='<button class="chip" data-recipe="'+r.id+'">'+esc(r.name)+' <b>'+r.kcal+'</b></button>';
+  });
+  h+='</div>';
+
+  h+='<div class="divide"></div>';
+  if(!showCustom){
+    h+='<button class="btn ghost small" id="showCustom">ADD YOUR OWN FOOD</button>';
+  }else{
+    h+='<div class="eyebrow">New food</div><h3>Save it once, use it forever</h3>'+
+       '<p class="muted" style="font-size:13.5px">Copy the numbers straight off the packet. Pick whichever the label gives you.</p>'+
+       '<label class="f" style="display:block;margin-bottom:8px"><div>NAME</div>'+
+       '<input id="cfName" placeholder="Aldi chicken kiev" style="font-family:var(--body)"></label>'+
+       '<label class="f" style="display:block;margin-bottom:8px"><div>CALORIES</div>'+
+       '<input id="cfKcal" inputmode="numeric" placeholder="285"></label>'+
+       '<div class="chips" style="margin-bottom:10px">'+
+       '<button class="chip sel" data-cfmode="per100" id="mPer">per 100g</button>'+
+       '<button class="chip" data-cfmode="each" id="mEach">per item</button></div>'+
+       '<div class="btnrow"><button class="btn small" id="cfSave">SAVE FOOD</button>'+
+       '<button class="btn ghost small" id="cfCancel">CANCEL</button></div>';
   }
-  h += panel("Weigh-in history", wb);
+  h+='</div>';
+
+  h+='<div class="card"><div class="eyebrow">Eaten</div><h3>'+(isToday?"Today":"That day")+'</h3>';
+  var es=entries(d);
+  if(!es.length){
+    h+='<p class="muted">Nothing logged yet. Rough is fine — a rough log you keep beats a perfect one you abandon after four days.</p>';
+  }else{
+    es.forEach(function(e,i){
+      h+='<div class="logrow"><span class="lname">'+esc(e.n)+'</span>'+
+         '<span class="lk">'+e.k+'</span>'+
+         '<button class="del" data-del="'+i+'" aria-label="Remove">&times;</button></div>';
+    });
+  }
+  h+='</div>';
+
+  h+='<div class="card"><div class="eyebrow">Worth knowing</div><h3>How to count without it taking over</h3>'+
+    '<p>Weigh the things that carry most of the calories — oil, cheese, butter, pasta, rice, meat. Eyeball the veg. Nobody has ever got fat misjudging a carrot.</p>'+
+    '<p>Log it as you cook, not at bedtime. You will not remember by then and you will guess low, everybody does.</p>'+
+    '<p><strong>Do not chase a low number.</strong> Under 1,200 a day is not a shortcut — it is how you end up exhausted, ravenous and quitting in week three. If a day comes in very low, eat something.</p>'+
+    '<p class="muted">Going over on a Saturday changes almost nothing across a week. The 7-day average above is the number that actually matters.</p></div>';
   return h;
 }
 
-var TABS=[["status","Status"],["quests","Quests"],["training","Training"],["food","Food"],["log","Log"]];
-
 function render(){
-  var y = window.scrollY;
-  var rk = rankFor(S.level);
-  var h = '<div class="head"><div><div class="eyebrow">The System</div><div class="hunter">Hunter: Mark</div></div>'+
-    '<div class="rank" style="color:'+rk.c+';text-shadow:0 0 14px '+rk.c+'88">'+rk.r+'<small>RANK</small></div></div>';
-  if(ui.err) h += '<div class="panel" style="border-color:var(--red);background:#2a0d0d"><div class="pb"><div class="mono" style="font-size:12px;color:#fca5a5">'+esc(ui.err)+'</div></div></div>';
+  var p=planFor(iso()), st=streak();
+  document.getElementById("weeklabel").textContent="WEEK "+String(p.week).padStart(2,"0")+" OF 12";
+  document.getElementById("phaselabel").textContent=
+    p.phase.name+" \u00b7 "+(st>0?st+" day"+(st===1?"":"s")+" on the trot":"Start today");
 
-  if(ui.tab==="status") h += viewStatus();
-  else if(ui.tab==="quests") h += viewQuests();
-  else if(ui.tab==="training") h += viewTraining();
-  else if(ui.tab==="food") h += viewFood();
-  else h += viewLog();
+  var t=[["today","Today"],["move","Move"],["food","Food"],["log","Log"],["progress","Progress"]];
+  document.getElementById("tabs").innerHTML=t.map(function(x){
+    return '<button data-tab="'+x[0]+'" aria-current="'+(tab===x[0])+'">'+x[1]+'</button>';
+  }).join("");
 
-  if(ui.alert){
-    h += '<div class="overlay" data-act="closeAlert"><div class="panel glow"><div class="ph"><span>Notification</span></div>'+
-      '<div class="pb center"><div class="mono amber" style="font-size:11px;letter-spacing:.3em">LEVEL UP</div>'+
-      '<div class="lvl">'+ui.alert.level+'</div>'+
-      '<div class="mono" style="font-size:14px;color:'+ui.alert.rank.c+'">'+ui.alert.rank.r+'-RANK HUNTER</div>'+
-      '<button class="btn" data-act="closeAlert">Accept</button></div></div></div>';
+  var body = tab==="today"?viewToday(): tab==="move"?viewMove(): tab==="food"?viewFood():
+             tab==="log"?viewLog(): viewProgress();
+  document.getElementById("view").innerHTML = storageBanner() + body;
+  window.scrollTo(0,0);
+}
+
+/* ============================ EVENTS ============================ */
+
+document.addEventListener("click",function(e){
+  var el=e.target.closest("[data-tab],[data-habit],[data-acc],[data-rec],#saveW,#goalUp,#goalDown,#backup,#restore");
+  if(!el)return;
+
+  if(el.dataset.tab){tab=el.dataset.tab;openAcc=null;openRec=null;pending=null;render();return;}
+
+  if(el.dataset.day){
+    var dd=new Date(logDay()+"T12:00:00");
+    dd.setDate(dd.getDate()+parseInt(el.dataset.day,10));
+    if(iso(dd)>iso())return;
+    logDate=iso(dd);pending=null;render();return;
   }
-
-  document.getElementById("app").innerHTML = h;
-  var nav="";
-  TABS.forEach(function(t){ nav += '<button data-act="tab" data-id="'+t[0]+'" class="'+(ui.tab===t[0]?"on":"")+'">'+t[1]+'</button>'; });
-  document.getElementById("nav").innerHTML = nav;
-  window.scrollTo(0,y);
-}
-
-/* ============================ ACTIONS ============================= */
-
-function toggleQuest(id){
-  var q=null; QUESTS.forEach(function(x){ if(x.id===id) q=x; });
-  if(!q) return;
-  var t=today(), list=(S.log[t]||[]).slice(), on=list.indexOf(id)>-1;
-  if(on) list.splice(list.indexOf(id),1); else list.push(id);
-  S.log[t]=list;
-  S.stats[q.stat]=Math.max(0, S.stats[q.stat] + (on?-1:1));
-  S.xp += on ? -q.xp : q.xp;
-  S.totalXp = Math.max(0, S.totalXp + (on?-q.xp:q.xp));
-  if(!on && list.length===QUESTS.length){ S.xp += 123; S.totalXp += 123; }
-  var before=S.level;
-  while(S.xp >= needFor(S.level)){ S.xp -= needFor(S.level); S.level++; }
-  while(S.xp < 0 && S.level > 1){ S.level--; S.xp += needFor(S.level); }
-  if(S.xp<0) S.xp=0;
-  if(S.level>before) ui.alert={level:S.level, rank:rankFor(S.level)};
-  save(); render();
-}
-
-function logWeigh(){
-  var stEl=document.getElementById("wst"), lbEl=document.getElementById("wlb");
-  var s=parseFloat(stEl && stEl.value), p=parseFloat((lbEl && lbEl.value) || "0");
-  if(isNaN(s) || s<=0){ ui.err="Enter your weight in stone (and pounds if you like), then tap again."; render(); return; }
-  var lbs = s*14 + (isNaN(p)?0:p);
-  var t=today();
-  S.weights = S.weights.filter(function(w){ return w.d!==t; });
-  S.weights.push({d:t, lbs:lbs});
-  S.weights.sort(function(a,b){ return a.d<b.d?-1:1; });
-  if(S.weights.length===1) S.startLbs=lbs;
-  ui.err=null; save(); render();
-}
-
-function addNote(){
-  var el=document.getElementById("note");
-  var v = el ? el.value.trim() : "";
-  if(!v) return;
-  S.journal.unshift({d:today(), t:v});
-  S.journal = S.journal.slice(0,60);
-  save(); render();
-}
-
-function backup(){
-  var code = JSON.stringify(S);
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(code).then(function(){
-      ui.err="Backup code copied. Paste it into a note or message to yourself.";
-      render();
-    }, function(){ window.prompt("Copy this and keep it safe:", code); });
-  } else {
-    window.prompt("Copy this and keep it safe:", code);
+  if(el.dataset.food){
+    pending=(pending===el.dataset.food)?null:el.dataset.food;
+    document.getElementById("results").innerHTML=resultsHTML();
+    var ai=document.getElementById("amtIn"); if(ai){ai.focus();ai.select();}
+    return;
   }
-}
-
-function restore(){
-  var el=document.getElementById("rcode");
-  var v = el ? el.value.trim() : "";
-  if(!v){ ui.err="Paste your backup code into the box first."; render(); return; }
-  var o;
-  try{ o = JSON.parse(v); }catch(err){ o=null; }
-  if(!o || typeof o!=="object" || typeof o.level!=="number"){
-    ui.err="That code didn\u2019t look right \u2014 paste the whole thing, from the first { to the last }.";
-    render(); return;
+  if(el.dataset.chip){
+    var ci=document.getElementById("amtIn"); if(ci)ci.value=el.dataset.chip;
+    return;
   }
-  S = Object.assign(defaults(), o);
-  if(!S.startISO) S.startISO = today();
-  save();
-  ui.err="Restored \u2014 your levels and weigh-ins are back.";
-  render();
-}
+  if(el.id==="amtAdd"){
+    var f=foodByKey(pending), amt=parseFloat(document.getElementById("amtIn").value);
+    if(!f||!(amt>0)){alert("Put a number in first.");return;}
+    var kcal = f.per100!==undefined ? Math.round(f.per100*amt/100) : Math.round(f.each*amt);
+    var nm = f.per100!==undefined ? f.n+" ("+amt+"g)" : (amt===1? f.n : f.n+" x"+amt);
+    addEntry(nm,kcal);return;
+  }
+  if(el.dataset.recipe){
+    var r=null,z; for(z=0;z<RECIPES.length;z++){if(RECIPES[z].id===el.dataset.recipe)r=RECIPES[z];}
+    if(r)addEntry(r.name+" (1 portion)",r.kcal);
+    return;
+  }
+  if(el.dataset.del!==undefined){
+    var dk=logDay(); state.log[dk].splice(parseInt(el.dataset.del,10),1);
+    if(!state.log[dk].length)delete state.log[dk];
+    save();render();return;
+  }
+  if(el.id==="showCustom"){showCustom=true;render();return;}
+  if(el.id==="cfCancel"){showCustom=false;render();return;}
+  if(el.dataset.cfmode){
+    cfMode=el.dataset.cfmode;
+    document.getElementById("mPer").className="chip"+(cfMode==="per100"?" sel":"");
+    document.getElementById("mEach").className="chip"+(cfMode==="each"?" sel":"");
+    return;
+  }
+  if(el.id==="cfSave"){
+    var nname=document.getElementById("cfName").value.trim();
+    var nk=parseFloat(document.getElementById("cfKcal").value);
+    if(!nname||!(nk>0)){alert("Needs a name and a calorie number.");return;}
+    var obj={n:nname};
+    if(cfMode==="each")obj.each=Math.round(nk); else obj.per100=Math.round(nk);
+    state.customFoods.unshift(obj);
+    showCustom=false;searchTerm=nname;pending=null;
+    flash=save()?("Saved "+nname+" — search for it any time."):"Not saved — see the red note.";
+    render();return;
+  }
+  if(el.id==="kcalUp"){state.kcalTarget=Math.min(3000,state.kcalTarget+50);save();render();return;}
+  if(el.id==="kcalDown"){state.kcalTarget=Math.max(1200,state.kcalTarget-50);save();render();return;}
 
-document.addEventListener("click", function(e){
-  var t = e.target.closest ? e.target.closest("[data-act]") : null;
-  if(!t) return;
-  var a = t.getAttribute("data-act"), id = t.getAttribute("data-id");
-  if(a==="tab"){ ui.tab=id; ui.err=null; window.scrollTo(0,0); render(); }
-  else if(a==="quest"){ toggleQuest(id); }
-  else if(a==="ex"){ ui.ex[id] = !ui.ex[id]; render(); }
-  else if(a==="rec"){ ui.rec[id] = !ui.rec[id]; render(); }
-  else if(a==="weigh"){ logWeigh(); }
-  else if(a==="note"){ addNote(); }
-  else if(a==="backup"){ backup(); }
-  else if(a==="restore"){ restore(); }
-  else if(a==="closeAlert"){ ui.alert=null; render(); }
+  if(el.dataset.habit){
+    var d=iso(); state.checks[d]=state.checks[d]||{};
+    state.checks[d][el.dataset.habit]=!state.checks[d][el.dataset.habit];
+    save();render();return;
+  }
+  if(el.dataset.acc){openAcc=(openAcc===el.dataset.acc)?null:el.dataset.acc;render();return;}
+  if(el.dataset.rec){openRec=(openRec===el.dataset.rec)?null:el.dataset.rec;render();return;}
+
+  if(el.id==="saveW"){
+    var st=parseInt(document.getElementById("st").value,10)||0;
+    var lb=parseFloat(document.getElementById("lb").value)||0;
+    var total=st*14+lb;
+    if(total<60||total>500){alert("That doesn't look right — check the stone and pounds boxes.");return;}
+    var d2=iso();
+    state.weights=state.weights.filter(function(w){return w.date!==d2;});
+    if(!state.weights.length)state.startLb=total;
+    state.weights.push({date:d2,lb:total});
+    state.weights.sort(function(a,b){return a.date<b.date?-1:1;});
+    flash = save() ? "Saved: "+stoneStr(total) : "Not saved — see the red note above.";
+    render();return;
+  }
+  if(el.id==="goalUp"){state.goalLb=Math.min(state.startLb-7,state.goalLb+7);save();render();return;}
+  if(el.id==="goalDown"){state.goalLb=Math.max(112,state.goalLb-7);save();render();return;}
+
+  if(el.id==="backup"){
+    var txt=JSON.stringify(state);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(
+        function(){alert("Copied. Paste it into a note or text it to yourself.");},
+        function(){prompt("Copy this and keep it safe:",txt);});
+    }else{prompt("Copy this and keep it safe:",txt);}
+    return;
+  }
+  if(el.id==="restore"){
+    var paste=prompt("Paste your backup here. This replaces everything currently saved.");
+    if(!paste)return;
+    try{
+      var obj=JSON.parse(paste);
+      if(!obj||typeof obj!=="object"||!("weights" in obj))throw new Error("bad");
+      state=Object.assign(blank(),obj);
+      flash = save() ? "Backup restored." : "Restored for now, but it can't be saved — see the red note.";
+      tab="progress";render();
+    }catch(err){alert("That doesn't look like a backup. Paste the whole thing, including the curly brackets.");}
+    return;
+  }
 });
 
-render();
+document.addEventListener("input",function(e){
+  if(e.target.id==="foodSearch"){
+    searchTerm=e.target.value; pending=null;
+    var r=document.getElementById("results"); if(r)r.innerHTML=resultsHTML();
+  }
+});
 
-if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
-  window.addEventListener("load", function(){
+document.addEventListener("keydown",function(e){
+  if(e.key==="Enter"&&e.target.id==="amtIn"){e.preventDefault();
+    var b=document.getElementById("amtAdd"); if(b)b.click();}
+});
+
+document.addEventListener("change",function(e){
+  if(e.target.id==="startDate"&&e.target.value){state.startDate=e.target.value;save();render();}
+});
+
+/* Offline support. Only works over http(s), which is the point. */
+if("serviceWorker" in navigator && !IS_FILE){
+  window.addEventListener("load",function(){
     navigator.serviceWorker.register("sw.js").catch(function(){});
   });
 }
+
+load();render();
 </script>
 </body>
 </html>
