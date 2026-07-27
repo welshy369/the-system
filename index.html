@@ -118,6 +118,28 @@ nav button.on{color:var(--cyan);border-top-color:var(--cyan);background:var(--pa
 .overlay .panel{max-width:340px;width:100%;margin:0}
 .lvl{font-family:var(--mono);font-size:60px;font-weight:700;color:var(--cyan);text-shadow:0 0 24px rgba(34,211,238,.55);line-height:1}
 .center{text-align:center}
+
+.daynav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+.daynav button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;background:var(--panel2);
+  border:1px solid var(--line);border-radius:2px;padding:8px 12px;color:var(--text)}
+.daynav button[disabled]{opacity:.35}
+.result{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;
+  padding:10px 12px;border:1px solid var(--line);border-radius:2px;background:var(--panel2);margin-top:8px}
+.result .rn{font-size:15px;line-height:1.3}
+.result .ru{display:block;font-family:var(--mono);font-size:10px;color:var(--mute);margin-top:2px}
+.result .rk{font-family:var(--mono);font-size:12px;color:var(--cyan);white-space:nowrap}
+.fitem{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--panel2)}
+.fitem:last-child{border-bottom:none}
+.fitem .fn{flex:1;font-size:15px;line-height:1.3}
+.fitem .fn em{display:block;font-family:var(--mono);font-size:10px;color:var(--mute);font-style:normal;margin-top:2px}
+.fitem .fk{font-family:var(--mono);font-size:14px;min-width:48px;text-align:right}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:28px;height:28px;border:1px solid var(--line);border-radius:2px;background:var(--panel);
+  text-align:center;font-family:var(--mono);font-size:14px;color:var(--cyan);line-height:26px}
+.qty span{font-family:var(--mono);font-size:13px;min-width:14px;text-align:center}
+.fdel{color:var(--red);font-family:var(--mono);font-size:16px;padding:0 4px}
+.pb input + input{margin-top:0}
+nav button{padding:13px 1px;font-size:9px;letter-spacing:.1em}
 @media (prefers-reduced-motion: reduce){*{transition:none !important}}
 </style>
 </head>
@@ -571,6 +593,73 @@ var QUESTS = [
  {id:"bonus",label:"Bonus objective \u2014 second walk",detail:"15 more minutes after tea. Optional. Big XP.",stat:"END",xp:69}
 ];
 
+
+/* Approximate values \u2014 near enough for tracking, not lab figures.
+   [name, serving, kcal, protein g] */
+var FOODS = {
+"From the plan":[
+ ["Banana porridge (your portion)","1 bowl",560,22],
+ ["Eggs and beans on toast (your portion)","1 plate",600,38],
+ ["Yoghurt and berry pot (your portion)","1 pot",200,20],
+ ["Lentil soup, bread and tuna","1 bowl",550,45],
+ ["Batch chilli with rice (your portion)","1 plate",620,48],
+ ["Chicken traybake (your portion)","1 plate",620,48],
+ ["Chickpea curry with rice and yoghurt","1 plate",620,30],
+ ["Hidden veg bolognese (your portion)","1 plate",640,45],
+ ["Tuna pasta (your portion)","1 plate",600,50],
+ ["Jacket potato, beans and tuna","1 plate",620,48]],
+"Breakfast and bread":[
+ ["Porridge oats (dry)","40 g",150,5],["Weetabix","1 biscuit",68,2.4],["Cornflakes","30 g",113,2],
+ ["Granola","50 g",220,5],["Wholemeal bread","1 slice",90,4],["White bread","1 slice",85,3],
+ ["Crumpet","1",90,3],["Bagel","1",250,9],["Pitta bread","1",160,5],["Tortilla wrap","1",220,6],
+ ["Toast with butter","1 slice",165,4]],
+"Eggs and dairy":[
+ ["Egg","1 medium",66,6],["Semi-skimmed milk","100 ml",50,3.5],["Whole milk","100 ml",64,3.4],
+ ["Greek yoghurt 0%","100 g",57,10],["Greek yoghurt full fat","100 g",97,9],["Natural yoghurt","100 g",79,5],
+ ["Cottage cheese","100 g",98,12],["Cheddar","30 g",124,7.6],["Reduced-fat cheese","30 g",80,8],
+ ["Butter","10 g",74,0],["Cream cheese","30 g",75,2],["Protein shake with milk","1",220,30]],
+"Meat and fish":[
+ ["Chicken breast, cooked","100 g",165,31],["Chicken thigh, skinless","100 g",177,24],
+ ["5% beef mince, raw","100 g",137,21],["Turkey mince, raw","100 g",110,22],["Bacon, grilled","1 rasher",60,5],
+ ["Pork sausage","1",200,10],["Tuna in spring water","1 tin drained",160,36],["Salmon fillet","100 g",208,20],
+ ["White fish fillet","100 g",90,19],["Prawns","100 g",76,18],["Ham","1 slice",25,4],["Steak, lean","150 g",300,45]],
+"Beans, pulses and nuts":[
+ ["Baked beans","half a tin",155,10],["Baked beans","full tin",310,20],["Kidney beans, drained","100 g",100,7],
+ ["Chickpeas, drained","100 g",115,7],["Red lentils (dry)","50 g",175,12],["Peanut butter","1 tbsp",94,4],
+ ["Hummus","50 g",150,4],["Mixed nuts","25 g",150,5]],
+"Potatoes, rice and pasta":[
+ ["Rice (dry)","75 g",267,6],["Rice, cooked","100 g",130,2.7],["Pasta (dry)","100 g",350,12],
+ ["Pasta, cooked","100 g",158,5.8],["Boiled potatoes","180 g",140,4],["Jacket potato","1 large",250,6],
+ ["Mashed potato with butter","200 g",230,4],["Oven chips","100 g",160,2.6],["Roast potatoes","150 g",250,4],
+ ["Egg noodles","1 nest",190,6],["Couscous (dry)","50 g",180,6]],
+"Fruit and veg":[
+ ["Banana","1",105,1.3],["Apple","1",78,0.4],["Orange","1",62,1],["Berries","100 g",45,1],
+ ["Grapes","100 g",69,0.6],["Frozen mixed veg","100 g",42,2.6],["Peas","100 g",81,5],
+ ["Broccoli","100 g",35,2.8],["Carrot","1 medium",25,0.6],["Side salad","1 bowl",20,1],
+ ["Tomato","1",20,1],["Onion","1",44,1.2],["Sweetcorn","100 g",96,3],["Avocado","half",160,2]],
+"Snacks and sweet things":[
+ ["Digestive biscuit","1",71,1],["Chocolate digestive","1",85,1],["Crisps","25 g bag",130,1.5],
+ ["Chocolate bar","45 g",240,3],["Freddo","1",95,1],["Cereal bar","1",100,1.5],["Rice cake","1",35,0.7],
+ ["Malt loaf","1 slice",90,2],["Scone with butter","1",280,6],["Flapjack","1",250,3],
+ ["Ice cream","100 ml",180,3],["Popcorn, sweet","25 g",120,1],["Boiled eggs","2",132,12]],
+"Drinks":[
+ ["Tea with a splash of milk","1 mug",15,1],["Coffee, black","1 mug",2,0],["Latte","regular",150,8],
+ ["Cola","1 can",139,0],["Diet cola","1 can",1,0],["Orange juice","200 ml",84,1],
+ ["Squash, no added sugar","1 glass",6,0],["Lager","1 pint",180,2],["Wine","175 ml glass",160,0],
+ ["Gin and slimline tonic","single",60,0],["Hot chocolate","1 mug",190,6]],
+"Takeaway and quick food":[
+ ["Chicken curry, takeaway","1 portion",500,30],["Pizza","1 slice",250,10],["Fish and chips","1 portion",900,40],
+ ["Doner kebab","1",700,40],["Cheeseburger","1",300,15],["Chip shop chips","small",500,8],
+ ["Sausage roll","1",300,8],["Meal deal sandwich","1",380,18],["Chinese takeaway rice","1 portion",400,8],
+ ["Full English breakfast","1 plate",800,40]],
+"Cooking and sauces":[
+ ["Olive oil","1 tbsp",120,0],["Vegetable oil","1 tsp",40,0],["Mayonnaise","1 tbsp",95,0],
+ ["Light mayonnaise","1 tbsp",45,0],["Ketchup","1 tbsp",20,0],["Brown sauce","1 tbsp",25,0],
+ ["Gravy","100 ml",25,0.5],["Cheese sauce","100 ml",120,4],["Salad dressing","1 tbsp",70,0],["Sugar","1 tsp",16,0]]
+};
+
+var KCAL_TARGET = 1850, PROTEIN_TARGET = 150;
+
 var STAT_KEYS=["STR","END","VIT","INT","WIL"];
 var STAT_NAMES={STR:"Strength",END:"Endurance",VIT:"Vitality",INT:"Intelligence",WIL:"Willpower"};
 
@@ -579,7 +668,7 @@ var STAT_NAMES={STR:"Strength",END:"Endurance",VIT:"Vitality",INT:"Intelligence"
 function iso(d){ d=d||new Date(); var x=new Date(d.getTime()-d.getTimezoneOffset()*60000); return x.toISOString().slice(0,10); }
 function today(){ return iso(); }
 function defaults(){ return {startISO:today(),startLbs:198,targetLbs:175,level:1,xp:0,totalXp:0,
-  stats:{STR:0,END:0,VIT:0,INT:0,WIL:0},log:{},weights:[],journal:[]}; }
+  stats:{STR:0,END:0,VIT:0,INT:0,WIL:0},log:{},weights:[],journal:[],food:{},kcalTarget:KCAL_TARGET}; }
 
 var S, memoryOnly=false;
 try{
@@ -594,7 +683,7 @@ catch(e){ storageOk = false; memoryOnly = true; }
 
 var isFile = (location.protocol === "file:");
 
-var ui = {tab:"status", ex:{}, rec:{}, alert:null,
+var ui = {tab:"status", ex:{}, rec:{}, alert:null, day:today(), q:"", focusQ:false,
   err: isFile ? "You\u2019ve opened this as a file. It can\u2019t save, can\u2019t go on your home screen, and won\u2019t work offline \u2014 see Your data at the bottom of this tab."
       : (storageOk ? null : "This browser is blocking saved data. Nothing you tick will survive closing the tab \u2014 see Your data at the bottom of this tab.")};
 
@@ -832,8 +921,7 @@ function viewFood(){
     '<div class="grid3">'+
     '<div class="tile" style="text-align:center"><b class="cy">1,850</b><em>kcal</em></div>'+
     '<div class="tile" style="text-align:center"><b class="cy">150 g</b><em>protein</em></div>'+
-    '<div class="tile" style="text-align:center"><b class="cy">2 L</b><em>water</em></div></div>'+
-    '<div class="small muted">Same pot, bigger ladle. These are the ten recipes from her plan \u2014 you eat the same food, cooked once, with a larger portion on your plate. Every recipe has a green box telling you exactly what to add to yours. She\u2019s on around 1,500 a day; you\u2019re on roughly 1,850, which is about a pound a week off you.</div>', {glow:true});
+    '<div class="tile" style="text-align:center"><b class="cy">2 L</b><em>water</em></div></div>', {glow:true});
 
   var rb="";
   RECIPES.forEach(function(r){ rb += recCard(r); });
@@ -867,6 +955,137 @@ function viewFood(){
   return h;
 }
 
+/* --------------------------- calorie count ------------------------ */
+
+function fEntries(d){ return (S.food && S.food[d]) || []; }
+function fKcal(d){ var t=0; fEntries(d).forEach(function(e){ t += e.k*e.q; }); return Math.round(t); }
+function fProtein(d){ var t=0; fEntries(d).forEach(function(e){ t += (e.p||0)*e.q; }); return Math.round(t); }
+function shiftDay(d,n){ var x=new Date(d+"T12:00:00"); x.setDate(x.getDate()+n); return iso(x); }
+function niceDay(d){
+  if(d===today()) return "Today";
+  if(d===shiftDay(today(),-1)) return "Yesterday";
+  var x=new Date(d+"T12:00:00");
+  return x.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
+}
+function allFoods(){
+  var out=[];
+  Object.keys(FOODS).forEach(function(c){ FOODS[c].forEach(function(f){ out.push({cat:c,n:f[0],u:f[1],k:f[2],p:f[3]}); }); });
+  return out;
+}
+function foodRow(f){
+  return '<button class="result" data-act="fadd" data-n="'+esc(f.n)+'" data-u="'+esc(f.u)+'" data-k="'+f.k+'" data-p="'+f.p+'">'+
+    '<span class="rn">'+esc(f.n)+'<span class="ru">'+esc(f.u)+(f.cat?' \u00b7 '+esc(f.cat):'')+'</span></span>'+
+    '<span class="rk">'+f.k+' kcal</span></button>';
+}
+
+function viewCount(){
+  var d=ui.day, kc=fKcal(d), pr=fProtein(d), target=S.kcalTarget||KCAL_TARGET;
+  var left=target-kc, over=kc>target;
+  var h="";
+
+  h += '<div class="daynav"><button data-act="fday" data-n="-1">\u2190 Previous</button>'+
+    '<span class="mono" style="font-size:12px;color:var(--cyan)">'+esc(niceDay(d))+'</span>'+
+    '<button data-act="fday" data-n="1"'+(d===today()?" disabled":"")+'>Next \u2192</button></div>';
+
+  var b = '<div style="display:flex;justify-content:space-between;align-items:flex-end">'+
+      '<div><div class="lab" style="color:var(--mute);margin:0 0 2px">Eaten</div>'+
+      '<div class="mono" style="font-size:36px;line-height:1;color:var(--cyan)">'+kc+'</div></div>'+
+      '<div style="text-align:right"><div class="lab" style="color:var(--mute);margin:0 0 2px">'+(over?"Over by":"Left")+'</div>'+
+      '<div class="mono" style="font-size:36px;line-height:1;color:'+(over?"var(--red)":"var(--greenLit)")+'">'+Math.abs(left)+'</div></div></div>'+
+    bar((kc/target)*100, over?"#dc2626":"#22d3ee", 10)+
+    '<div class="mono" style="display:flex;justify-content:space-between;font-size:11px;color:var(--mute)">'+
+      '<span>Target '+target+' kcal</span><span>Protein '+pr+' / '+PROTEIN_TARGET+' g</span></div>'+
+    bar((pr/PROTEIN_TARGET)*100, "#16a34a", 6);
+  h += panel("Ration count", b, {glow:true, right:niceDay(d)});
+
+  var list=fEntries(d), lb="";
+  if(!list.length){
+    lb = '<div class="tiny">Nothing logged. Search below, or tap one of your plan meals.</div>';
+  } else {
+    list.forEach(function(e,i){
+      lb += '<div class="fitem"><span class="fn">'+esc(e.n)+'<em>'+esc(e.u||"")+'</em></span>'+
+        '<span class="qty"><button data-act="fless" data-i="'+i+'">\u2212</button><span>'+e.q+'</span>'+
+        '<button data-act="fmore" data-i="'+i+'">+</button></span>'+
+        '<span class="fk">'+Math.round(e.k*e.q)+'</span>'+
+        '<button class="fdel" data-act="fdel" data-i="'+i+'">\u00d7</button></div>';
+    });
+  }
+  h += panel(niceDay(d), lb);
+
+  var ab = '<input id="q" value="'+esc(ui.q)+'" placeholder="Search \u2014 chicken, toast, pint...">';
+  var q = ui.q.trim().toLowerCase();
+  if(q.length>=2){
+    var hits = allFoods().filter(function(f){ return f.n.toLowerCase().indexOf(q)>-1; }).slice(0,14);
+    if(!hits.length) ab += '<div class="tiny">Nothing matching. Add it by hand below.</div>';
+    else hits.forEach(function(f){ ab += foodRow(f); });
+  } else {
+    ab += '<div class="lab" style="margin-top:14px">Straight off the plan</div>';
+    FOODS["From the plan"].forEach(function(f){ ab += foodRow({n:f[0],u:f[1],k:f[2],p:f[3],cat:""}); });
+    ab += '<div class="tiny">Type two letters to search the rest \u2014 around 120 everyday foods.</div>';
+  }
+  ab += '<div class="lab" style="margin-top:16px">Or add your own</div>'+
+    '<input id="cn" placeholder="What was it">'+
+    '<div style="display:flex;gap:8px;margin-top:8px"><input id="ck" inputmode="numeric" placeholder="kcal">'+
+    '<input id="cp" inputmode="numeric" placeholder="protein g"></div>'+
+    '<button class="btn" data-act="fcustom" style="margin-top:10px">Add it</button>'+
+    '<div class="tiny">Packet calories are on the back, per portion. If you\u2019re guessing, guess high \u2014 it\u2019s the honest direction.</div>';
+  h += panel("Add something", ab);
+
+  var days=[], dd=today(), logged=0, sum=0;
+  for(var i=0;i<14;i++){ days.push(dd); if(fEntries(dd).length){ logged++; sum+=fKcal(dd); } dd=shiftDay(dd,-1); }
+  var hb="";
+  if(!logged) hb = '<div class="tiny">Fills in as you log.</div>';
+  else {
+    hb = '<div class="grid2" style="margin-bottom:10px">'+
+      '<div class="tile"><em>Daily average</em><b class="cy">'+Math.round(sum/logged)+'</b></div>'+
+      '<div class="tile"><em>Days logged</em><b class="cy">'+logged+'</b></div></div>';
+    days.forEach(function(x){
+      var t=fKcal(x), o=t>(S.kcalTarget||KCAL_TARGET);
+      hb += '<div class="row" style="margin-bottom:6px"><span class="mono muted" style="font-size:11px;width:74px">'+esc(niceDay(x))+'</span>'+
+        '<span style="flex:1">'+bar(t?Math.min(100,(t/(S.kcalTarget||KCAL_TARGET))*100):0, o?"#dc2626":"#4ade80", 8)+'</span>'+
+        '<span class="mono" style="font-size:12px;width:44px;text-align:right">'+(t||"\u2014")+'</span></div>';
+    });
+    hb += '<div class="tiny">One heavy day inside a good week barely moves the needle. It\u2019s the fortnight\u2019s average that shows up on the scales.</div>';
+  }
+  h += panel("Last fortnight", hb);
+
+  h += panel("Target", '<div style="display:flex;gap:8px"><input id="tg" inputmode="numeric" value="'+(S.kcalTarget||KCAL_TARGET)+'">'+
+    '<button class="btn" style="width:auto;flex:1" data-act="ftarget">Save</button></div>'+
+    '<div class="tiny">1,850 is the number the plan works to. Below 1,500 isn\u2019t faster \u2014 it just makes you hungry, tired and more likely to jack it in, so the box won\u2019t go lower.</div>'+
+    '<button class="btn ghost" data-act="fclear">Clear '+esc(niceDay(d))+'</button>');
+  return h;
+}
+
+function fAdd(n,u,k,p){
+  var d=ui.day, list=fEntries(d).slice(), found=-1;
+  list.forEach(function(e,i){ if(e.n===n && e.k===k) found=i; });
+  if(found>-1) list[found]=Object.assign({},list[found],{q:list[found].q+1});
+  else list.push({n:n,u:u,k:k,p:p,q:1});
+  if(!S.food) S.food={};
+  S.food[d]=list; save(); render();
+}
+function fBump(i,n){
+  var d=ui.day, list=fEntries(d).slice();
+  if(!list[i]) return;
+  list[i]=Object.assign({},list[i],{q:list[i].q+n});
+  if(list[i].q<=0) list.splice(i,1);
+  S.food[d]=list; save(); render();
+}
+function fCustom(){
+  var n=((document.getElementById("cn")||{}).value||"").trim();
+  var k=parseFloat((document.getElementById("ck")||{}).value);
+  var p=parseFloat((document.getElementById("cp")||{}).value);
+  if(!n || isNaN(k) || k<0){ ui.err="Give it a name and a calorie number, then tap Add it."; render(); return; }
+  ui.err=null; fAdd(n,"your entry",Math.round(k),isNaN(p)?0:Math.round(p));
+}
+function fTarget(){
+  var v=parseInt((document.getElementById("tg")||{}).value,10);
+  if(isNaN(v)){ ui.err="Enter a number of calories."; render(); return; }
+  var msg = (v<1500) ? "Set to 1,500 \u2014 that\u2019s the floor this app allows." : null;
+  if(v<1500) v=1500;
+  S.kcalTarget=v; save(); ui.err=msg; render();
+}
+
 function viewLog(){
   var h="";
   var jb = '<textarea id="note" rows="3" placeholder="First full press-up. Felt like a boss kill."></textarea>'+
@@ -888,7 +1107,7 @@ function viewLog(){
   return h;
 }
 
-var TABS=[["status","Status"],["quests","Quests"],["training","Training"],["food","Food"],["log","Log"]];
+var TABS=[["status","Status"],["quests","Quests"],["training","Train"],["count","Count"],["food","Food"],["log","Log"]];
 
 function render(){
   var y = window.scrollY;
@@ -901,6 +1120,7 @@ function render(){
   else if(ui.tab==="quests") h += viewQuests();
   else if(ui.tab==="training") h += viewTraining();
   else if(ui.tab==="food") h += viewFood();
+  else if(ui.tab==="count") h += viewCount();
   else h += viewLog();
 
   if(ui.alert){
@@ -915,8 +1135,14 @@ function render(){
   var nav="";
   TABS.forEach(function(t){ nav += '<button data-act="tab" data-id="'+t[0]+'" class="'+(ui.tab===t[0]?"on":"")+'">'+t[1]+'</button>'; });
   document.getElementById("nav").innerHTML = nav;
+  var qEl=document.getElementById("q");
+  if(qEl && ui.focusQ){ qEl.focus(); qEl.setSelectionRange(qEl.value.length, qEl.value.length); }
   window.scrollTo(0,y);
 }
+
+document.addEventListener("input", function(e){
+  if(e.target && e.target.id==="q"){ ui.q=e.target.value; ui.focusQ=true; render(); ui.focusQ=false; }
+});
 
 /* ============================ ACTIONS ============================= */
 
@@ -1001,6 +1227,18 @@ document.addEventListener("click", function(e){
   else if(a==="note"){ addNote(); }
   else if(a==="backup"){ backup(); }
   else if(a==="restore"){ restore(); }
+  else if(a==="fadd"){ fAdd(t.getAttribute("data-n"), t.getAttribute("data-u"), parseFloat(t.getAttribute("data-k")), parseFloat(t.getAttribute("data-p"))); }
+  else if(a==="fmore"){ fBump(parseInt(t.getAttribute("data-i"),10), 1); }
+  else if(a==="fless"){ fBump(parseInt(t.getAttribute("data-i"),10), -1); }
+  else if(a==="fdel"){ fBump(parseInt(t.getAttribute("data-i"),10), -999); }
+  else if(a==="fcustom"){ fCustom(); }
+  else if(a==="ftarget"){ fTarget(); }
+  else if(a==="fclear"){ if(S.food) delete S.food[ui.day]; save(); render(); }
+  else if(a==="fday"){
+    var nx=shiftDay(ui.day, parseInt(t.getAttribute("data-n"),10));
+    if(nx>today()) return;
+    ui.day=nx; ui.err=null; render();
+  }
   else if(a==="closeAlert"){ ui.alert=null; render(); }
 });
 
