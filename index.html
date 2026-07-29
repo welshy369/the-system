@@ -332,149 +332,113 @@ var COOLDOWN = ["Doorway chest stretch \u2014 forearm on the frame, step through
   "Child's pose on the floor \u2014 45 seconds, breathe out slowly."];
 
 var PHASES = [
- {wk:[1,2],rank:"E",name:"Awakening",harder:"Starting point. Everything later is measured against this fortnight.",cardio:"20 minutes of brisk walking, every day",
-  week:[["Mon","Session 1"],["Tue","Walk only"],["Wed","Session 2"],["Thu","Walk only"],["Fri","Session 1"],["Sat","Walk only"],["Sun","Rest and stretch"]],
+ {wk:[1,1],rank:"E",name:"Awakening",harder:"Starting point. Everything later is measured against this week.",
+  cardio:"Three runs. Brisk 5 minute walk to start, then run for 60 seconds, walk for 90 seconds, and repeat that eight times.",
+  week:[["Mon","Run"],["Tue","The ladder"],["Wed","Run"],["Thu","The ladder"],["Fri","Run"],["Sat","The ladder, or an easy walk if you are still sore"],["Sun","Rest and stretch"]],
+  ladder:"1 km tier \u2014 10 of each",
   sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"worktopPress",sets:3,reps:"5 reps",rest:"90 seconds"},
-     {k:"chairSquat",sets:3,reps:"8 reps",rest:"90 seconds"},
-     {k:"plank",sets:3,reps:"hold 15 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"doorwayRow",sets:3,reps:"8 reps",rest:"90 seconds"},
-     {k:"gluteBridge",sets:3,reps:"10 reps",rest:"60 seconds"},
-     {k:"deadBug",sets:3,reps:"6 reps each side",rest:"60 seconds"}]}],
-  note:"It should feel too easy. That's deliberate \u2014 weeks 1 and 2 build the habit, not the muscle. The people who go hard now are the ones who quit in week three."},
- {wk:[3,4],rank:"E",name:"Awakening II",harder:"Hands come off the worktop and onto the stairs, squats lose the chair, and every set gains reps.",cardio:"30 minutes of brisk walking, every day",
-  week:[["Mon","Session 1"],["Tue","Walk only"],["Wed","Session 2"],["Thu","Walk only"],["Fri","Session 1"],["Sat","Walk only"],["Sun","Rest and stretch"]],
+   {title:"The ladder \u2014 1 km tier",ex:[
+     {k:"worktopPress",sets:1,reps:"10 press-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"sitUp",sets:1,reps:"10 sit-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"chairSquat",sets:1,reps:"10 squats in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"doorwayRow",sets:1,reps:"10 rows in total, in as many sets as it takes",rest:"60 seconds between sets"}]}],
+  note:"Sixty seconds of running will feel long. Run it far slower than feels right \u2014 if you cannot say a full sentence out loud while running, slow down rather than stop. Week one builds the habit, not the fitness."},
+
+ {wk:[2,2],rank:"E",name:"Awakening II",harder:"The running block goes from 60 seconds to 90, and the walk between shrinks.",
+  cardio:"Three runs. Brisk 5 minute walk to start, then run for 90 seconds, walk for 2 minutes, and repeat that six times.",
+  week:[["Mon","Run"],["Tue","The ladder"],["Wed","Run"],["Thu","The ladder"],["Fri","Run"],["Sat","The ladder, or an easy walk if you are still sore"],["Sun","Rest and stretch"]],
+  ladder:"1 km tier \u2014 10 of each",
   sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"inclinePress",sets:3,reps:"8 reps",rest:"90 seconds"},
-     {k:"bodyweightSquat",sets:3,reps:"12 reps",rest:"90 seconds"},
-     {k:"plank",sets:3,reps:"hold 25 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"doorwayRow",sets:3,reps:"12 reps",rest:"90 seconds"},
-     {k:"gluteBridge",sets:3,reps:"15 reps",rest:"60 seconds"},
-     {k:"deadBug",sets:3,reps:"8 reps each side",rest:"60 seconds"}]}],
-  note:"Swap the worktop for the stairs or the arm of the sofa. Same movement, lower surface, more of your weight through your arms."},
- {wk:[5,6],rank:"D",name:"Gate clearance",harder:"A fourth set on the big movements, split squats added, and your first interval walk.",
-  cardio:"30 minute walk daily, plus one interval day: walk fast for 1 minute, easy for 2 minutes, repeat 8 times",
-  week:[["Mon","Session 1"],["Tue","Walk"],["Wed","Session 2"],["Thu","Interval walk"],["Fri","Session 1"],["Sat","Walk"],["Sun","Rest and stretch"]],
+   {title:"The ladder \u2014 1 km tier",ex:[
+     {k:"worktopPress",sets:1,reps:"10 press-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"sitUp",sets:1,reps:"10 sit-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"chairSquat",sets:1,reps:"10 squats in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"doorwayRow",sets:1,reps:"10 rows in total, in as many sets as it takes",rest:"60 seconds between sets"}]}],
+  note:"Ladder numbers stay at 10 for a second week on purpose. Same reps, done cleaner and with less rest. If 10 press-ups off the worktop is easy by Friday, move your hands down to the stairs rather than adding reps."},
+
+ {wk:[3,3],rank:"D",name:"Gate opens",harder:"The ladder doubles to 20, and the running blocks stretch to three minutes.",
+  cardio:"Three runs. Brisk 5 minute walk to start, then twice through: run 90 seconds, walk 90 seconds, run 3 minutes, walk 3 minutes.",
+  week:[["Mon","Run"],["Tue","The ladder"],["Wed","Run"],["Thu","The ladder"],["Fri","Run"],["Sat","The ladder, or an easy walk if you are still sore"],["Sun","Rest and stretch"]],
+  ladder:"2 km tier \u2014 20 of each",
   sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"inclinePress",sets:4,reps:"8 reps",rest:"90 seconds"},
-     {k:"bodyweightSquat",sets:4,reps:"15 reps",rest:"90 seconds"},
-     {k:"splitSquat",sets:3,reps:"6 reps each leg",rest:"60 seconds"},
-     {k:"plank",sets:3,reps:"hold 35 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"doorwayRow",sets:4,reps:"12 reps",rest:"90 seconds"},
-     {k:"hipHinge",sets:3,reps:"10 reps, no weight",rest:"90 seconds"},
-     {k:"gluteBridge",sets:3,reps:"15 reps",rest:"60 seconds"},
-     {k:"deadBug",sets:3,reps:"8 reps each side",rest:"60 seconds"}]}],
-  note:"Week 5 is when knees and shoulders start grumbling. A dull ache a day or two after training is normal. Sharp pain, one-sided pain, or pain inside a joint is not \u2014 stop that exercise and use the easier version."},
- {wk:[7,8],rank:"D",name:"Gate clearance II",harder:"Press-ups move to the floor, the rucksack comes out, and rests get longer because the sets get harder.",cardio:"30 to 40 minute walk daily, plus two interval days",
-  week:[["Mon","Session 1"],["Tue","Interval walk"],["Wed","Session 2"],["Thu","Walk"],["Fri","Session 1"],["Sat","Interval walk"],["Sun","Rest and stretch"]],
+   {title:"The ladder \u2014 2 km tier",ex:[
+     {k:"inclinePress",sets:1,reps:"20 press-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"sitUp",sets:1,reps:"20 sit-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"bodyweightSquat",sets:1,reps:"20 squats in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"doorwayRow",sets:1,reps:"20 rows in total, in as many sets as it takes",rest:"60 seconds between sets"}]}],
+  note:"Twenty is where you stop doing it in one go and start breaking it up. Four sets of five is the same twenty as one set of twenty, and it counts exactly the same."},
+
+ {wk:[4,4],rank:"D",name:"Gate clearance",harder:"Your first five minute run. Two of them, in the same session.",
+  cardio:"Three runs. Brisk 5 minute walk to start, then: run 3 minutes, walk 90 seconds, run 5 minutes, walk 2 and a half minutes, run 3 minutes, walk 90 seconds, run 5 minutes.",
+  week:[["Mon","Run"],["Tue","The ladder"],["Wed","Run"],["Thu","The ladder"],["Fri","Run"],["Sat","The ladder, or an easy walk if you are still sore"],["Sun","Rest and stretch"]],
+  ladder:"2 km tier \u2014 20 of each",
   sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"floorPress",sets:4,reps:"6 reps (knees down if needed)",rest:"2 minutes"},
-     {k:"loadedSquat",sets:4,reps:"12 reps",rest:"2 minutes"},
-     {k:"splitSquat",sets:3,reps:"8 reps each leg",rest:"90 seconds"},
-     {k:"plank",sets:3,reps:"hold 45 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"doorwayRow",sets:4,reps:"15 reps",rest:"90 seconds"},
-     {k:"hipHinge",sets:3,reps:"12 reps with the loaded bag",rest:"2 minutes"},
-     {k:"gluteBridge",sets:3,reps:"20 reps",rest:"60 seconds"},
-     {k:"sitUp",sets:3,reps:"12 reps",rest:"60 seconds"}]}],
-  note:"Somewhere in these two weeks you'll get your first proper press-up off the floor. Write it in the journal \u2014 that's a boss kill."},
- {wk:[9,10],rank:"C",name:"Ascension",harder:"Walking becomes jogging, press-ups nearly double, and lunges replace standing still.",
-  cardio:"Three jogging days: jog 30 seconds, walk 90 seconds, repeat 10 times. Keep the daily walk on the other days.",
-  week:[["Mon","Session 1"],["Tue","Jog intervals"],["Wed","Session 2"],["Thu","Jog intervals"],["Fri","Session 1"],["Sat","Jog intervals"],["Sun","Rest and stretch"]],
+   {title:"The ladder \u2014 2 km tier",ex:[
+     {k:"inclinePress",sets:1,reps:"20 press-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"sitUp",sets:1,reps:"20 sit-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"bodyweightSquat",sets:1,reps:"20 squats in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"doorwayRow",sets:1,reps:"20 rows in total, in as many sets as it takes",rest:"60 seconds between sets"}]}],
+  note:"Week four is the first one that bites, and it is the week most people quit. If a run goes badly, repeat it rather than skipping forwards. Nothing in here has a deadline."},
+
+ {wk:[5,5],rank:"C",name:"Ascension",harder:"Three different runs this week, and the last one has no walking in it at all.",
+  cardio:"Three different runs. First: run 5 minutes, walk 3 minutes, three times through. Second: run 8 minutes, walk 5 minutes, run 8 minutes. Third: run 20 minutes with no walking.",
+  week:[["Mon","Run one"],["Tue","The ladder"],["Wed","Run two"],["Thu","The ladder"],["Fri","Run three \u2014 20 minutes unbroken"],["Sat","The ladder, or an easy walk if you are still sore"],["Sun","Rest and stretch"]],
+  ladder:"3 km tier \u2014 30 of each",
   sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"floorPress",sets:4,reps:"10 reps",rest:"2 minutes"},
-     {k:"loadedSquat",sets:4,reps:"15 reps",rest:"2 minutes"},
-     {k:"walkingLunge",sets:3,reps:"10 reps each leg",rest:"90 seconds"},
-     {k:"plank",sets:3,reps:"hold 60 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"tableRow",sets:4,reps:"8 reps",rest:"2 minutes"},
-     {k:"hipHinge",sets:4,reps:"12 reps loaded",rest:"2 minutes"},
-     {k:"splitSquat",sets:3,reps:"10 reps each leg",rest:"90 seconds"},
-     {k:"sitUp",sets:3,reps:"15 reps",rest:"60 seconds"}]}],
-  note:"Jog far slower than feels right. If you can't say a full sentence out loud while jogging, slow down \u2014 don't stop."},
- {wk:[11,12],rank:"C",name:"Trial",harder:"No rest between exercises \u2014 five straight rounds, then a test day to put numbers on it.",cardio:"Three jogging days: jog 1 minute, walk 1 minute, repeat 12 times",
-  week:[["Mon","Circuit"],["Tue","Jog intervals"],["Wed","Circuit"],["Thu","Jog intervals"],["Fri","Circuit"],["Sat","Jog intervals"],["Sun","Rest and stretch"]],
-  circuit:"Do one set of each exercise back to back with no rest, then rest 90 seconds. That's one round. Five rounds in total.",
+   {title:"The ladder \u2014 3 km tier",ex:[
+     {k:"inclinePress",sets:1,reps:"30 press-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"sitUp",sets:1,reps:"30 sit-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"bodyweightSquat",sets:1,reps:"30 squats in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"doorwayRow",sets:1,reps:"30 rows in total, in as many sets as it takes",rest:"60 seconds between sets"}]}],
+  note:"Friday is the big one. Twenty minutes without stopping, three weeks after you could barely manage sixty seconds. Go slow enough that you are bored rather than dying, and write it in the journal afterwards. That is a boss kill."},
+
+ {wk:[6,6],rank:"C",name:"The trial",harder:"Back to intervals for two runs, then twenty-five minutes unbroken on the third.",
+  cardio:"Three different runs. First: run 5 minutes, walk 3 minutes, run 8 minutes, walk 3 minutes, run 5 minutes. Second: run 10 minutes, walk 3 minutes, run 10 minutes. Third: run 25 minutes with no walking.",
+  week:[["Mon","Run one"],["Tue","The ladder"],["Wed","Run two"],["Thu","The ladder"],["Fri","Run three \u2014 25 minutes unbroken"],["Sat","The ladder, or an easy walk if you are still sore"],["Sun","Rest and stretch"]],
+  ladder:"3 km tier \u2014 30 of each",
   sessions:[
-   {title:"The circuit \u2014 five rounds",ex:[
-     {k:"floorPress",sets:1,reps:"12 reps",rest:"straight on"},
-     {k:"bodyweightSquat",sets:1,reps:"20 reps",rest:"straight on"},
-     {k:"walkingLunge",sets:1,reps:"10 reps each leg",rest:"straight on"},
-     {k:"sitUp",sets:1,reps:"15 reps",rest:"straight on"},
-     {k:"plank",sets:1,reps:"hold 45 seconds",rest:"90 seconds, then next round"}]}],
-  note:"On the last day of week 12, test yourself: most press-ups in one go, most squats in one go, and time yourself over 1 km. Write all three in the journal. Everything after this is measured against those numbers."},
- {wk:[13,14],rank:"B",name:"Shadow extraction",
-  harder:"Back to straight sets, but heavier: press-ups at twelve, plank past a minute, two more tins in the bag.",
-  cardio:"Three jogging days: jog 90 seconds, walk 60 seconds, repeat 10 times",
-  week:[["Mon","Session 1"],["Tue","Jog intervals"],["Wed","Session 2"],["Thu","Jog intervals"],["Fri","Session 1"],["Sat","Walk"],["Sun","Rest and stretch"]],
+   {title:"The ladder \u2014 3 km tier",ex:[
+     {k:"inclinePress",sets:1,reps:"30 press-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"sitUp",sets:1,reps:"30 sit-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"bodyweightSquat",sets:1,reps:"30 squats in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"doorwayRow",sets:1,reps:"30 rows in total, in as many sets as it takes",rest:"60 seconds between sets"}]}],
+  note:"Going back to walk breaks after last Friday feels like a step backwards. It is not \u2014 the intervals are what make the twenty-five minutes possible. Trust the order."},
+
+ {wk:[7,7],rank:"B",name:"Shadow extraction",harder:"Every run is now unbroken. No more walk breaks, and the ladder hits 40.",
+  cardio:"Three runs, all the same: 25 minutes with no walking. Around 4 km at an easy pace.",
+  week:[["Mon","Run"],["Tue","The ladder"],["Wed","Run"],["Thu","The ladder"],["Fri","Run"],["Sat","The ladder, or an easy walk if you are still sore"],["Sun","Rest and stretch"]],
+  ladder:"4 km tier \u2014 40 of each",
   sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"floorPress",sets:4,reps:"12 reps",rest:"2 minutes"},
-     {k:"loadedSquat",sets:4,reps:"15 reps, two more tins in the bag",rest:"2 minutes"},
-     {k:"walkingLunge",sets:3,reps:"12 reps each leg",rest:"90 seconds"},
-     {k:"plank",sets:3,reps:"hold 75 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"tableRow",sets:4,reps:"10 reps",rest:"2 minutes"},
-     {k:"hipHinge",sets:4,reps:"15 reps loaded",rest:"2 minutes"},
-     {k:"splitSquat",sets:3,reps:"12 reps each leg",rest:"90 seconds"},
-     {k:"sitUp",sets:4,reps:"15 reps",rest:"60 seconds"}]}],
-  note:"Twelve press-ups a set would have been impossible in week one. Go back and read your first journal entry."},
- {wk:[15,16],rank:"B",name:"Shadow extraction II",
-  harder:"Pike press-ups added for shoulders, and the jog stretches to two minutes at a stretch.",
-  cardio:"Three jogging days: jog 2 minutes, walk 1 minute, repeat 8 times",
-  week:[["Mon","Session 1"],["Tue","Jog intervals"],["Wed","Session 2"],["Thu","Jog intervals"],["Fri","Session 1"],["Sat","Walk"],["Sun","Rest and stretch"]],
+   {title:"The ladder \u2014 4 km tier",ex:[
+     {k:"floorPress",sets:1,reps:"40 press-ups in total, in as many sets as it takes",rest:"60 to 90 seconds between sets"},
+     {k:"sitUp",sets:1,reps:"40 sit-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"bodyweightSquat",sets:1,reps:"40 squats in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"doorwayRow",sets:1,reps:"40 rows in total, in as many sets as it takes",rest:"60 seconds between sets"}]}],
+  note:"Press-ups move to the floor this week. If forty off the floor is not happening, do them with your knees down, or split them \u2014 twenty off the floor and twenty off the stairs. Forty is forty."},
+
+ {wk:[8,8],rank:"B",name:"Shadow extraction II",harder:"Twenty-eight minutes, three times, and the ladder is a proper session now.",
+  cardio:"Three runs, all the same: 28 minutes with no walking. Somewhere around 4.5 km.",
+  week:[["Mon","Run"],["Tue","The ladder"],["Wed","Run"],["Thu","The ladder"],["Fri","Run"],["Sat","The ladder, or an easy walk if you are still sore"],["Sun","Rest and stretch"]],
+  ladder:"4 km tier \u2014 40 of each",
   sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"pikePress",sets:3,reps:"8 reps",rest:"90 seconds"},
-     {k:"floorPress",sets:4,reps:"14 reps",rest:"2 minutes"},
-     {k:"loadedSquat",sets:4,reps:"18 reps",rest:"2 minutes"},
-     {k:"plank",sets:3,reps:"hold 90 seconds",rest:"60 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"tableRow",sets:4,reps:"12 reps",rest:"2 minutes"},
-     {k:"hipHinge",sets:4,reps:"15 reps loaded",rest:"2 minutes"},
-     {k:"walkingLunge",sets:3,reps:"14 reps each leg",rest:"90 seconds"},
-     {k:"deadBug",sets:3,reps:"12 reps each side",rest:"60 seconds"}]}],
-  note:"Pike press-ups are humbling. Start on the stairs version and don\u2019t be proud about it."},
- {wk:[17,18],rank:"A",name:"Monarch\u2019s road",
-  harder:"Feet go up on a chair for decline press-ups, five sets on the rows, and the jog becomes an unbroken run.",
-  cardio:"Three runs: 15 minutes continuous, no walk breaks. Slower is fine \u2014 unbroken is the point.",
-  week:[["Mon","Session 1"],["Tue","Run"],["Wed","Session 2"],["Thu","Run"],["Fri","Session 1"],["Sat","Run or long walk"],["Sun","Rest and stretch"]],
+   {title:"The ladder \u2014 4 km tier",ex:[
+     {k:"floorPress",sets:1,reps:"40 press-ups in total, in as many sets as it takes",rest:"60 to 90 seconds between sets"},
+     {k:"sitUp",sets:1,reps:"40 sit-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"bodyweightSquat",sets:1,reps:"40 squats in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"doorwayRow",sets:1,reps:"40 rows in total, in as many sets as it takes",rest:"60 seconds between sets"}]}],
+  note:"Two minutes more than last week. That is the whole difference. The ladder takes about twenty minutes now including the rests, so give it a proper slot rather than squeezing it in."},
+
+ {wk:[9,99],rank:"A",name:"Monarch's road",harder:"Thirty minutes unbroken, fifty of everything, and then it holds. This is the routine.",
+  cardio:"Three runs a week, all the same: 30 minutes with no walking. That is your 5 km.",
+  week:[["Mon","Run \u2014 30 minutes"],["Tue","The ladder"],["Wed","Run \u2014 30 minutes"],["Thu","The ladder"],["Fri","Run \u2014 30 minutes"],["Sat","The ladder, or a long easy walk"],["Sun","Rest and stretch"]],
+  ladder:"5 km tier \u2014 50 of each",
   sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"declinePress",sets:4,reps:"10 reps",rest:"2 minutes"},
-     {k:"loadedSquat",sets:5,reps:"15 reps",rest:"2 minutes"},
-     {k:"splitSquat",sets:3,reps:"10 reps each leg, back foot on a step",rest:"90 seconds"},
-     {k:"plank",sets:3,reps:"hold 2 minutes",rest:"90 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"tableRow",sets:5,reps:"12 reps",rest:"2 minutes"},
-     {k:"hipHinge",sets:4,reps:"20 reps loaded",rest:"2 minutes"},
-     {k:"walkingLunge",sets:4,reps:"15 reps each leg",rest:"90 seconds"},
-     {k:"sitUp",sets:4,reps:"20 reps",rest:"60 seconds"}]}],
-  note:"Your first unbroken fifteen minutes is a bigger milestone than any press-up number. Write that one down."},
- {wk:[19,24],rank:"A",name:"Ascendant",
-  harder:"Six weeks where the plan hands you the wheel: every fortnight add two reps to every set, or one whole extra set.",
-  cardio:"Build the run: 20 minutes, then 25, then 30. By week 24 that\u2019s around 5 km.",
-  week:[["Mon","Session 1"],["Tue","Run"],["Wed","Session 2"],["Thu","Run"],["Fri","Session 1"],["Sat","Run or long walk"],["Sun","Rest and stretch"]],
-  sessions:[
-   {title:"Session 1 \u2014 Push and squat",ex:[
-     {k:"declinePress",sets:5,reps:"12 reps",rest:"2 minutes"},
-     {k:"loadedSquat",sets:5,reps:"20 reps",rest:"2 minutes"},
-     {k:"walkingLunge",sets:4,reps:"20 reps each leg",rest:"90 seconds"},
-     {k:"plank",sets:3,reps:"hold 2 minutes 30",rest:"90 seconds"}]},
-   {title:"Session 2 \u2014 Pull and hinge",ex:[
-     {k:"tableRow",sets:5,reps:"15 reps",rest:"2 minutes"},
-     {k:"hipHinge",sets:5,reps:"20 reps loaded",rest:"2 minutes"},
-     {k:"splitSquat",sets:4,reps:"12 reps each leg, elevated",rest:"90 seconds"},
-     {k:"sitUp",sets:5,reps:"25 reps",rest:"60 seconds"}]}],
-  note:"When adding reps and adding sets both stop being possible, that\u2019s the point where the endgame protocol stops being a joke and starts being a project."}
+   {title:"The ladder \u2014 5 km tier",ex:[
+     {k:"floorPress",sets:1,reps:"50 press-ups in total, in as many sets as it takes",rest:"60 to 90 seconds between sets"},
+     {k:"sitUp",sets:1,reps:"50 sit-ups in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"bodyweightSquat",sets:1,reps:"50 squats in total, in as many sets as it takes",rest:"60 seconds between sets"},
+     {k:"tableRow",sets:1,reps:"50 rows in total, in as many sets as it takes",rest:"60 to 90 seconds between sets"}]}],
+  note:"From here the plan stops changing and starts repeating. Three runs of 30 minutes, three ladder days of 50, every week, for as long as you want. The numbers on the scales come from keeping this going, not from making it harder. If you get bored: run the same 5 km faster, or start walking the ladder up towards 100."}
 ];
 
 var ENDGAME = ["100 press-ups","100 sit-ups","100 squats","10 km run"];
@@ -599,12 +563,12 @@ var SHOPPING = [
 
 var QUESTS = [
  {id:"walk",label:"Daily movement",detail:"The walk for your current phase",stat:"END",xp:30},
- {id:"train",label:"Training session",detail:"Or stretching on a walk-only day",stat:"STR",xp:30},
+ {id:"train",label:"Training session",detail:"The ladder, or stretching on a rest day",stat:"STR",xp:30},
  {id:"cals",label:"Ate to plan",detail:"Your portions, no extras",stat:"WIL",xp:30},
  {id:"prot",label:"Protein at every meal",detail:"Eggs, tuna, mince, chicken, yoghurt, beans",stat:"INT",xp:30},
  {id:"water",label:"2 litres of water",detail:"Roughly 4 pint glasses",stat:"VIT",xp:30},
  {id:"sleep",label:"7+ hours sleep",detail:"The cheapest performance drug there is",stat:"VIT",xp:30},
- {id:"bonus",label:"Bonus objective \u2014 second walk",detail:"15 more minutes after tea. Optional. Big XP.",stat:"END",xp:69}
+ {id:"bonus",label:"Bonus objective \u2014 evening walk",detail:"15 easy minutes after tea. Optional. Big XP.",stat:"END",xp:69}
 ];
 
 
@@ -935,28 +899,60 @@ function viewTraining(){
     '<p style="margin:0 0 10px"><b class="cy">When to move up</b> \u2014 when you can finish every set with two reps still left in you, use the harder version listed on the exercise.</p>'+
     '<p style="margin:0" class="amber">Tap any exercise below for how to do it, what it should feel like, and what to do if it\u2019s too hard or too easy.</p></div>', {glow:true});
 
-  var pb = '<div class="note" style="background:var(--panel2)"><span class="mono green" style="font-size:12px">WALKING \u2014 '+esc(ph.cardio)+'</span></div><div>'+
+  var pb = '<div class="note" style="background:var(--panel2)"><span class="mono green" style="font-size:12px">RUNNING \u2014 '+esc(ph.cardio)+'</span></div>'+
+    (ph.ladder ? '<div class="note" style="background:var(--panel2)"><span class="mono amber" style="font-size:12px">LADDER \u2014 '+esc(ph.ladder)+', on the non-running days</span></div>' : '')+
+    '<div>'+
     '<div class="lab" style="color:var(--mute)">Your week</div>';
   ph.week.forEach(function(r){
     pb += '<div class="dayrow"><em>'+r[0]+'</em><span'+(r[1].indexOf("Rest")>-1?' class="muted"':'')+'>'+esc(r[1])+'</span></div>';
   });
   pb += '</div>';
-  if(ph.harder) pb += '<div class="note good"><div class="lab" style="color:var(--greenLit)">What\u2019s harder than last phase</div>'+esc(ph.harder)+'</div>';
+  if(ph.harder) pb += '<div class="note good"><div class="lab" style="color:var(--greenLit)">What\u2019s harder than last week</div>'+esc(ph.harder)+'</div>';
   pb += '<div class="small amber">'+esc(ph.note)+'</div>';
   h += panel(ph.rank+"-rank \u00b7 "+ph.name, pb, {right:"Week "+w});
 
   h += panel("How it gets harder",
-    '<div class="small"><p style="margin:0 0 10px">The plan steps up on its own every fortnight \u2014 it works out which phase you\u2019re in from the date you started, so you never have to decide when to push. Ten phases, twenty-four weeks, E-rank to A-rank.</p>'+
-    '<p style="margin:0 0 10px">Three things climb: <b class="cy">the movement</b> (worktop \u2192 stairs \u2192 floor \u2192 feet up on a chair), <b class="cy">the numbers</b> (5 reps becomes 12, a 15-second plank becomes two and a half minutes), and <b class="cy">the load</b> (nothing, then a rucksack, then more tins in it).</p>'+
-    '<p style="margin:0 0 10px" class="muted">Within a fortnight the numbers stay put on purpose. Same sets, done better \u2014 slower, cleaner, less wobble. If you finish every set with two reps still in you before the fortnight is out, use the harder version on the exercise rather than waiting.</p>'+
-    '<p style="margin:0" class="amber">Past week 24 it stops prescribing and starts trusting you: add two reps to every set, or one more set, every fortnight. That road ends at the endgame protocol.</p></div>');
+    '<div class="small"><p style="margin:0 0 10px">The plan steps up on its own every week \u2014 it works out which week you\u2019re in from the date you started, so you never have to decide when to push. Nine weeks, three runs a week, E-rank to A-rank. Couch to 5 km.</p>'+
+    '<p style="margin:0 0 10px">Two things climb. <b class="cy">The run</b> goes from 60 seconds at a time in week one to 30 minutes unbroken by week nine, which is your 5 km. <b class="cy">The ladder</b> starts at 10 press-ups, 10 sit-ups and 10 squats and goes up by 10 every fortnight, until it is 50 of each.</p>'+
+    '<p style="margin:0 0 10px">The ladder tracks the run. 1 km is 10 of each, 2 km is 20, and so on up to 50 of each when you are running 5 km. It happens on the days you are not running.</p>'+
+    '<p style="margin:0 0 10px" class="muted">The number is a total for the session, not a set. 50 press-ups means 50 by the time you finish, in as many sets as it takes \u2014 ten sets of five is exactly the same 50 as five sets of ten, and it counts the same.</p>'+
+    '<p style="margin:0 0 10px" class="muted">The version counts too. Worktop press-ups are still press-ups. If the floor is too much, do the whole 50 off the stairs and move down when you can. Same for sit-ups \u2014 if your lower back complains, do crunches instead and keep the number.</p>'+
+    '<p style="margin:0" class="amber">Past week 9 the plan stops changing. Three runs of 30 minutes, three ladder days of 50, every week. That is the routine, and the routine is what shifts the weight.</p></div>');
 
   var wu='<ol class="steps">';
   WARMUP.forEach(function(s,i){ wu += '<li><em>'+(i+1)+'</em><span>'+esc(s)+'</span></li>'; });
   wu += '</ol><div class="tiny">Five minutes. Non-negotiable \u2014 it\u2019s most of your injury insurance.</div>';
   h += panel("Warm-up \u2014 every session", wu);
 
-  if(ph.circuit) h += panel("How this circuit works", '<div class="small">'+esc(ph.circuit)+'</div>');
+  h += panel("Eating and drinking around a run",
+    '<div class="small"><p style="margin:0 0 10px" class="muted">Nothing here is complicated, and none of it is optional-supplement nonsense. At 5 km and under, timing matters and products don\u2019t.</p>'+
+
+    '<div class="note"><div class="lab" style="color:var(--greenLit)">Before</div>'+
+    '<p style="margin:0 0 8px">If you run first thing, go out on an empty stomach. Anything under 45 minutes doesn\u2019t need fuel \u2014 you have plenty on board already. Drink about 300 ml of water when you get up, roughly half a pint, then go. Not a full pint straight down or it will slosh.</p>'+
+    '<p style="margin:0 0 8px">If you\u2019ve had a proper meal, leave 2 to 3 hours before running. A full stomach and running do not get on, and that is where the stitch comes from.</p>'+
+    '<p style="margin:0 0 8px">If it\u2019s been 4 or 5 hours since you ate and you feel hollow, have something small and mostly carbohydrate about 45 minutes to an hour before: a banana, a slice of toast with jam or honey, or a couple of oatcakes. Low fat, low fibre, small.</p>'+
+    '<p style="margin:0">Avoid anything greasy, creamy or high in fibre in the 3 hours before a run. That means no fry-up, no big bowl of beans, no full-fat latte.</p></div>'+
+
+    '<div class="note"><div class="lab" style="color:var(--greenLit)">During</div>'+
+    '<p style="margin:0 0 8px">Under 30 minutes you don\u2019t need to carry water. Over 40 minutes, or on a hot day, take some and sip it.</p>'+
+    '<p style="margin:0">Gels, sports drinks and energy bars are for people running over an hour. At this distance they are just calories you would have to earn back.</p></div>'+
+
+    '<div class="note"><div class="lab" style="color:var(--greenLit)">After</div>'+
+    '<p style="margin:0 0 8px">Drink about 500 ml of water, roughly a pint, in the half hour after you get in.</p>'+
+    '<p style="margin:0 0 8px">Eat within about an hour if you can. One of your plan meals is exactly right \u2014 you want protein and carbohydrate together. Eggs on toast, chicken and rice, Greek yoghurt with fruit.</p>'+
+    '<p style="margin:0">You do not need a recovery shake. A meal does the same job for less money.</p></div>'+
+
+    '<div class="note"><div class="lab">Coffee</div>'+
+    '<p style="margin:0">Black coffee 45 minutes to an hour before a run genuinely helps, and it is the only legal performance aid worth bothering with. No sugar, no milk, no calories.</p></div>'+
+
+    '<div class="note"><div class="lab">Ladder days</div>'+
+    '<p style="margin:0">Far less fussy than running. Just don\u2019t start within an hour of a big meal. If you\u2019ve eaten nothing all morning, have something small first \u2014 50 squats on an empty tank is where the light-headedness comes from.</p></div>'+
+
+    '<div class="note"><div class="lab">Water, every day</div>'+
+    '<p style="margin:0">Two litres is the daily quest and it matters more on running days. Roughly clear by mid-morning is what you\u2019re after. Dark first thing is normal; dark all day means drink more.</p></div>'+
+
+    '<p style="margin:10px 0 0" class="amber">The bit people get wrong: the pre-run banana comes out of your 1,850, not on top of it \u2014 log it on the Count tab like anything else. And a 5 km burns somewhere around 300 kcal at your weight, which is less than most people assume. Don\u2019t eat it back twice.</p>'+
+    '<p style="margin:8px 0 0" class="muted">Alcohol the night before makes the next morning\u2019s run feel about twice as hard. Worth knowing before you blame the plan.</p></div>');
 
   ph.sessions.forEach(function(s,si){
     var b="";
@@ -973,7 +969,7 @@ function viewTraining(){
     var active = w>=p.wk[0] && w<=p.wk[1], cleared = w>p.wk[1];
     camp += '<div class="row" style="padding:8px 12px;border-radius:2px;margin-bottom:8px;background:'+(active?"#07210f":"var(--panel2)")+
       ';border:1px solid '+(active?"var(--green)":"var(--line)")+'">'+
-      '<span class="mono muted" style="font-size:12px;width:62px">WK '+p.wk[0]+'\u2013'+p.wk[1]+'</span>'+
+      '<span class="mono muted" style="font-size:12px;width:62px">WK '+(p.wk[1]>=99?p.wk[0]+"+":p.wk[1]===p.wk[0]?p.wk[0]:p.wk[0]+"\u2013"+p.wk[1])+'</span>'+
       '<span class="mono" style="font-size:12px;width:18px;color:'+rankColour(p.rank)+'">'+p.rank+'</span>'+
       '<span style="flex:1;font-size:15px'+(active?";color:var(--greenLit)":"")+'">'+esc(p.name)+'</span>'+
       '<span class="mono" style="font-size:10px;color:'+(cleared?"var(--greenLit)":"var(--mute)")+'">'+(cleared?"CLEARED":active?"ACTIVE":"LOCKED")+'</span></div>';
