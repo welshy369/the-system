@@ -716,6 +716,13 @@ var PLATES = [
 ];
 
 var KCAL_TARGET = 1850, PROTEIN_TARGET = 150;
+var DRINK_TARGET = 2000;
+
+/* One tap each. ml, because every bottle and glass in the house is marked in ml. */
+var DRINKS = [
+  {n:"Glass",ml:250},{n:"Mug",ml:300},{n:"Can",ml:330},
+  {n:"Bottle",ml:500},{n:"Pint",ml:568},{n:"Big bottle",ml:750}
+];
 
 var STAT_KEYS=["STR","END","VIT","INT","WIL"];
 var STAT_NAMES={STR:"Strength",END:"Endurance",VIT:"Vitality",INT:"Intelligence",WIL:"Willpower"};
@@ -725,7 +732,8 @@ var STAT_NAMES={STR:"Strength",END:"Endurance",VIT:"Vitality",INT:"Intelligence"
 function iso(d){ d=d||new Date(); var x=new Date(d.getTime()-d.getTimezoneOffset()*60000); return x.toISOString().slice(0,10); }
 function today(){ return iso(); }
 function defaults(){ return {startISO:today(),startLbs:198,targetLbs:175,level:1,xp:0,totalXp:0,
-  stats:{STR:0,END:0,VIT:0,INT:0,WIL:0},log:{},weights:[],journal:[],food:{},customFoods:[],kcalTarget:KCAL_TARGET}; }
+  stats:{STR:0,END:0,VIT:0,INT:0,WIL:0},log:{},weights:[],journal:[],food:{},customFoods:[],kcalTarget:KCAL_TARGET,
+  drink:{},drinkTarget:DRINK_TARGET}; }
 
 var S, memoryOnly=false;
 try{
@@ -1047,6 +1055,13 @@ function viewFood(){
 /* --------------------------- calorie count ------------------------ */
 
 function fEntries(d){ return (S.food && S.food[d]) || []; }
+function dEntries(d){ return (S.drink && S.drink[d]) || []; }
+function dTotal(d){ return dEntries(d).reduce(function(a,e){ return a + (e.ml||0); }, 0); }
+function dAdd(name, ml){
+  var d=ui.day; if(!S.drink) S.drink={};
+  S.drink[d] = dEntries(d).concat([{n:name, ml:ml}]);
+  save(); render();
+}
 function fKcal(d){ var t=0; fEntries(d).forEach(function(e){ t += e.k; }); return Math.round(t); }
 function fProtein(d){ var t=0; fEntries(d).forEach(function(e){ t += (e.p||0); }); return Math.round(t); }
 function shiftDay(d,n){ var x=new Date(d+"T12:00:00"); x.setDate(x.getDate()+n); return iso(x); }
@@ -1128,6 +1143,42 @@ function viewCount(){
     bar((pr/PROTEIN_TARGET)*100, "#16a34a", 6);
   if(avg7()) b += '<div class="tiny">7-day average: '+avg7()+' kcal a day \u2014 that\u2019s the number that shows up on the scales, not any single day.</div>';
   h += panel("Ration count", b, {glow:true, right:niceDay(d)});
+
+  var dml=dTotal(d), dtgt=S.drinkTarget||DRINK_TARGET, dleft=dtgt-dml, dhit=dml>=dtgt;
+  var db = '<div style="display:flex;justify-content:space-between;align-items:flex-end">'+
+      '<div><div class="lab" style="color:var(--mute);margin:0 0 2px">Drunk</div>'+
+      '<div class="mono" style="font-size:36px;line-height:1;color:#38bdf8">'+(dml/1000).toFixed(2)+
+      '<span style="font-size:15px;color:var(--mute)"> L</span></div></div>'+
+      '<div style="text-align:right"><div class="lab" style="color:var(--mute);margin:0 0 2px">'+(dhit?"Over by":"Left")+'</div>'+
+      '<div class="mono" style="font-size:36px;line-height:1;color:'+(dhit?"var(--greenLit)":"#38bdf8")+'">'+Math.abs(dleft)+
+      '<span style="font-size:15px;color:var(--mute)"> ml</span></div></div></div>'+
+    bar((dml/dtgt)*100, dhit?"#4ade80":"#38bdf8", 10)+
+    '<div class="mono" style="display:flex;justify-content:space-between;font-size:11px;color:var(--mute)">'+
+      '<span>Target '+dtgt+' ml</span><span>'+dEntries(d).length+' logged</span></div>';
+  db += '<div class="lab" style="margin-top:14px">Add a drink</div><div class="chips">';
+  DRINKS.forEach(function(x){
+    db += '<button class="chip" data-act="dadd" data-id="'+esc(x.n)+'" data-v="'+x.ml+'">'+esc(x.n)+' <b>'+x.ml+'</b></button>';
+  });
+  db += '</div>';
+  var dlist=dEntries(d);
+  if(dlist.length){
+    db += '<div class="lab" style="margin-top:14px">Today so far</div>';
+    dlist.forEach(function(e,i){
+      db += '<div class="fitem"><span class="fn">'+esc(e.n)+'</span>'+
+        '<span class="fk">'+e.ml+'</span>'+
+        '<button class="fdel" data-act="ddel" data-i="'+i+'" aria-label="Remove">\u00d7</button></div>';
+    });
+  } else {
+    db += '<div class="tiny" style="margin-top:12px">Nothing yet. Tea and coffee count \u2014 they are wet, and the old line about them drying you out does not hold up.</div>';
+  }
+  db += '<div style="display:flex;align-items:center;gap:10px;margin-top:14px">'+
+    '<button class="btn ghost" style="width:auto;padding:10px 16px" data-act="dtgtdown">\u2212 250</button>'+
+    '<span class="mono" style="flex:1;text-align:center;font-size:20px;color:#38bdf8">'+dtgt+' ml</span>'+
+    '<button class="btn ghost" style="width:auto;padding:10px 16px" data-act="dtgtup">+ 250</button></div>';
+  if(dhit) db += '<div class="note good"><div class="lab" style="color:var(--greenLit)">Target met</div>That is the water quest earned. Tick it on the Quests tab \u2014 this counter does not tick it for you.</div>';
+  db += '<div class="tiny">2 litres is the daily quest. On a running day add another 500 ml on top, and more again if it is warm. The honest check is colour, not numbers \u2014 roughly clear by mid-morning is right, dark all day means drink more.</div>'+
+    '<button class="btn ghost" data-act="dclear">Clear drinks for '+esc(niceDay(d))+'</button>';
+  h += panel("Liquid", db, {right:(dml/1000).toFixed(2)+" / "+(dtgt/1000).toFixed(1)+" L"});
 
   var ab = '<div class="lab">Search</div>'+
     '<input id="q" value="'+esc(ui.q)+'" placeholder="mince, oats, pint..." autocomplete="off">'+
@@ -1384,6 +1435,16 @@ document.addEventListener("click", function(e){
   else if(a==="fkcalup"){ S.kcalTarget=Math.min(3500,(S.kcalTarget||KCAL_TARGET)+50); save(); render(); }
   else if(a==="fkcaldown"){ S.kcalTarget=Math.max(1500,(S.kcalTarget||KCAL_TARGET)-50); save(); render(); }
   else if(a==="fclear"){ if(S.food) delete S.food[ui.day]; save(); render(); }
+  else if(a==="dadd"){ dAdd(t.getAttribute("data-id"), parseInt(t.getAttribute("data-v"),10)); }
+  else if(a==="ddel"){
+    var dli=parseInt(t.getAttribute("data-i"),10), dday=ui.day, dl=dEntries(dday).slice();
+    dl.splice(dli,1);
+    if(dl.length) S.drink[dday]=dl; else delete S.drink[dday];
+    save(); render();
+  }
+  else if(a==="dclear"){ if(S.drink) delete S.drink[ui.day]; save(); render(); }
+  else if(a==="dtgtup"){ S.drinkTarget=Math.min(6000,(S.drinkTarget||DRINK_TARGET)+250); save(); render(); }
+  else if(a==="dtgtdown"){ S.drinkTarget=Math.max(1000,(S.drinkTarget||DRINK_TARGET)-250); save(); render(); }
   else if(a==="fday"){
     var nx=shiftDay(ui.day, parseInt(t.getAttribute("data-n"),10));
     if(nx>today()) return;
