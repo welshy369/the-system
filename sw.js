@@ -2,7 +2,7 @@
    Bump CACHE (v1 -> v2 -> ...) whenever you edit index.html to guarantee
    installed copies pull the new version instead of serving the old one. */
 
-const CACHE = "system-v3";
+const CACHE = "system-v4";
 
 const ASSETS = [
   "./",
